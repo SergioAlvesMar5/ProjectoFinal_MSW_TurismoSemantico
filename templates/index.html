@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>TurismoSemántico — España</title>
+
+  <!-- Leaflet (mapa) -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
+  <!-- D3 para visualización del grafo RDF -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.8.5/d3.min.js"></script>
+
+  <link rel="stylesheet" href="/static/css/style.css"/>
+</head>
+<body>
+
+<!-- ═══ HEADER ═══════════════════════════════════════════════════════════ -->
+<header>
+  <div class="header-brand">
+    <span class="brand-icon">🗺️</span>
+    <div>
+      <h1>TurismoSemántico</h1>
+      <p class="brand-sub">Plataforma Inteligente del Patrimonio Cultural de España</p>
+    </div>
+  </div>
+
+  <nav class="header-nav" role="navigation" aria-label="Navegación principal">
+    <button class="nav-btn active" onclick="mostrarSeccion('mapa')"    aria-label="Ver mapa">🗺️ Explorar</button>
+    <button class="nav-btn"        onclick="mostrarSeccion('buscar')"  aria-label="Buscar destinos">🔍 Buscar</button>
+    <button class="nav-btn"        onclick="mostrarSeccion('chat')"    aria-label="Chatbot">🤖 Guía IA</button>
+    <button class="nav-btn"        onclick="mostrarSeccion('grafo')"   aria-label="Grafo RDF">🕸️ Grafo RDF</button>
+    <button class="nav-btn"        onclick="mostrarSeccion('sparql')"  aria-label="SPARQL">⚡ SPARQL</button>
+  </nav>
+
+  <!-- Indicador de estado -->
+  <div class="estado-badge" id="estadoBadge">
+    <span id="estadoIcon">⏳</span>
+    <span id="estadoTexto">Sin datos</span>
+  </div>
+
+  <button id="themeToggle" class="theme-toggle" type="button"
+          aria-label="Cambiar tema" title="Cambiar tema">🌙</button>
+</header>
+
+<!-- ═══ PANEL DE CARGA ════════════════════════════════════════════════════ -->
+<div id="panelCarga" class="panel-carga">
+  <div class="carga-card" role="main" aria-label="Panel de inicialización">
+    <h2>🚀 Inicializar TurismoSemántico</h2>
+    <p>Carga datos de las fuentes abiertas para activar todas las funcionalidades.</p>
+
+    <div class="fuentes-grid" role="list" aria-label="Fuentes de datos">
+      <div class="fuente-item" role="listitem">
+        <span class="fuente-icon">🌐</span>
+        <div><strong>Wikidata SPARQL</strong><br>Patrimonio UNESCO · Museos · Destinos semánticos</div>
+      </div>
+      <div class="fuente-item" role="listitem">
+        <span class="fuente-icon">🗺️</span>
+        <div><strong>OpenStreetMap Overpass</strong><br>Castillos · Monumentos · POIs en tiempo real</div>
+      </div>
+      <div class="fuente-item" role="listitem">
+        <span class="fuente-icon">🌤️</span>
+        <div><strong>Open-Meteo API</strong><br>Clima actual y previsión (sin API key)</div>
+      </div>
+      <div class="fuente-item" role="listitem">
+        <span class="fuente-icon">🧠</span>
+        <div><strong>Embeddings + RAG</strong><br>Búsqueda semántica · Chatbot guía turístico</div>
+      </div>
+    </div>
+
+    <div class="carga-botones">
+      <button class="btn-primary" onclick="cargarDatos(false)" id="btnCargar">
+        ⚡ Cargar datos frescos (APIs)
+      </button>
+      <button class="btn-secondary" onclick="cargarDatos(true)" id="btnCache">
+        📦 Usar caché local
+      </button>
+    </div>
+
+    <div id="logCarga" class="log-carga" aria-live="polite" role="log"></div>
+  </div>
+</div>
+
+<!-- ═══ CONTENIDO PRINCIPAL ═══════════════════════════════════════════════ -->
+<main id="mainContent" class="main-content" style="display:none">
+
+  <!-- ── SECCIÓN MAPA ─────────────────────────────────────────────────── -->
+  <section id="secMapa" class="seccion activa" aria-label="Mapa de destinos">
+    <div class="mapa-layout">
+
+      <!-- Panel izquierdo: filtros y detalle -->
+      <aside class="panel-lateral" aria-label="Panel de filtros y detalle">
+        <div class="filtros-card">
+          <h3>🔎 Filtrar destinos</h3>
+          <select id="filtroTipo" onchange="filtrarMapa()" aria-label="Filtrar por tipo">
+            <option value="">Todos los tipos</option>
+            <option value="patrimonio_unesco">🏛️ Patrimonio UNESCO</option>
+            <option value="museo">🖼️ Museos</option>
+            <option value="castle">🏰 Castillos</option>
+            <option value="attraction">🌟 Atracciones</option>
+          </select>
+
+          <div class="stat-row">
+            <span class="stat-num" id="statDestinos">0</span>
+            <span class="stat-label">destinos cargados</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-num" id="statTripletas">0</span>
+            <span class="stat-label">tripletas RDF</span>
+          </div>
+        </div>
+
+        <!-- Panel de detalle de destino -->
+        <div id="panelDetalle" class="detalle-card" style="display:none" aria-label="Detalle del destino seleccionado">
+          <button class="btn-close" onclick="cerrarDetalle()" aria-label="Cerrar panel">✕</button>
+          <div id="detalleContenido"></div>
+        </div>
+
+        <!-- Búsqueda OSM por ciudad -->
+        <div class="osm-card">
+          <h4>🗺️ OSM: POIs de una ciudad</h4>
+          <div class="input-row">
+            <input type="text" id="inputCiudadOSM" placeholder="ej: Salamanca"
+                   aria-label="Nombre de la ciudad para buscar en OpenStreetMap"/>
+            <button class="btn-sm" onclick="buscarOSM()" aria-label="Buscar en OpenStreetMap">Buscar</button>
+          </div>
+          <div id="resultadosOSM" class="resultados-mini"></div>
+        </div>
+      </aside>
+
+      <!-- Mapa principal -->
+      <div id="mapa" class="mapa-contenedor" role="application" aria-label="Mapa interactivo de destinos turísticos"></div>
+    </div>
+  </section>
+
+  <!-- ── SECCIÓN BUSCAR ───────────────────────────────────────────────── -->
+  <section id="secBuscar" class="seccion" aria-label="Búsqueda semántica">
+    <div class="buscar-layout">
+      <div class="buscar-header">
+        <h2>🔍 Buscador Semántico</h2>
+        <p>Busca por significado, no solo por palabras exactas. Powered by SentenceTransformers.</p>
+      </div>
+
+      <div class="buscar-box">
+        <input type="text" id="inputBuscar"
+               placeholder="Ej: patrimonio medieval con castillos, playa mediterránea con historia..."
+               aria-label="Consulta de búsqueda semántica"
+               onkeydown="if(event.key==='Enter') ejecutarBusqueda()"/>
+        <button class="btn-primary" onclick="ejecutarBusqueda()" aria-label="Buscar">🔍 Buscar</button>
+      </div>
+
+      <!-- Ejemplos de búsqueda -->
+      <div class="ejemplos-busqueda">
+        <span class="label-ejemplos">Prueba:</span>
+        <button class="tag-btn" onclick="buscarEjemplo('arte medieval y catedrales góticas')">Arte medieval</button>
+        <button class="tag-btn" onclick="buscarEjemplo('museos de arte moderno')">Museos de arte</button>
+        <button class="tag-btn" onclick="buscarEjemplo('castillos y fortalezas árabes')">Castillos árabes</button>
+        <button class="tag-btn" onclick="buscarEjemplo('patrimonio de la humanidad UNESCO')">Patrimonio UNESCO</button>
+        <button class="tag-btn" onclick="buscarEjemplo('naturaleza y parques nacionales')">Naturaleza</button>
+      </div>
+
+      <!-- NER results -->
+      <div id="nerResultados" class="ner-panel" style="display:none" aria-live="polite">
+        <h4>🏷️ Entidades detectadas (NER con spaCy):</h4>
+        <div id="nerTags"></div>
+      </div>
+
+      <!-- Resultados -->
+      <div id="resultadosBusqueda" class="resultados-grid" aria-live="polite" role="list"></div>
+    </div>
+  </section>
+
+  <!-- ── SECCIÓN CHATBOT ──────────────────────────────────────────────── -->
+  <section id="secChat" class="seccion" aria-label="Chatbot guía turístico">
+    <div class="chat-layout">
+      <div class="chat-header">
+        <h2>🤖 Guía Turístico IA</h2>
+        <p>Chatbot RAG: recupera información semántica y genera respuestas en lenguaje natural.</p>
+        <div class="rag-pipeline-badge">
+          <span>Wikidata</span> →
+          <span>ChromaDB</span> →
+          <span>SentenceTransformers</span> →
+          <span>Claude (LLM)</span>
+        </div>
+      </div>
+
+      <div class="chat-contenedor" id="chatContenedor" role="log" aria-live="polite" aria-label="Conversación con el guía turístico">
+        <div class="msg-bot">
+          <span class="msg-avatar">🤖</span>
+          <div class="msg-burbuja">
+            ¡Hola! Soy tu guía turístico inteligente. Puedo responderte preguntas sobre
+            el patrimonio cultural, destinos y monumentos de España usando información
+            semántica de Wikidata y OpenStreetMap.<br><br>
+            <strong>¿Qué quieres descubrir hoy?</strong>
+          </div>
+        </div>
+      </div>
+
+      <div class="chat-input-area">
+        <input type="text" id="inputChat"
+               placeholder="Pregunta sobre patrimonio, destinos, historia..."
+               aria-label="Escribir pregunta al guía turístico"
+               onkeydown="if(event.key==='Enter') enviarChat()"/>
+        <button class="btn-primary" onclick="enviarChat()" aria-label="Enviar pregunta">Enviar ➤</button>
+      </div>
+
+      <!-- Preguntas sugeridas -->
+      <div class="sugerencias-chat">
+        <button class="tag-btn" onclick="preguntarChat('¿Cuáles son los sitios Patrimonio UNESCO más importantes?')">¿Patrimonio UNESCO?</button>
+        <button class="tag-btn" onclick="preguntarChat('Recomiéndame destinos con arte medieval')">Recomiéndame destinos medievales</button>
+        <button class="tag-btn" onclick="preguntarChat('¿Qué museos de arte hay en España?')">Museos de arte</button>
+        <button class="tag-btn" onclick="preguntarChat('¿Qué destinos visitar en el norte de España?')">Norte de España</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── SECCIÓN GRAFO RDF ────────────────────────────────────────────── -->
+  <section id="secGrafo" class="seccion" aria-label="Grafo de conocimiento RDF">
+    <div class="grafo-layout">
+      <div class="grafo-header">
+        <h2>🕸️ Grafo de Conocimiento RDF/OWL</h2>
+        <p>Visualización de las tripletas del grafo semántico construido con rdflib.
+           Ontología RDFS-Plus con clases, propiedades e inferencia.</p>
+        <div class="grafo-controles">
+          <button class="btn-sm" onclick="cargarGrafo()" aria-label="Cargar grafo RDF">↻ Cargar grafo</button>
+          <a href="/api/ttl" class="btn-sm" download="grafo.ttl" aria-label="Descargar Turtle">⬇️ Descargar .ttl</a>
+        </div>
+      </div>
+
+      <div class="grafo-stats" id="grafoStats" aria-live="polite"></div>
+
+      <!-- Leyenda de tipos -->
+      <div class="leyenda-grafo">
+        <span class="ley-item"><span class="dot" style="background:#4CAF50"></span> Destino</span>
+        <span class="ley-item"><span class="dot" style="background:#2196F3"></span> PatrimonioUNESCO</span>
+        <span class="ley-item"><span class="dot" style="background:#FF9800"></span> Museo</span>
+        <span class="ley-item"><span class="dot" style="background:#9C27B0"></span> Castillo</span>
+      </div>
+
+      <div id="grafoVisualizacion" class="grafo-svg-container" role="img" aria-label="Visualización del grafo RDF"></div>
+
+      <div id="grafoDetalle" class="grafo-detalle" role="region" aria-live="polite" aria-label="Detalle del nodo seleccionado">
+        <h4>Detalle del nodo</h4>
+        <div class="grafo-detalle-meta">Haz clic en una burbuja para ver sus relaciones.</div>
+      </div>
+
+      <!-- Tabla de tripletas -->
+      <div class="tripletas-tabla-wrap">
+        <h3>Tripletas RDF (muestra)</h3>
+        <div id="tripletasTabla" class="tripletas-scroll"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── SECCIÓN SPARQL ───────────────────────────────────────────────── -->
+  <section id="secSparql" class="seccion" aria-label="Consola SPARQL">
+    <div class="sparql-layout">
+      <div class="sparql-header">
+        <h2>⚡ Consola SPARQL Local</h2>
+        <p>Ejecuta consultas SPARQL directamente sobre el grafo RDF construido con rdflib.</p>
+      </div>
+
+      <!-- Consultas de ejemplo -->
+      <div class="sparql-ejemplos">
+        <button class="tag-btn" onclick="cargarEjemploSparql('todos_destinos')" >Todos los destinos</button>
+        <button class="tag-btn" onclick="cargarEjemploSparql('patrimonio_unesco')">Solo UNESCO</button>
+        <button class="tag-btn" onclick="cargarEjemploSparql('museos')"          >Museos</button>
+        <button class="tag-btn" onclick="cargarEjemploSparql('contar_tipos')"    >Contar por tipo</button>
+      </div>
+
+      <textarea id="sparqlQuery" class="sparql-editor" rows="10"
+                aria-label="Editor SPARQL"
+                spellcheck="false">PREFIX ts: <http://turismo-semantico.es/ontologia#>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+
+SELECT ?nombre ?lat ?lon WHERE {
+  ?destino rdf:type ts:Destino ;
+           ts:nombre ?nombre ;
+           ts:latitud ?lat ;
+           ts:longitud ?lon .
+}
+LIMIT 20</textarea>
+
+      <button class="btn-primary" onclick="ejecutarSparql()" aria-label="Ejecutar consulta SPARQL">▶ Ejecutar SPARQL</button>
+
+      <div id="sparqlResultados" class="sparql-resultados" aria-live="polite" role="region" aria-label="Resultados SPARQL"></div>
+    </div>
+  </section>
+
+</main>
+
+<!-- ═══ CHATBOT FLOTANTE ══════════════════════════════════════════════════ -->
+<button id="chatBtn" class="chat-fab" onclick="mostrarSeccion('chat')"
+        aria-label="Abrir chatbot guía turístico" title="Guía IA">🤖</button>
+
+<script src="/static/js/app.js"></script>
+</body>
+</html>

@@ -1,0 +1,16 @@
+name: turismo_semantico
+channels:
+  - conda-forge
+  - defaults
+dependencies:
+  - python=3.11
+  - pip
+  - pip:
+    - flask==3.0.3
+    - requests==2.31.0
+    - rdflib==7.0.0
+    - SPARQLWrapper==2.0.0
+    - sentence-transformers==3.0.0
+    - chromadb==0.5.3
+    - anthropic==0.28.0
+    - spacy==3.7.5
