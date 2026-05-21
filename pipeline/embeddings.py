@@ -49,7 +49,15 @@ def _get_modelo():
 def _get_collection():
     global _chroma_client, _collection
     if _collection is None and EMBEDDINGS_OK:
-        _chroma_client = chromadb.PersistentClient(path="./chroma_db")
+        if _chroma_client is None:
+            try:
+                from chromadb.config import Settings
+                _chroma_client = chromadb.PersistentClient(
+                    path="./chroma_db",
+                    settings=Settings(anonymized_telemetry=False),
+                )
+            except Exception:
+                _chroma_client = chromadb.PersistentClient(path="./chroma_db")
         try:
             _collection = _chroma_client.get_collection("destinos")
         except Exception:

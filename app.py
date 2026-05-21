@@ -98,7 +98,17 @@ def cargar_datos_background():
         log("Consultando Wikidata (destinos generales)...")
         generales = get_destinos_para_embeddings(limit=60)
         if not generales:
-            log("  ⚠️ Wikidata devolvio 0 destinos generales")
+            prev_cache = _load_cache_json(DATA_FILE) or []
+            generales_prev = [
+                d for d in prev_cache
+                if d.get("wikidata_id")
+                and (d.get("tipo") or "").strip().lower() not in ("museo", "patrimonio_unesco")
+            ]
+            if generales_prev:
+                log(f"  ⚠️ Wikidata devolvio 0. Reutilizando {len(generales_prev)} de cache")
+                generales = generales_prev
+            else:
+                log("  ⚠️ Wikidata devolvio 0 destinos generales")
         log(f"  → {len(generales)} destinos generales obtenidos")
 
         # 2. OpenStreetMap: patrimonio historico nacional

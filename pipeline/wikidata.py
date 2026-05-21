@@ -15,23 +15,30 @@ HEADERS = {
 }
 
 
-def _run_query(sparql: str, timeout: int = 20) -> list[dict]:
-    """Ejecuta una consulta SPARQL y devuelve la lista de bindings."""
+def _run_query(sparql: str, timeout: int = 20, max_retries: int = 1) -> tuple[list[dict], str | None]:
+  """Ejecuta una consulta SPARQL y devuelve (bindings, error)."""
+  last_err = None
+  for attempt in range(max_retries + 1):
     try:
-        resp = requests.get(
-            SPARQL_ENDPOINT,
-            params={"query": sparql, "format": "json"},
-            headers=HEADERS,
-            timeout=timeout,
-        )
-        if resp.status_code != 200:
-            preview = (resp.text or "")[:300].replace("\n", " ")
-            print(f"[Wikidata] HTTP {resp.status_code}: {preview}")
-            return []
-        return resp.json()["results"]["bindings"]
+      resp = requests.get(
+        SPARQL_ENDPOINT,
+        params={"query": sparql, "format": "json"},
+        headers=HEADERS,
+        timeout=timeout,
+      )
+      if resp.status_code != 200:
+        preview = (resp.text or "")[:300].replace("\n", " ")
+        last_err = f"HTTP {resp.status_code}: {preview}"
+      else:
+        return resp.json()["results"]["bindings"], None
     except Exception as e:
-        print(f"[Wikidata] Error: {e}")
-        return []
+      last_err = str(e)
+
+    if attempt < max_retries:
+      time.sleep(1.5 * (attempt + 1))
+
+  print(f"[Wikidata] Error: {last_err}")
+  return [], last_err
 
 
 def get_destinos_patrimonio_unesco(limit: int = 30) -> list[dict]:
@@ -52,7 +59,9 @@ def get_destinos_patrimonio_unesco(limit: int = 30) -> list[dict]:
     }}
     LIMIT {limit}
     """
-    rows = _run_query(query)
+    rows, err = _run_query(query, timeout=25)
+    if err:
+      return []
     results = []
     for r in rows:
         try:
@@ -89,7 +98,9 @@ def get_museos_espana(limit: int = 40) -> list[dict]:
     }}
     LIMIT {limit}
     """
-    rows = _run_query(query)
+    rows, err = _run_query(query, timeout=25)
+    if err:
+      return []
     results = []
     for r in rows:
         try:
@@ -124,7 +135,9 @@ def get_detalles_lugar(wikidata_id: str) -> dict:
     }}
     LIMIT 20
     """
-    rows = _run_query(query)
+    rows, err = _run_query(query, timeout=20)
+    if err:
+        return {}
     detalles = {}
     for r in rows:
         prop = r.get("propLabel", {}).get("value", r["prop"]["value"])
@@ -137,7 +150,12 @@ def get_destinos_para_embeddings(limit: int = 80) -> list[dict]:
     """
     Devuelve una lista amplia de destinos con descripción textual para generar embeddings.
     """
-    location_clause = """
+    location_primary = """
+      ?lugar wdt:P17 wd:Q29 .
+      FILTER(?lugar != wd:Q29)
+    """
+
+    location_fallback = """
       {
         ?lugar wdt:P17 wd:Q29 .
       } UNION {
@@ -155,12 +173,13 @@ def get_destinos_para_embeddings(limit: int = 80) -> list[dict]:
         "wd:Q515",      # city
     ]
 
+    values = " ".join(base_types)
     query_primary = f"""
     SELECT DISTINCT ?lugar ?lugarLabel ?desc ?coord ?tipo ?tipoLabel WHERE {{
-      {location_clause}
+      {location_primary}
       ?lugar wdt:P625 ?coord ;
              wdt:P31 ?tipo .
-      ?tipo wdt:P279* wd:Q2221906 .
+      VALUES ?tipo {{ {values} }}
       OPTIONAL {{
         ?lugar schema:description ?desc .
         FILTER(LANG(?desc) = "es")
@@ -169,17 +188,18 @@ def get_destinos_para_embeddings(limit: int = 80) -> list[dict]:
     }}
     LIMIT {limit}
     """
-    rows = _run_query(query_primary)
+    rows, err = _run_query(query_primary, timeout=25)
+    if err:
+        return []
 
     if not rows:
-        values = " ".join(base_types)
         query_fallback = f"""
         SELECT DISTINCT ?lugar ?lugarLabel ?desc ?coord ?tipo ?tipoLabel WHERE {{
-          VALUES ?baseType {{ {values} }}
-          {location_clause}
+          {location_primary}
           ?lugar wdt:P625 ?coord ;
                  wdt:P31 ?tipo .
           ?tipo wdt:P279* ?baseType .
+          VALUES ?baseType {{ {values} }}
           OPTIONAL {{
             ?lugar schema:description ?desc .
             FILTER(LANG(?desc) = "es")
@@ -188,12 +208,14 @@ def get_destinos_para_embeddings(limit: int = 80) -> list[dict]:
         }}
         LIMIT {limit}
         """
-        rows = _run_query(query_fallback)
+        rows, err = _run_query(query_fallback, timeout=25)
+        if err:
+            return []
 
     if not rows:
         query_relaxed = f"""
         SELECT DISTINCT ?lugar ?lugarLabel ?desc ?coord WHERE {{
-          {location_clause}
+          {location_fallback}
           ?lugar wdt:P625 ?coord .
           OPTIONAL {{
             ?lugar schema:description ?desc .
@@ -203,7 +225,9 @@ def get_destinos_para_embeddings(limit: int = 80) -> list[dict]:
         }}
         LIMIT {limit}
         """
-        rows = _run_query(query_relaxed)
+        rows, err = _run_query(query_relaxed, timeout=30)
+        if err:
+            return []
 
     if not rows:
         print("[Wikidata] Sin resultados para destinos generales.")

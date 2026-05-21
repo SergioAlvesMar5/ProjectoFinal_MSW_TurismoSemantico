@@ -10,24 +10,34 @@ geoespaciales en tiempo real de monumentos, museos y patrimonio de España.
 import requests
 import time
 
-OVERPASS_URL = "https://overpass-api.de/api/interpreter"
+OVERPASS_URLS = [
+    "https://overpass-api.de/api/interpreter",
+    "https://overpass.kumi.systems/api/interpreter",
+    "https://overpass.nchc.org.tw/api/interpreter",
+]
 HEADERS = {"User-Agent": "TurismoSemantico/1.0 (universidad; proyecto academico)"}
 
 
-def _overpass_query(query: str, timeout: int = 30) -> list[dict]:
+def _overpass_query(query: str, timeout: int = 30, retries: int = 1) -> list[dict]:
     """Ejecuta una consulta Overpass QL y devuelve los elementos."""
-    try:
-        resp = requests.post(
-            OVERPASS_URL,
-            data={"data": query},
-            headers=HEADERS,
-            timeout=timeout,
-        )
-        resp.raise_for_status()
-        return resp.json().get("elements", [])
-    except Exception as e:
-        print(f"[Overpass] Error: {e}")
-        return []
+    last_err = None
+    for url in OVERPASS_URLS:
+        for attempt in range(retries + 1):
+            try:
+                resp = requests.post(
+                    url,
+                    data={"data": query},
+                    headers=HEADERS,
+                    timeout=timeout,
+                )
+                resp.raise_for_status()
+                return resp.json().get("elements", [])
+            except Exception as e:
+                last_err = f"{url}: {e}"
+                if attempt < retries:
+                    time.sleep(1.0 * (attempt + 1))
+        print(f"[Overpass] Error: {last_err}")
+    return []
 
 
 def get_monumentos_ciudad(ciudad: str, radio_km: float = 10.0) -> list[dict]:
@@ -103,18 +113,30 @@ def get_patrimonio_nacional(limit_bbox: tuple = (36.0, -9.5, 43.8, 4.5)) -> list
     bbox = (lat_min, lon_min, lat_max, lon_max)
     """
     s, w, n, e = limit_bbox
-    query = f"""
-    [out:json][timeout:40];
+    query_nodes = f"""
+    [out:json][timeout:35];
     (
-      node["historic"="castle"]({s},{w},{n},{e});
-      node["historic"="ruins"]({s},{w},{n},{e});
-      node["heritage"]["name"]({s},{w},{n},{e});
-      way["historic"="castle"]({s},{w},{n},{e});
-      way["heritage"]["name"]({s},{w},{n},{e});
+        node["historic"="castle"]({s},{w},{n},{e});
+        node["historic"="ruins"]({s},{w},{n},{e});
+        node["heritage"]["name"]({s},{w},{n},{e});
     );
-    out center tags;
+    out tags;
     """
-    elementos = _overpass_query(query, timeout=45)
+    elementos = _overpass_query(query_nodes, timeout=35)
+
+    if not elementos:
+        query_full = f"""
+        [out:json][timeout:45];
+        (
+            node["historic"="castle"]({s},{w},{n},{e});
+            node["historic"="ruins"]({s},{w},{n},{e});
+            node["heritage"]["name"]({s},{w},{n},{e});
+            way["historic"="castle"]({s},{w},{n},{e});
+            way["heritage"]["name"]({s},{w},{n},{e});
+        );
+        out center tags;
+        """
+        elementos = _overpass_query(query_full, timeout=45)
     results = []
     for el in elementos[:60]:  # max 60
         tags = el.get("tags", {})
