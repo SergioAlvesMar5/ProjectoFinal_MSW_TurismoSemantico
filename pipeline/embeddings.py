@@ -17,9 +17,9 @@ try:
     from sentence_transformers import SentenceTransformer
     import chromadb
     EMBEDDINGS_OK = True
-except ImportError:
+except Exception as e:
     EMBEDDINGS_OK = False
-    print("[Embeddings] sentence-transformers/chromadb no instalados. Usando búsqueda TF-IDF.")
+    print(f"[Embeddings] Embeddings no disponibles ({e}). Usando búsqueda TF-IDF.")
 
 try:
     import spacy

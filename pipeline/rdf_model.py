@@ -14,6 +14,7 @@ from rdflib import (
 from rdflib.namespace import SKOS, FOAF
 import json
 from pathlib import Path
+import re
 
 # ── Namespaces ──────────────────────────────────────────────────────────────
 TS   = Namespace("http://turismo-semantico.es/ontologia#")
@@ -103,6 +104,18 @@ def poblar_grafo(g: Graph, destinos: list[dict]) -> Graph:
     """
     Añade instancias al grafo a partir de la lista de destinos.
     """
+    def normalize_gyear(value: str | int | None) -> str | None:
+        if value is None:
+            return None
+        s = str(value).strip()
+        if not s:
+            return None
+        if not re.fullmatch(r"-?\d{1,4}", s):
+            return None
+        if s.startswith("-"):
+            return None
+        return s.zfill(4)
+
     TIPO_MAP = {
         "patrimonio_unesco": TS.PatrimonioUNESCO,
         "museo":             TS.Museo,
@@ -135,7 +148,12 @@ def poblar_grafo(g: Graph, destinos: list[dict]) -> Graph:
             g.add((uri, TS.wikidataId,  Literal(d["wikidata_id"])))
             g.add((uri, OWL.sameAs,     WD[d["wikidata_id"]]))
         if d.get("anio_patrimonio"):
-            g.add((uri, TS.anioPatrimonio, Literal(d["anio_patrimonio"], datatype=XSD.gYear)))
+            raw_year = d.get("anio_patrimonio")
+            norm_year = normalize_gyear(raw_year)
+            if norm_year:
+                g.add((uri, TS.anioPatrimonio, Literal(norm_year, datatype=XSD.gYear)))
+            else:
+                g.add((uri, TS.anioPatrimonio, Literal(str(raw_year))))
 
     return g
 

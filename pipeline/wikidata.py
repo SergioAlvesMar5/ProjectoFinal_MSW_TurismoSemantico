@@ -24,7 +24,10 @@ def _run_query(sparql: str, timeout: int = 20) -> list[dict]:
             headers=HEADERS,
             timeout=timeout,
         )
-        resp.raise_for_status()
+        if resp.status_code != 200:
+            preview = (resp.text or "")[:300].replace("\n", " ")
+            print(f"[Wikidata] HTTP {resp.status_code}: {preview}")
+            return []
         return resp.json()["results"]["bindings"]
     except Exception as e:
         print(f"[Wikidata] Error: {e}")
@@ -134,10 +137,28 @@ def get_destinos_para_embeddings(limit: int = 80) -> list[dict]:
     """
     Devuelve una lista amplia de destinos con descripción textual para generar embeddings.
     """
-    query = f"""
+    location_clause = """
+      {
+        ?lugar wdt:P17 wd:Q29 .
+      } UNION {
+        ?lugar wdt:P131* wd:Q29 .
+      }
+      FILTER(?lugar != wd:Q29)
+    """
+
+    base_types = [
+        "wd:Q2221906",  # tourist attraction (original)
+        "wd:Q570116",   # tourist attraction (alt)
+        "wd:Q839954",   # cultural heritage
+        "wd:Q4989906",  # monument
+        "wd:Q17350442", # historic site
+        "wd:Q515",      # city
+    ]
+
+    query_primary = f"""
     SELECT DISTINCT ?lugar ?lugarLabel ?desc ?coord ?tipo ?tipoLabel WHERE {{
-      ?lugar wdt:P17 wd:Q29 ;
-             wdt:P625 ?coord ;
+      {location_clause}
+      ?lugar wdt:P625 ?coord ;
              wdt:P31 ?tipo .
       ?tipo wdt:P279* wd:Q2221906 .
       OPTIONAL {{
@@ -148,7 +169,46 @@ def get_destinos_para_embeddings(limit: int = 80) -> list[dict]:
     }}
     LIMIT {limit}
     """
-    rows = _run_query(query)
+    rows = _run_query(query_primary)
+
+    if not rows:
+        values = " ".join(base_types)
+        query_fallback = f"""
+        SELECT DISTINCT ?lugar ?lugarLabel ?desc ?coord ?tipo ?tipoLabel WHERE {{
+          VALUES ?baseType {{ {values} }}
+          {location_clause}
+          ?lugar wdt:P625 ?coord ;
+                 wdt:P31 ?tipo .
+          ?tipo wdt:P279* ?baseType .
+          OPTIONAL {{
+            ?lugar schema:description ?desc .
+            FILTER(LANG(?desc) = "es")
+          }}
+          SERVICE wikibase:label {{ bd:serviceParam wikibase:language "es,en". }}
+        }}
+        LIMIT {limit}
+        """
+        rows = _run_query(query_fallback)
+
+    if not rows:
+        query_relaxed = f"""
+        SELECT DISTINCT ?lugar ?lugarLabel ?desc ?coord WHERE {{
+          {location_clause}
+          ?lugar wdt:P625 ?coord .
+          OPTIONAL {{
+            ?lugar schema:description ?desc .
+            FILTER(LANG(?desc) = "es")
+          }}
+          SERVICE wikibase:label {{ bd:serviceParam wikibase:language "es,en". }}
+        }}
+        LIMIT {limit}
+        """
+        rows = _run_query(query_relaxed)
+
+    if not rows:
+        print("[Wikidata] Sin resultados para destinos generales.")
+        return []
+
     results = []
     for r in rows:
         try:
@@ -156,13 +216,14 @@ def get_destinos_para_embeddings(limit: int = 80) -> list[dict]:
             lon, lat = coord_str.replace("Point(", "").replace(")", "").split()
             nombre = r["lugarLabel"]["value"]
             desc   = r.get("desc", {}).get("value", f"Destino turístico en España: {nombre}")
+            tipo_label = r.get("tipoLabel", {}).get("value", "destino")
             results.append({
                 "id": r["lugar"]["value"].split("/")[-1],
                 "nombre": nombre,
                 "lat": float(lat),
                 "lon": float(lon),
                 "descripcion": desc,
-                "tipo": r.get("tipoLabel", {}).get("value", "lugar"),
+                "tipo": tipo_label,
                 "wikidata_id": r["lugar"]["value"].split("/")[-1],
                 "texto_embedding": f"{nombre}. {desc}",
             })

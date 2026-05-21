@@ -1,22 +1,22 @@
 [
   {
     "id": "Q54898",
-    "nombre": "San Cristóbal de La Laguna",
+    "nombre": "San CristÃ³bal de La Laguna",
     "lat": 28.485277777,
     "lon": -16.316666666,
     "imagen": "http://commons.wikimedia.org/wiki/Special:FilePath/San%20Crist%C3%B3bal%20de%20La%20Laguna%2C%20en%20Santa%20Cruz%20de%20Tenerife%20%28Espa%C3%B1a%29.jpg",
-    "descripcion": "municipio situado en la provincia de Santa Cruz de Tenerife, en la isla de Tenerife del archipiélago de las Canarias, España",
+    "descripcion": "municipio situado en la provincia de Santa Cruz de Tenerife, en la isla de Tenerife del archipiÃ©lago de las Canarias, EspaÃ±a",
     "anio_patrimonio": "1496",
     "tipo": "patrimonio_unesco",
     "wikidata_id": "Q54898"
   },
   {
     "id": "Q899302",
-    "nombre": "Cueva de Altamira y arte rupestre paleolítico del norte de España",
+    "nombre": "Cueva de Altamira y arte rupestre paleolÃ­tico del norte de EspaÃ±a",
     "lat": 43.3825,
     "lon": -4.11611111,
     "imagen": "http://commons.wikimedia.org/wiki/Special:FilePath/Techo%20de%20Altamira%20%28replica%29-Museo%20Arqueol%C3%B3gico%20Nacional.jpg",
-    "descripcion": "grupo compuesto por la Cueva de Altamira y otras 17 cuevas situadas en el norte de España, declaradas Patrimonio de la Humanidad por la UNESCO",
+    "descripcion": "grupo compuesto por la Cueva de Altamira y otras 17 cuevas situadas en el norte de EspaÃ±a, declaradas Patrimonio de la Humanidad por la UNESCO",
     "anio_patrimonio": "1985",
     "tipo": "patrimonio_unesco",
     "wikidata_id": "Q899302"
@@ -27,7 +27,7 @@
     "lat": 38.91113889,
     "lon": 1.435194444,
     "imagen": "http://commons.wikimedia.org/wiki/Special:FilePath/ForbysIbizaTown%2002.jpg",
-    "descripcion": "Patrimonio de la Humanidad de España",
+    "descripcion": "Patrimonio de la Humanidad de EspaÃ±a",
     "anio_patrimonio": "",
     "tipo": "patrimonio_unesco",
     "wikidata_id": "Q11918155"
@@ -38,7 +38,7 @@
     "lat": 40.482921154,
     "lon": -3.363101495,
     "imagen": "http://commons.wikimedia.org/wiki/Special:FilePath/Alcal%C3%A1%20de%20Henares%20%28RPS%2008-08-2015%29%20Colegio%20Mayor%20de%20San%20Ildefonso%2C%20fachada.png",
-    "descripcion": "fachada de la Universidad de Alcalá (España)",
+    "descripcion": "fachada de la Universidad de AlcalÃ¡ (EspaÃ±a)",
     "anio_patrimonio": "1543",
     "tipo": "patrimonio_unesco",
     "wikidata_id": "Q110524059"
@@ -49,18 +49,18 @@
     "lat": 37.886080468,
     "lon": -4.867785472,
     "imagen": "http://commons.wikimedia.org/wiki/Special:FilePath/Madinat%20al-Zahra%20%2852019329474%29.jpg",
-    "descripcion": "antigua ciudad palatina en Córdoba, España",
+    "descripcion": "antigua ciudad palatina en CÃ³rdoba, EspaÃ±a",
     "anio_patrimonio": "1000",
     "tipo": "patrimonio_unesco",
     "wikidata_id": "Q211252"
   },
   {
     "id": "Q64955212",
-    "nombre": "Palau de la Música y Hospital de San Pau",
+    "nombre": "Palau de la MÃºsica y Hospital de San Pau",
     "lat": 41.38778,
     "lon": 2.175,
     "imagen": "http://commons.wikimedia.org/wiki/Special:FilePath/Portada%20interior%20Hospital%20Sant%20Pau.jpg",
-    "descripcion": "Patrimonio de la Humanidad de Barcelona, España",
+    "descripcion": "Patrimonio de la Humanidad de Barcelona, EspaÃ±a",
     "anio_patrimonio": "",
     "tipo": "patrimonio_unesco",
     "wikidata_id": "Q64955212"
@@ -78,7 +78,7 @@
   },
   {
     "id": "Q921745",
-    "nombre": "Obras de Antoni Gaudí",
+    "nombre": "Obras de Antoni GaudÃ­",
     "lat": 41.4,
     "lon": 2.15,
     "imagen": "http://commons.wikimedia.org/wiki/Special:FilePath/Park%20G%C3%BCell05.jpg",
@@ -93,18 +93,18 @@
     "lat": 42.88076,
     "lon": -8.54468,
     "imagen": "http://commons.wikimedia.org/wiki/Special:FilePath/Catedral%20de%20Santiago%20de%20Compostela%20agosto%202018%20%28cropped%29.jpg",
-    "descripcion": "Patrimonio de la Humanidad de España",
+    "descripcion": "Patrimonio de la Humanidad de EspaÃ±a",
     "anio_patrimonio": "",
     "tipo": "patrimonio_unesco",
     "wikidata_id": "Q12386144"
   },
   {
     "id": "Q696803",
-    "nombre": "Las Médulas",
+    "nombre": "Las MÃ©dulas",
     "lat": 42.458699,
     "lon": -6.759002,
     "imagen": "http://commons.wikimedia.org/wiki/Special:FilePath/Las%20Medulas%20%2817504738221%29.jpg",
-    "descripcion": "yacimiento arqueológico en Borrenes y Carucedo, España",
+    "descripcion": "yacimiento arqueolÃ³gico en Borrenes y Carucedo, EspaÃ±a",
     "anio_patrimonio": "",
     "tipo": "patrimonio_unesco",
     "wikidata_id": "Q696803"
@@ -122,11 +122,11 @@
   },
   {
     "id": "Q463141",
-    "nombre": "Parque Nacional de Doñana",
+    "nombre": "Parque Nacional de DoÃ±ana",
     "lat": 37.02,
     "lon": -6.44,
     "imagen": "http://commons.wikimedia.org/wiki/Special:FilePath/Vista%20de%20las%20marismas%20del%20Parque%20Do%C3%B1ana.jpg",
-    "descripcion": "parque nacional de España",
+    "descripcion": "parque nacional de EspaÃ±a",
     "anio_patrimonio": "1969",
     "tipo": "patrimonio_unesco",
     "wikidata_id": "Q463141"
@@ -137,14 +137,14 @@
     "lat": 41.380833333,
     "lon": 1.0825,
     "imagen": "http://commons.wikimedia.org/wiki/Special:FilePath/Monestir%20de%20Poblet.JPG",
-    "descripcion": "bien de interés cultural en Tarragona, Cataluña, España",
+    "descripcion": "bien de interÃ©s cultural en Tarragona, CataluÃ±a, EspaÃ±a",
     "anio_patrimonio": "1150",
     "tipo": "patrimonio_unesco",
     "wikidata_id": "Q645157"
   },
   {
     "id": "Q33200",
-    "nombre": "Mezquita-catedral de Córdoba",
+    "nombre": "Mezquita-catedral de CÃ³rdoba",
     "lat": 37.879194444,
     "lon": -4.779722222,
     "imagen": "http://commons.wikimedia.org/wiki/Special:FilePath/Mezquita%20de%20C%C3%B3rdoba%20desde%20el%20aire%20%28C%C3%B3rdoba%2C%20Espa%C3%B1a%29.jpg",
@@ -155,22 +155,22 @@
   },
   {
     "id": "Q557337",
-    "nombre": "Real Alcázar de Segovia",
+    "nombre": "Real AlcÃ¡zar de Segovia",
     "lat": 40.9525,
     "lon": -4.1325,
     "imagen": "http://commons.wikimedia.org/wiki/Special:FilePath/Panor%C3%A1mica%20Oto%C3%B1o%20Alc%C3%A1zar%20de%20Segovia.jpg",
-    "descripcion": "castillo de Segovia (España), que fue residencia de los reyes de Castilla",
+    "descripcion": "castillo de Segovia (EspaÃ±a), que fue residencia de los reyes de Castilla",
     "anio_patrimonio": "1200",
     "tipo": "patrimonio_unesco",
     "wikidata_id": "Q557337"
   },
   {
     "id": "Q98824936",
-    "nombre": "basílica romana de Santa Eulalia",
+    "nombre": "basÃ­lica romana de Santa Eulalia",
     "lat": 38.920352777,
     "lon": -6.341761111,
     "imagen": "http://commons.wikimedia.org/wiki/Special:FilePath/Bas%C3%ADlica%20Romano%20Cristiana%20de%20M%C3%A9rida%2002.jpg",
-    "descripcion": "antigua basílica en Mérida (España)",
+    "descripcion": "antigua basÃ­lica en MÃ©rida (EspaÃ±a)",
     "anio_patrimonio": "",
     "tipo": "patrimonio_unesco",
     "wikidata_id": "Q98824936"
@@ -181,7 +181,7 @@
     "lat": 43.014194444,
     "lon": -7.559888888,
     "imagen": "http://commons.wikimedia.org/wiki/Special:FilePath/Lugo%202023%20-%20Roman%20Walls.jpg",
-    "descripcion": "muralla en Lugo, España",
+    "descripcion": "muralla en Lugo, EspaÃ±a",
     "anio_patrimonio": "",
     "tipo": "patrimonio_unesco",
     "wikidata_id": "Q2733427"
@@ -199,11 +199,11 @@
   },
   {
     "id": "Q513893",
-    "nombre": "Catedral de Santa María de Teruel",
+    "nombre": "Catedral de Santa MarÃ­a de Teruel",
     "lat": 40.3439,
     "lon": -1.10722,
     "imagen": "http://commons.wikimedia.org/wiki/Special:FilePath/Teruel%20Cathedral%202024%20-%20South%20fa%C3%A7ade.jpg",
-    "descripcion": "templo católico de Aragón, (España)",
+    "descripcion": "templo catÃ³lico de AragÃ³n, (EspaÃ±a)",
     "anio_patrimonio": "1171",
     "tipo": "patrimonio_unesco",
     "wikidata_id": "Q513893"
@@ -214,14 +214,14 @@
     "lat": 38.264444444,
     "lon": -0.690833333,
     "imagen": "http://commons.wikimedia.org/wiki/Special:FilePath/Arcoiris%20en%20el%20Palmeral%20de%20Elche.jpg",
-    "descripcion": "palmeral histórico en Elche (España), inscrito en el Patrimonio Mundial de la UNESCO en 2000",
+    "descripcion": "palmeral histÃ³rico en Elche (EspaÃ±a), inscrito en el Patrimonio Mundial de la UNESCO en 2000",
     "anio_patrimonio": "",
     "tipo": "patrimonio_unesco",
     "wikidata_id": "Q930784"
   },
   {
     "id": "Q1975533",
-    "nombre": "Arte rupestre del arco mediterráneo de la Península Ibérica",
+    "nombre": "Arte rupestre del arco mediterrÃ¡neo de la PenÃ­nsula IbÃ©rica",
     "lat": 39.79,
     "lon": -1.033333333,
     "imagen": "http://commons.wikimedia.org/wiki/Special:FilePath/Arte%20rupestre%20arco%20mediterraneo.png",
@@ -231,8 +231,18 @@
     "wikidata_id": "Q1975533"
   },
   {
+    "id": "Q1658710",
+    "nombre": "Isla de las Esculturas",
+    "lat": 42.44,
+    "lon": -8.633889,
+    "imagen": "http://commons.wikimedia.org/wiki/Special:FilePath/Pontevedra%20capital%20Parque%20de%20la%20Isla%20de%20las%20Esculturas%2C%20entrada%20principal.jpg",
+    "ciudad": "Pontevedra",
+    "tipo": "museo",
+    "wikidata_id": "Q1658710"
+  },
+  {
     "id": "Q11914754",
-    "nombre": "Col·lecció d'Automòbils Salvador Claret",
+    "nombre": "ColÂ·lecciÃ³ d'AutomÃ²bils Salvador Claret",
     "lat": 41.83381111,
     "lon": 2.75703056,
     "imagen": "http://commons.wikimedia.org/wiki/Special:FilePath/Spanien%20Sils%20Museumsgeb%C3%A4ude.JPG",
@@ -242,7 +252,7 @@
   },
   {
     "id": "Q4894418",
-    "nombre": "Filmoteca de Cataluña",
+    "nombre": "Filmoteca de CataluÃ±a",
     "lat": 41.378666666,
     "lon": 2.170916666,
     "imagen": "http://commons.wikimedia.org/wiki/Special:FilePath/Filmoteca%20de%20Catalunya-seu%20Raval.JPG",
@@ -266,13 +276,13 @@
     "lat": 36.723222594,
     "lon": -4.411637,
     "imagen": "http://commons.wikimedia.org/wiki/Special:FilePath/M%C3%A1laga%20Gibralfaro%2002.jpg",
-    "ciudad": "Málaga",
+    "ciudad": "MÃ¡laga",
     "tipo": "museo",
     "wikidata_id": "Q1049197"
   },
   {
     "id": "Q107456458",
-    "nombre": "Museo Histórico de Belmez y del Territorio Minero",
+    "nombre": "Museo HistÃ³rico de Belmez y del Territorio Minero",
     "lat": 38.2723,
     "lon": -5.2088165,
     "imagen": "",
@@ -281,18 +291,8 @@
     "wikidata_id": "Q107456458"
   },
   {
-    "id": "Q3329927",
-    "nombre": "Museo del Mar (Peñíscola)",
-    "lat": 40.3573,
-    "lon": 0.408195,
-    "imagen": "http://commons.wikimedia.org/wiki/Special:FilePath/Museu%20de%20la%20Mar%2C%20Peniscola%2009.JPG",
-    "ciudad": "Peñíscola",
-    "tipo": "museo",
-    "wikidata_id": "Q3329927"
-  },
-  {
     "id": "Q867072",
-    "nombre": "Fundación Joan Miró",
+    "nombre": "FundaciÃ³n Joan MirÃ³",
     "lat": 41.368611111,
     "lon": 2.16,
     "imagen": "http://commons.wikimedia.org/wiki/Special:FilePath/Fundaci%C3%B3%20Mir%C3%B3.JPG",
@@ -301,64 +301,34 @@
     "wikidata_id": "Q867072"
   },
   {
-    "id": "Q17043323",
-    "nombre": "Museo del Mar",
-    "lat": 39.7977,
-    "lon": 2.69145,
-    "imagen": "http://commons.wikimedia.org/wiki/Special:FilePath/MuseudelaMar.jpg",
-    "ciudad": "Sóller",
+    "id": "Q2545595",
+    "nombre": "Museo de Escultura de LeganÃ©s",
+    "lat": 40.324831,
+    "lon": -3.76095,
+    "imagen": "",
+    "ciudad": "LeganÃ©s",
     "tipo": "museo",
-    "wikidata_id": "Q17043323"
+    "wikidata_id": "Q2545595"
   },
   {
     "id": "Q944404",
-    "nombre": "Museo de Juguetes y Autómatas",
+    "nombre": "Museo de Juguetes y AutÃ³matas",
     "lat": 41.610275,
     "lon": 1.142588888,
     "imagen": "http://commons.wikimedia.org/wiki/Special:FilePath/Museu%20de%20joguets%20de%20Verd%C3%BA.JPG",
-    "ciudad": "Verdú",
+    "ciudad": "VerdÃº",
     "tipo": "museo",
     "wikidata_id": "Q944404"
   },
   {
-    "id": "Q10940111",
-    "nombre": "Museo Diocesano de Huesca",
-    "lat": 42.140561111,
-    "lon": -0.408330555,
-    "imagen": "http://commons.wikimedia.org/wiki/Special:FilePath/Catedral%20de%20Huesca%2C%20Museo%20Diocesano.JPG",
-    "ciudad": "Huesca",
-    "tipo": "museo",
-    "wikidata_id": "Q10940111"
-  },
-  {
     "id": "Q16545882",
-    "nombre": "Centro de Interpretación de la Emigración e Instrucción Pública",
+    "nombre": "Centro de InterpretaciÃ³n de la EmigraciÃ³n e InstrucciÃ³n PÃºblica",
     "lat": 43.420693,
     "lon": -6.822784,
     "imagen": "",
     "ciudad": "Boal",
     "tipo": "museo",
     "wikidata_id": "Q16545882"
-  },
-  {
-    "id": "Q560041",
-    "nombre": "Museo Diocesano de Tarragona",
-    "lat": 41.115277777,
-    "lon": 1.263888888,
-    "imagen": "http://commons.wikimedia.org/wiki/Special:FilePath/CATEDRAL%20DE%20TARRAGONA.jpg",
-    "ciudad": "Tarragona",
-    "tipo": "museo",
-    "wikidata_id": "Q560041"
-  },
-  {
-    "id": "Q18047912",
-    "nombre": "Museo de la Pesca",
-    "lat": 41.843611111,
-    "lon": 3.123333333,
-    "imagen": "http://commons.wikimedia.org/wiki/Special:FilePath/Port%20de%20Palamos%20Fishery%20Museum.jpg",
-    "ciudad": "Palamós",
-    "tipo": "museo",
-    "wikidata_id": "Q18047912"
   },
   {
     "id": "Q176251",
@@ -372,23 +342,13 @@
   },
   {
     "id": "Q99435527",
-    "nombre": "El submarí Barcelona",
+    "nombre": "El submarÃ­ Barcelona",
     "lat": 41.4145,
     "lon": 2.13209,
     "imagen": "http://commons.wikimedia.org/wiki/Special:FilePath/Submar%C3%AD%20Barcelona%20P1180787.JPG",
     "ciudad": "Barcelona",
     "tipo": "museo",
     "wikidata_id": "Q99435527"
-  },
-  {
-    "id": "Q1954347",
-    "nombre": "Museu Diocesà de Menorca",
-    "lat": 40.001576,
-    "lon": 3.8387211,
-    "imagen": "",
-    "ciudad": "Ciudadela de Menorca",
-    "tipo": "museo",
-    "wikidata_id": "Q1954347"
   },
   {
     "id": "Q18708922",
@@ -402,11 +362,11 @@
   },
   {
     "id": "Q6033164",
-    "nombre": "Museo Automovilístico de Málaga",
+    "nombre": "Museo AutomovilÃ­stico de MÃ¡laga",
     "lat": 36.699787,
     "lon": -4.438469,
     "imagen": "http://commons.wikimedia.org/wiki/Special:FilePath/Malaga%20museo.jpg",
-    "ciudad": "Málaga",
+    "ciudad": "MÃ¡laga",
     "tipo": "museo",
     "wikidata_id": "Q6033164"
   },
@@ -419,26 +379,6 @@
     "ciudad": "Las Palmas de Gran Canaria",
     "tipo": "museo",
     "wikidata_id": "Q5861983"
-  },
-  {
-    "id": "Q6033498",
-    "nombre": "Museo Marítimo de Asturias",
-    "lat": 43.613624,
-    "lon": -5.793002,
-    "imagen": "http://commons.wikimedia.org/wiki/Special:FilePath/Museo%20Mar%C3%ADtimo%20de%20Asturias.jpg",
-    "ciudad": "Luanco",
-    "tipo": "museo",
-    "wikidata_id": "Q6033498"
-  },
-  {
-    "id": "Q83618981",
-    "nombre": "Maritime Museum Mallorca",
-    "lat": 39.797621024,
-    "lon": 2.691444948,
-    "imagen": "",
-    "ciudad": "Sóller",
-    "tipo": "museo",
-    "wikidata_id": "Q83618981"
   },
   {
     "id": "Q6033525",
@@ -471,22 +411,12 @@
     "wikidata_id": "Q6076055"
   },
   {
-    "id": "Q29961308",
-    "nombre": "Museo Catedralicio Diocesano de León",
-    "lat": 42.599444444,
-    "lon": -5.566666666,
-    "imagen": "http://commons.wikimedia.org/wiki/Special:FilePath/Museo%20catedralicio-diocesano.jpg",
-    "ciudad": "León",
-    "tipo": "museo",
-    "wikidata_id": "Q29961308"
-  },
-  {
     "id": "Q969308",
     "nombre": "Palacio de los Condes de Buenavista",
     "lat": 36.721619444,
     "lon": -4.418330555,
     "imagen": "http://commons.wikimedia.org/wiki/Special:FilePath/MPM%202.jpg",
-    "ciudad": "Málaga",
+    "ciudad": "MÃ¡laga",
     "tipo": "museo",
     "wikidata_id": "Q969308"
   },
@@ -496,38 +426,108 @@
     "lat": 41.377381,
     "lon": 2.177259,
     "imagen": "http://commons.wikimedia.org/wiki/Special:FilePath/Museu%20de%20Cera%20de%20Barcelona%20%28Catal%C3%A0%29.jpg",
-    "ciudad": "Barrio Gótico",
+    "ciudad": "Barrio GÃ³tico",
     "tipo": "museo",
     "wikidata_id": "Q876794"
   },
   {
-    "id": "Q1394017",
-    "nombre": "Museo del Mar de Galicia",
-    "lat": 42.224138888,
-    "lon": -8.770166666,
-    "imagen": "http://commons.wikimedia.org/wiki/Special:FilePath/Museo%20do%20Mar.jpg",
-    "ciudad": "Vigo",
+    "id": "Q974750",
+    "nombre": "Museo PedagÃ³gico Nacional",
+    "lat": 40.426998722,
+    "lon": -3.70640869,
+    "imagen": "",
+    "ciudad": "Madrid",
     "tipo": "museo",
-    "wikidata_id": "Q1394017"
+    "wikidata_id": "Q974750"
   },
   {
-    "id": "Q1286354",
-    "nombre": "Museo Marítimo de Barcelona",
-    "lat": 41.37502778,
-    "lon": 2.17636944,
-    "imagen": "http://commons.wikimedia.org/wiki/Special:FilePath/Drassanes%20barcelona.jpg",
-    "ciudad": "El Raval",
+    "id": "Q179199",
+    "nombre": "Museo Guggenheim Bilbao",
+    "lat": 43.26883,
+    "lon": -2.934099,
+    "imagen": "http://commons.wikimedia.org/wiki/Special:FilePath/Museo%20Guggenheim%2C%20Bilbao%20%2831273245344%29.jpg",
+    "ciudad": "Bilbao",
     "tipo": "museo",
-    "wikidata_id": "Q1286354"
+    "wikidata_id": "Q179199"
   },
   {
-    "id": "Q6033504",
-    "nombre": "Museo Marítimo del Cantábrico",
-    "lat": 43.4633101,
-    "lon": -3.7856919,
-    "imagen": "http://commons.wikimedia.org/wiki/Special:FilePath/Santander%20-%20Museo%20Mar%C3%ADtimo%20del%20Cant%C3%A1brico%2002.JPG",
-    "ciudad": "Santander",
+    "id": "Q125904837",
+    "nombre": "Museo Minero de La UniÃ³n",
+    "lat": 37.618211092,
+    "lon": -0.87940082,
+    "imagen": "",
+    "ciudad": "La UniÃ³n",
     "tipo": "museo",
-    "wikidata_id": "Q6033504"
+    "wikidata_id": "Q125904837"
+  },
+  {
+    "id": "Q1026041",
+    "nombre": "CaixaForum Madrid",
+    "lat": 40.410905,
+    "lon": -3.692897,
+    "imagen": "http://commons.wikimedia.org/wiki/Special:FilePath/Caixaforum%20Madrid%202024.jpg",
+    "ciudad": "Centro",
+    "tipo": "museo",
+    "wikidata_id": "Q1026041"
+  },
+  {
+    "id": "Q942216",
+    "nombre": "Museo del Molino Papelero de Capellades",
+    "lat": 41.528611111,
+    "lon": 1.684166666,
+    "imagen": "http://commons.wikimedia.org/wiki/Special:FilePath/Bassa%20de%20Capellades%201.jpg",
+    "ciudad": "Capellades",
+    "tipo": "museo",
+    "wikidata_id": "Q942216"
+  },
+  {
+    "id": "Q256777",
+    "nombre": "FundaciÃ³n Montenmedio Arte ContemporÃ¡neo (NMAC)",
+    "lat": 36.24304962,
+    "lon": -5.90717983,
+    "imagen": "http://commons.wikimedia.org/wiki/Special:FilePath/Fundaci%C3%B3n%20NMAC%202.jpg",
+    "ciudad": "Vejer de la Frontera",
+    "tipo": "museo",
+    "wikidata_id": "Q256777"
+  },
+  {
+    "id": "Q24021593",
+    "nombre": "Parque HernÃ¡ndez",
+    "lat": 35.291944444,
+    "lon": -2.940833333,
+    "imagen": "http://commons.wikimedia.org/wiki/Special:FilePath/Parque%20Hern%C3%A1ndez%2C%20puerta%20principal.jpg",
+    "ciudad": "Melilla",
+    "tipo": "museo",
+    "wikidata_id": "Q24021593"
+  },
+  {
+    "id": "Q1741117",
+    "nombre": "Museo Regional de ArtÃ ",
+    "lat": 39.695,
+    "lon": 3.35125,
+    "imagen": "http://commons.wikimedia.org/wiki/Special:FilePath/Art%C3%A0%20-%20Museu%20Regional%20d%27Art%C3%A0%2002%20ies-2.jpg",
+    "ciudad": "ArtÃ¡",
+    "tipo": "museo",
+    "wikidata_id": "Q1741117"
+  },
+  {
+    "id": "Q7194792",
+    "nombre": "Pinacoteca Municipal de Langreo - Eduardo Ãšrculo",
+    "lat": 43.300743,
+    "lon": -5.686654,
+    "imagen": "http://commons.wikimedia.org/wiki/Special:FilePath/Pinacoteca.jpg",
+    "ciudad": "Langreo",
+    "tipo": "museo",
+    "wikidata_id": "Q7194792"
+  },
+  {
+    "id": "Q549696",
+    "nombre": "Museo de Palencia",
+    "lat": 42.00916667,
+    "lon": -4.53555556,
+    "imagen": "http://commons.wikimedia.org/wiki/Special:FilePath/Museo%20Arqueol%C3%B3gico%20de%20Palencia.jpg",
+    "ciudad": "Palencia",
+    "tipo": "museo",
+    "wikidata_id": "Q549696"
   }
 ]

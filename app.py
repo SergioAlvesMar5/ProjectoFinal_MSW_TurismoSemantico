@@ -39,6 +39,7 @@ estado = {
     "num_tripletas": 0,
     "embeddings_ok": False,
     "cargando": False,
+    "error": "",
     "log": [],
 }
 grafo_global = None
@@ -80,62 +81,82 @@ def cargar_datos_background():
     global grafo_global, destinos_global
     estado["cargando"] = True
     estado["log"] = []
+    estado["error"] = ""
 
-    log("Iniciando carga de datos...")
+    try:
+        log("Iniciando carga de datos...")
 
-    # 1. Wikidata: destinos para embeddings (fuente semántica principal)
-    log("Consultando Wikidata (patrimonio UNESCO)...")
-    patrimonio = get_destinos_patrimonio_unesco(limit=25)
-    log(f"  → {len(patrimonio)} sitios UNESCO obtenidos")
+        # 1. Wikidata: destinos para embeddings (fuente semantica principal)
+        log("Consultando Wikidata (patrimonio UNESCO)...")
+        patrimonio = get_destinos_patrimonio_unesco(limit=25)
+        log(f"  → {len(patrimonio)} sitios UNESCO obtenidos")
 
-    log("Consultando Wikidata (museos)...")
-    museos = get_museos_espana(limit=30)
-    log(f"  → {len(museos)} museos obtenidos")
+        log("Consultando Wikidata (museos)...")
+        museos = get_museos_espana(limit=30)
+        log(f"  → {len(museos)} museos obtenidos")
 
-    log("Consultando Wikidata (destinos generales)...")
-    generales = get_destinos_para_embeddings(limit=60)
-    log(f"  → {len(generales)} destinos generales obtenidos")
+        log("Consultando Wikidata (destinos generales)...")
+        generales = get_destinos_para_embeddings(limit=60)
+        if not generales:
+            log("  ⚠️ Wikidata devolvio 0 destinos generales")
+        log(f"  → {len(generales)} destinos generales obtenidos")
 
-    # 2. OpenStreetMap: patrimonio histórico nacional
-    log("Consultando OpenStreetMap (castillos y patrimonio)...")
-    osm_patrimonio = get_patrimonio_nacional()
-    log(f"  → {len(osm_patrimonio)} elementos patrimoniales de OSM obtenidos")
+        # 2. OpenStreetMap: patrimonio historico nacional
+        log("Consultando OpenStreetMap (castillos y patrimonio)...")
+        osm_patrimonio = get_patrimonio_nacional()
+        if not osm_patrimonio:
+            prev_cache = _load_cache_json(DATA_FILE) or []
+            osm_prev = [d for d in prev_cache if d.get("fuente") == "OpenStreetMap"]
+            if osm_prev:
+                log(f"  ⚠️ OSM devolvio 0 resultados. Reutilizando {len(osm_prev)} de cache")
+                osm_patrimonio = osm_prev
+        log(f"  → {len(osm_patrimonio)} elementos patrimoniales de OSM obtenidos")
 
-    # Fusionar y deduplicar por nombre
-    todos = {d["nombre"]: d for d in (generales + patrimonio + museos + osm_patrimonio)}
-    destinos_global = list(todos.values())
-    log(f"Total destinos únicos: {len(destinos_global)}")
+        # Fusionar y deduplicar por nombre
+        todos = {d["nombre"]: d for d in (generales + patrimonio + museos + osm_patrimonio)}
+        destinos_new = list(todos.values())
+        log(f"Total destinos unicos: {len(destinos_new)}")
 
-    # Guardar en disco como caché
-    DATA_FILE.write_text(
-        json.dumps(destinos_global, ensure_ascii=False, indent=2),
-        encoding="utf-8",
-    )
-    log("Datos guardados en caché (data/destinos.json)")
+        # Guardar en disco como cache
+        DATA_FILE.write_text(
+            json.dumps(destinos_new, ensure_ascii=False, indent=2),
+            encoding="utf-8",
+        )
+        log("Datos guardados en cache (data/destinos.json)")
 
-    # 3. Construir grafo RDF
-    log("Construyendo ontología RDF/OWL...")
-    grafo_global = construir_ontologia()
-    poblar_grafo(grafo_global, destinos_global)
-    estado["num_tripletas"] = len(grafo_global)
-    log(f"Grafo RDF construido: {estado['num_tripletas']} tripletas")
+        # 3. Construir grafo RDF
+        log("Construyendo ontologia RDF/OWL...")
+        grafo_new = construir_ontologia()
+        poblar_grafo(grafo_new, destinos_new)
+        num_tripletas = len(grafo_new)
+        log(f"Grafo RDF construido: {num_tripletas} tripletas")
 
-    # Serializar el grafo en Turtle
-    Path("data/grafo.ttl").write_text(
-        grafo_global.serialize(format="turtle"), encoding="utf-8"
-    )
-    log("Grafo exportado a data/grafo.ttl")
+        # Serializar el grafo en Turtle
+        Path("data/grafo.ttl").write_text(
+            grafo_new.serialize(format="turtle"), encoding="utf-8"
+        )
+        log("Grafo exportado a data/grafo.ttl")
 
-    # 4. Generar embeddings (puede tardar si no hay GPU)
-    log("Generando embeddings (puede tardar unos minutos la primera vez)...")
-    ok = indexar_destinos(destinos_global)
-    estado["embeddings_ok"] = ok
-    log(f"Embeddings: {'OK' if ok else 'Usando TF-IDF (instala sentence-transformers)'}")
+        # 4. Generar embeddings (puede tardar si no hay GPU)
+        log("Generando embeddings (puede tardar unos minutos la primera vez)...")
+        ok = indexar_destinos(destinos_new)
+        estado["embeddings_ok"] = ok
+        log(f"Embeddings: {'OK' if ok else 'Usando TF-IDF (instala sentence-transformers)'}")
 
-    estado["num_destinos"] = len(destinos_global)
-    estado["cargado"]  = True
-    estado["cargando"] = False
-    log("✅ Carga completa. La aplicación está lista.")
+        # Aplicar cambios al estado global solo si todo fue OK
+        destinos_global = destinos_new
+        grafo_global = grafo_new
+        estado["num_destinos"] = len(destinos_new)
+        estado["num_tripletas"] = num_tripletas
+        estado["cargado"] = True
+        log("✅ Carga completa. La aplicacion esta lista.")
+    except Exception as e:
+        estado["cargado"] = False
+        estado["embeddings_ok"] = False
+        estado["error"] = str(e)
+        log(f"Error en carga: {e}")
+    finally:
+        estado["cargando"] = False
 
 
 # ── Rutas Flask ──────────────────────────────────────────────────────────────
@@ -166,10 +187,15 @@ def api_cargar():
             destinos_global = cache_data
             grafo_global = construir_ontologia()
             poblar_grafo(grafo_global, destinos_global)
+            Path("data/grafo.ttl").write_text(
+                grafo_global.serialize(format="turtle"), encoding="utf-8"
+            )
             estado["embeddings_ok"] = indexar_destinos(destinos_global)
             estado["cargado"] = True
             estado["num_destinos"] = len(destinos_global)
             estado["num_tripletas"] = len(grafo_global)
+            estado["cargando"] = False
+            estado["error"] = ""
             log(f"Datos cargados desde caché ({len(destinos_global)} destinos)")
             return jsonify({"ok": True, "msg": "Datos cargados desde caché.", "fuente": "cache"})
 
@@ -233,6 +259,7 @@ def api_clima():
 def api_overpass():
     ciudad = request.args.get("ciudad", "").strip()
     radio  = float(request.args.get("radio", 5))
+    radio = max(1.0, min(radio, 20.0))
     if not ciudad:
         return jsonify({"error": "Parámetro ciudad requerido"}), 400
     pois = get_monumentos_ciudad(ciudad, radio_km=radio)
