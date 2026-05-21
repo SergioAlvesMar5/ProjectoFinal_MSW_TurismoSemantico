@@ -231,6 +231,16 @@
     "texto_embedding": "Baesippo. Destino turístico en España: Baesippo"
   },
   {
+    "id": "Q3867196",
+    "nombre": "Cerro de los Infantes",
+    "lat": 37.2672,
+    "lon": -3.767283,
+    "descripcion": "bien de interés cultural",
+    "tipo": "ciudad",
+    "wikidata_id": "Q3867196",
+    "texto_embedding": "Cerro de los Infantes. bien de interés cultural"
+  },
+  {
     "id": "Q494693",
     "nombre": "Torrelavega",
     "lat": 43.350555555,
@@ -259,16 +269,6 @@
     "tipo": "ciudad",
     "wikidata_id": "Q486792",
     "texto_embedding": "Aranjuez. municipio de la Comunidad de Madrid, España"
-  },
-  {
-    "id": "Q6129295",
-    "nombre": "Ciudad romana de Singilia Barba",
-    "lat": 37.032508333,
-    "lon": -4.630927777,
-    "descripcion": "bien de interés cultural",
-    "tipo": "ciudad",
-    "wikidata_id": "Q6129295",
-    "texto_embedding": "Ciudad romana de Singilia Barba. bien de interés cultural"
   },
   {
     "id": "Q584446",
@@ -371,16 +371,6 @@
     "texto_embedding": "Requena. municipio de la provincia de Valencia, España"
   },
   {
-    "id": "Q6169531",
-    "nombre": "Yacimiento arqueológico de Doña Blanca",
-    "lat": 36.627143,
-    "lon": -6.161248,
-    "descripcion": "bien de interés cultural",
-    "tipo": "ciudad",
-    "wikidata_id": "Q6169531",
-    "texto_embedding": "Yacimiento arqueológico de Doña Blanca. bien de interés cultural"
-  },
-  {
     "id": "Q164197",
     "nombre": "Coslada",
     "lat": 40.426111111,
@@ -442,16 +432,6 @@
     "texto_embedding": "Torrente. municipio de la provincia de Valencia, España"
   },
   {
-    "id": "Q6140279",
-    "nombre": "Tejada la Vieja",
-    "lat": 37.497219741,
-    "lon": -6.362057452,
-    "descripcion": "bien de interés cultural",
-    "tipo": "ciudad",
-    "wikidata_id": "Q6140279",
-    "texto_embedding": "Tejada la Vieja. bien de interés cultural"
-  },
-  {
     "id": "Q965924",
     "nombre": "Medina Alzahira",
     "lat": 37.95397,
@@ -470,6 +450,16 @@
     "tipo": "ciudad",
     "wikidata_id": "Q1492",
     "texto_embedding": "Barcelona. capital de Cataluña, España"
+  },
+  {
+    "id": "Q3552479",
+    "nombre": "Urso",
+    "lat": 37.242284,
+    "lon": -5.090233,
+    "descripcion": "patrimonio histórico de Andalucía de importancia arqueológica en Osuna, España",
+    "tipo": "ciudad",
+    "wikidata_id": "Q3552479",
+    "texto_embedding": "Urso. patrimonio histórico de Andalucía de importancia arqueológica en Osuna, España"
   },
   {
     "id": "Q5768702",
@@ -560,6 +550,16 @@
     "tipo": "ciudad",
     "wikidata_id": "Q8826",
     "texto_embedding": "Palma de Mallorca. capital de la Comunidad Autónoma de las Islas Baleares, España"
+  },
+  {
+    "id": "Q15679",
+    "nombre": "Badajoz",
+    "lat": 38.87789,
+    "lon": -6.970609,
+    "descripcion": "capital de la provincia de Badajoz, Extremadura, España",
+    "tipo": "ciudad",
+    "wikidata_id": "Q15679",
+    "texto_embedding": "Badajoz. capital de la provincia de Badajoz, Extremadura, España"
   },
   {
     "id": "Q899302",
@@ -771,16 +771,6 @@
     "wikidata_id": "Q2284354"
   },
   {
-    "id": "Q670077",
-    "nombre": "Real Academia de Bellas Artes de Santa Isabel de Hungría",
-    "lat": 37.3877,
-    "lon": -5.99106,
-    "imagen": "http://commons.wikimedia.org/wiki/Special:FilePath/Renacimiento%20en%20Sevilla%2C%20Casa%20de%20los%20Pinelo.jpg",
-    "ciudad": "Sevilla",
-    "tipo": "museo",
-    "wikidata_id": "Q670077"
-  },
-  {
     "id": "Q7990668",
     "nombre": "Muelle de las Carabelas",
     "lat": 37.21148,
@@ -799,16 +789,6 @@
     "ciudad": "Madrid",
     "tipo": "museo",
     "wikidata_id": "Q876383"
-  },
-  {
-    "id": "Q1421776",
-    "nombre": "museo Vostell-Malpartida",
-    "lat": 39.421913669,
-    "lon": -6.504153194,
-    "imagen": "http://commons.wikimedia.org/wiki/Special:FilePath/Panor%C3%A1mica%20del%20Museo%20Vostell.jpg",
-    "ciudad": "Los Barruecos",
-    "tipo": "museo",
-    "wikidata_id": "Q1421776"
   },
   {
     "id": "Q110656878",
@@ -841,16 +821,6 @@
     "wikidata_id": "Q18810179"
   },
   {
-    "id": "Q1310820",
-    "nombre": "Museo del Mar (Lloret de Mar)",
-    "lat": 41.69956,
-    "lon": 2.85073,
-    "imagen": "http://commons.wikimedia.org/wiki/Special:FilePath/Can%20Garriga-Lloret%20de%20Mar%20%284%29.jpg",
-    "ciudad": "Lloret de Mar",
-    "tipo": "museo",
-    "wikidata_id": "Q1310820"
-  },
-  {
     "id": "Q6034305",
     "nombre": "Museo de la Siderurgia y la Minería de Castilla y León",
     "lat": 42.83825,
@@ -871,24 +841,14 @@
     "wikidata_id": "Q1126981"
   },
   {
-    "id": "Q1577723",
-    "nombre": "L'ETNO, Museu Valencià d'Etnologia",
-    "lat": 39.478422222,
-    "lon": -0.383127777,
-    "imagen": "http://commons.wikimedia.org/wiki/Special:FilePath/Museu%20Valenci%C3%A0%20d%27Etnologia%2C%20sala%20Sec%C3%A0%20i%20Muntanya%2C%20carro%20de%20televisions.JPG",
-    "ciudad": "Valencia",
+    "id": "Q12393758",
+    "nombre": "Museo Diocesano Catedralicio de Lugo",
+    "lat": 43.0092,
+    "lon": -7.5583,
+    "imagen": "http://commons.wikimedia.org/wiki/Special:FilePath/Catedral%20de%20Lugo..JPG",
+    "ciudad": "Lugo",
     "tipo": "museo",
-    "wikidata_id": "Q1577723"
-  },
-  {
-    "id": "Q2437999",
-    "nombre": "L'Umbracle",
-    "lat": 39.45547222,
-    "lon": -0.35400833,
-    "imagen": "http://commons.wikimedia.org/wiki/Special:FilePath/L%27Umbracle%2C%20Valencia%2C%20Spain%20-%20Jan%202007.jpg",
-    "ciudad": "Valencia",
-    "tipo": "museo",
-    "wikidata_id": "Q2437999"
+    "wikidata_id": "Q12393758"
   },
   {
     "id": "Q12257480",
@@ -901,44 +861,14 @@
     "wikidata_id": "Q12257480"
   },
   {
-    "id": "Q634421",
-    "nombre": "Centre de Documentació i Museu de les Arts Escèniques",
-    "lat": 41.37119722,
-    "lon": 2.15775,
-    "imagen": "http://commons.wikimedia.org/wiki/Special:FilePath/Museu%20de%20les%20Arts%20Esc%C3%A8niques%20hall.JPG",
-    "ciudad": "Barcelona",
+    "id": "Q944049",
+    "nombre": "Castillo de Guardias Viejas",
+    "lat": 36.70040446,
+    "lon": -2.851461251,
+    "imagen": "http://commons.wikimedia.org/wiki/Special:FilePath/Guardias%20Viejas.jpg",
+    "ciudad": "El Ejido",
     "tipo": "museo",
-    "wikidata_id": "Q634421"
-  },
-  {
-    "id": "Q516917",
-    "nombre": "Museo de Historia de Arévalo",
-    "lat": 41.066216666,
-    "lon": -4.719797222,
-    "imagen": "http://commons.wikimedia.org/wiki/Special:FilePath/Casa%20de%20los%20Sexmos.JPG",
-    "ciudad": "Arévalo",
-    "tipo": "museo",
-    "wikidata_id": "Q516917"
-  },
-  {
-    "id": "Q1368571",
-    "nombre": "Palacio Real de El Pardo",
-    "lat": 40.521288,
-    "lon": -3.77506,
-    "imagen": "http://commons.wikimedia.org/wiki/Special:FilePath/El%20Palacio%20de%20El%20Pardo.JPG",
-    "ciudad": "Madrid",
-    "tipo": "museo",
-    "wikidata_id": "Q1368571"
-  },
-  {
-    "id": "Q1630272",
-    "nombre": "Museo Frederic Marès",
-    "lat": 41.3844,
-    "lon": 2.17667,
-    "imagen": "http://commons.wikimedia.org/wiki/Special:FilePath/Entrada%20Museu%20Frederic%20Mar%C3%A8s.jpg",
-    "ciudad": "Barrio Gótico",
-    "tipo": "museo",
-    "wikidata_id": "Q1630272"
+    "wikidata_id": "Q944049"
   },
   {
     "id": "Q1049274",
@@ -1001,6 +931,16 @@
     "wikidata_id": "Q5449162"
   },
   {
+    "id": "Q4897297",
+    "nombre": "Museo Diocesano de Urgel",
+    "lat": 42.357222222,
+    "lon": 1.461944444,
+    "imagen": "http://commons.wikimedia.org/wiki/Special:FilePath/Catedral%20de%20La%20Seu%20d%C2%B4Urgell.jpg",
+    "ciudad": "Seo de Urgel",
+    "tipo": "museo",
+    "wikidata_id": "Q4897297"
+  },
+  {
     "id": "Q284916",
     "nombre": "Gabinete de las Artes Gráficas",
     "lat": 41.388388888,
@@ -1009,16 +949,6 @@
     "ciudad": "Barcelona",
     "tipo": "museo",
     "wikidata_id": "Q284916"
-  },
-  {
-    "id": "Q3817998",
-    "nombre": "Museo de Historia de la Inmigración de Cataluña",
-    "lat": 41.428557875,
-    "lon": 2.212404411,
-    "imagen": "http://commons.wikimedia.org/wiki/Special:FilePath/MIGRAR.jpg",
-    "ciudad": "San Adrián de Besós",
-    "tipo": "museo",
-    "wikidata_id": "Q3817998"
   },
   {
     "id": "Q429192",
@@ -1069,5 +999,75 @@
     "ciudad": "Sils",
     "tipo": "museo",
     "wikidata_id": "Q11914754"
+  },
+  {
+    "id": "Q4894418",
+    "nombre": "Filmoteca de Cataluña",
+    "lat": 41.378666666,
+    "lon": 2.170916666,
+    "imagen": "http://commons.wikimedia.org/wiki/Special:FilePath/Filmoteca%20de%20Catalunya-seu%20Raval.JPG",
+    "ciudad": "El Raval",
+    "tipo": "museo",
+    "wikidata_id": "Q4894418"
+  },
+  {
+    "id": "Q15121263",
+    "nombre": "Museo de Cera de Madrid",
+    "lat": 40.42444444,
+    "lon": -3.69138889,
+    "imagen": "http://commons.wikimedia.org/wiki/Special:FilePath/Entrada%20al%20Museo%20de%20Cera%20%284300311860%29%20%28cropped%29.jpg",
+    "ciudad": "Madrid",
+    "tipo": "museo",
+    "wikidata_id": "Q15121263"
+  },
+  {
+    "id": "Q1049197",
+    "nombre": "Castillo de Gibralfaro",
+    "lat": 36.723222594,
+    "lon": -4.411637,
+    "imagen": "http://commons.wikimedia.org/wiki/Special:FilePath/M%C3%A1laga%20Gibralfaro%2002.jpg",
+    "ciudad": "Málaga",
+    "tipo": "museo",
+    "wikidata_id": "Q1049197"
+  },
+  {
+    "id": "Q107456458",
+    "nombre": "Museo Histórico de Belmez y del Territorio Minero",
+    "lat": 38.2723,
+    "lon": -5.2088165,
+    "imagen": "",
+    "ciudad": "Belmez",
+    "tipo": "museo",
+    "wikidata_id": "Q107456458"
+  },
+  {
+    "id": "Q3329927",
+    "nombre": "Museo del Mar (Peñíscola)",
+    "lat": 40.3573,
+    "lon": 0.408195,
+    "imagen": "http://commons.wikimedia.org/wiki/Special:FilePath/Museu%20de%20la%20Mar%2C%20Peniscola%2009.JPG",
+    "ciudad": "Peñíscola",
+    "tipo": "museo",
+    "wikidata_id": "Q3329927"
+  },
+  {
+    "id": "Q867072",
+    "nombre": "Fundación Joan Miró",
+    "lat": 41.368611111,
+    "lon": 2.16,
+    "imagen": "http://commons.wikimedia.org/wiki/Special:FilePath/Fundaci%C3%B3%20Mir%C3%B3.JPG",
+    "ciudad": "Montjuic",
+    "tipo": "museo",
+    "wikidata_id": "Q867072"
+  },
+  {
+    "id": "Q17043323",
+    "nombre": "Museo del Mar",
+    "lat": 39.7977,
+    "lon": 2.69145,
+    "imagen": "http://commons.wikimedia.org/wiki/Special:FilePath/MuseudelaMar.jpg",
+    "ciudad": "Sóller",
+    "tipo": "museo",
+    "wikidata_id": "Q17043323"
   }
 ]
