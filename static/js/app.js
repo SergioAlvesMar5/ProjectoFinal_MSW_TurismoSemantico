@@ -363,15 +363,61 @@ function renderGrafoD3(container, tripletas) {
   tooltip.innerHTML = "<div class=\"grafo-tooltip-title\">Detalle del nodo</div>" +
     "<div class=\"grafo-tooltip-meta\">Haz clic en una burbuja.</div>";
 
+  function inferNodeType(id) {
+    const lower = String(id || "").toLowerCase();
+    if (lower.includes("unesco") || lower.includes("patrimonio")) return "Patrimonio UNESCO";
+    if (lower.includes("museo")) return "Museo";
+    if (lower.includes("castillo") || lower.includes("castle")) return "Castillo";
+    if (lower.includes("destino")) return "Destino";
+    if (lower.startsWith("http")) return "URI";
+    if (/^q\d+$/i.test(lower)) return "Wikidata";
+    return "Entidad";
+  }
+
+  function getTopPredicates(rels, limit = 4) {
+    const counts = new Map();
+    rels.forEach(r => counts.set(r.p, (counts.get(r.p) || 0) + 1));
+    return [...counts.entries()]
+      .sort((a, b) => b[1] - a[1])
+      .slice(0, limit);
+  }
+
   function hideTooltip() {
     tooltip.classList.remove("visible");
     tooltip.setAttribute("aria-hidden", "true");
   }
 
   function showTooltip(id, rels) {
-    tooltip.innerHTML =
-      `<div class="grafo-tooltip-title">${id}</div>` +
-      `<div class="grafo-tooltip-meta">${rels.length} relaciones visibles</div>`;
+    const total = rels.length;
+    const outgoing = rels.filter(r => r.dir === "->").length;
+    const incoming = total - outgoing;
+    const tipo = inferNodeType(id);
+    const topPreds = getTopPredicates(rels, 4);
+    const ejemplos = rels.slice(0, 3);
+
+    tooltip.innerHTML = `
+      <div class="grafo-tooltip-title">${id}</div>
+      <div class="grafo-tooltip-meta">${tipo}${total ? " · " + total + " relaciones" : ""}</div>
+      ${total ? `
+        <div class="gt-row">
+          <span class="gt-label">Salientes:</span> ${outgoing}
+          <span class="gt-dot">•</span>
+          <span class="gt-label">Entrantes:</span> ${incoming}
+        </div>
+      ` : `<div class="gt-row">Sin relaciones visibles en esta muestra.</div>`}
+      ${topPreds.length ? `
+        <div class="gt-subtitle">Predicados frecuentes</div>
+        <div class="gt-chips">
+          ${topPreds.map(([p, c]) => `<span class="gt-chip">${p} (${c})</span>`).join("")}
+        </div>
+      ` : ""}
+      ${ejemplos.length ? `
+        <div class="gt-subtitle">Ejemplos</div>
+        <div class="gt-list">
+          ${ejemplos.map(r => `<div>${r.dir} ${r.other}</div>`).join("")}
+        </div>
+      ` : ""}
+    `;
     tooltip.classList.add("visible");
     tooltip.setAttribute("aria-hidden", "false");
   }
@@ -620,6 +666,18 @@ function getSystemTheme() {
   return window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
 }
 
+let themeTransitionTimer = null;
+
+function runThemeTransition() {
+  const root = document.documentElement;
+  root.classList.add("theme-transition");
+  if (themeTransitionTimer) window.clearTimeout(themeTransitionTimer);
+  themeTransitionTimer = window.setTimeout(() => {
+    root.classList.remove("theme-transition");
+    themeTransitionTimer = null;
+  }, 300);
+}
+
 function applyTheme(theme) {
   const root = document.documentElement;
   if (theme === "dark" || theme === "light") {
@@ -647,11 +705,13 @@ function initThemeToggle() {
     const current = document.documentElement.getAttribute("data-theme") || getSystemTheme();
     const next = current === "dark" ? "light" : "dark";
     localStorage.setItem("theme", next);
+    runThemeTransition();
     applyTheme(next);
   });
 
   window.matchMedia("(prefers-color-scheme: dark)").addEventListener("change", (e) => {
     if (localStorage.getItem("theme")) return;
+    runThemeTransition();
     applyTheme(e.matches ? "dark" : "light");
   });
 }
