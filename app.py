@@ -55,6 +55,25 @@ def log(msg: str):
         estado["log"] = estado["log"][-50:]
 
 
+def _load_cache_json(path: Path) -> list[dict] | None:
+    try:
+        text = path.read_text(encoding="utf-8")
+        return json.loads(text)
+    except UnicodeDecodeError:
+        try:
+            text = path.read_text(encoding="latin-1")
+            data = json.loads(text)
+            path.write_text(json.dumps(data, ensure_ascii=False, indent=2), encoding="utf-8")
+            log("Cache convertida a UTF-8.")
+            return data
+        except Exception as e:
+            log(f"Error leyendo cache: {e}")
+            return None
+    except Exception as e:
+        log(f"Error leyendo cache: {e}")
+        return None
+
+
 # ── Carga de datos (se ejecuta en hilo separado) ─────────────────────────────
 
 def cargar_datos_background():
@@ -88,7 +107,10 @@ def cargar_datos_background():
     log(f"Total destinos únicos: {len(destinos_global)}")
 
     # Guardar en disco como caché
-    DATA_FILE.write_text(json.dumps(destinos_global, ensure_ascii=False, indent=2))
+    DATA_FILE.write_text(
+        json.dumps(destinos_global, ensure_ascii=False, indent=2),
+        encoding="utf-8",
+    )
     log("Datos guardados en caché (data/destinos.json)")
 
     # 3. Construir grafo RDF
@@ -137,15 +159,19 @@ def api_cargar():
     forzar = request.json.get("forzar", False) if request.json else False
     if DATA_FILE.exists() and not forzar:
         global destinos_global, grafo_global
-        destinos_global = json.loads(DATA_FILE.read_text())
-        grafo_global = construir_ontologia()
-        poblar_grafo(grafo_global, destinos_global)
-        indexar_destinos(destinos_global)
-        estado["cargado"] = True
-        estado["num_destinos"] = len(destinos_global)
-        estado["num_tripletas"] = len(grafo_global)
-        log(f"Datos cargados desde caché ({len(destinos_global)} destinos)")
-        return jsonify({"ok": True, "msg": "Datos cargados desde caché.", "fuente": "cache"})
+        cache_data = _load_cache_json(DATA_FILE)
+        if cache_data is None:
+            log("Cache invalida. Forzando recarga completa.")
+        else:
+            destinos_global = cache_data
+            grafo_global = construir_ontologia()
+            poblar_grafo(grafo_global, destinos_global)
+            estado["embeddings_ok"] = indexar_destinos(destinos_global)
+            estado["cargado"] = True
+            estado["num_destinos"] = len(destinos_global)
+            estado["num_tripletas"] = len(grafo_global)
+            log(f"Datos cargados desde caché ({len(destinos_global)} destinos)")
+            return jsonify({"ok": True, "msg": "Datos cargados desde caché.", "fuente": "cache"})
 
     # Carga completa en hilo separado
     t = threading.Thread(target=cargar_datos_background, daemon=True)
@@ -245,7 +271,9 @@ def api_sparql():
     if grafo_global is None:
         return jsonify({"error": "Grafo no construido aún"}), 503
 
-    resultados = sparql_local(grafo_global, q)
+    resultados, err = sparql_local(grafo_global, q)
+    if err:
+        return jsonify({"error": f"SPARQL error: {err}"}), 400
     return jsonify({"resultados": resultados, "total": len(resultados)})
 
 

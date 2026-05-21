@@ -108,6 +108,8 @@ def poblar_grafo(g: Graph, destinos: list[dict]) -> Graph:
         "museo":             TS.Museo,
         "castle":            TS.Castillo,
         "ruins":             TS.Castillo,
+        "castillo":          TS.Castillo,
+        "ruinas":            TS.Castillo,
         "attraction":        TS.Destino,
     }
 
@@ -115,8 +117,8 @@ def poblar_grafo(g: Graph, destinos: list[dict]) -> Graph:
         wid = d.get("wikidata_id") or d.get("id", "")
         uri = URIRef(f"http://turismo-semantico.es/destino/{wid}")
 
-        tipo_osm  = d.get("tipo_osm", "")
-        tipo_wiki = d.get("tipo", "")
+        tipo_osm  = (d.get("tipo_osm") or "").strip().lower()
+        tipo_wiki = (d.get("tipo") or "").strip().lower()
         cls = TIPO_MAP.get(tipo_osm) or TIPO_MAP.get(tipo_wiki, TS.Destino)
 
         g.add((uri, RDF.type,       cls))
@@ -156,20 +158,23 @@ def grafo_a_json(g: Graph) -> list[dict]:
     return triples[:300]  # límite para visualización
 
 
-def sparql_local(g: Graph, query: str) -> list[dict]:
+def sparql_local(g: Graph, query: str) -> tuple[list[dict], str | None]:
     """
     Ejecuta una consulta SPARQL sobre el grafo local (rdflib).
+    Devuelve (resultados, error).
     """
     try:
         results = g.query(query, initNs={"ts": TS, "rdf": RDF, "rdfs": RDFS})
         cols = [str(v) for v in results.vars]
-        return [
+        data = [
             {col: str(row[i]) for i, col in enumerate(cols)}
             for row in results
         ]
+        return data, None
     except Exception as e:
-        print(f"[SPARQL local] Error: {e}")
-        return []
+        msg = str(e) or "SPARQL error"
+        print(f"[SPARQL local] Error: {msg}")
+        return [], msg
 
 
 # ── Shapes SHACL (en Turtle) ────────────────────────────────────────────────

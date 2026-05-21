@@ -116,7 +116,7 @@ def get_patrimonio_nacional(limit_bbox: tuple = (36.0, -9.5, 43.8, 4.5)) -> list
     """
     elementos = _overpass_query(query, timeout=45)
     results = []
-    for el in elementos[:limit_bbox[3] and 60 or 60]:  # max 60
+    for el in elementos[:60]:  # max 60
         tags = el.get("tags", {})
         nombre = tags.get("name:es") or tags.get("name")
         if not nombre:

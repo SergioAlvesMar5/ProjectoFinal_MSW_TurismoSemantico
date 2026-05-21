@@ -57,12 +57,13 @@ function cargarMarcadores(destinos) {
   marcadores = [];
   destinos.forEach(d => {
     if (!d.lat || !d.lon) return;
-    const m = L.marker([d.lat, d.lon], { icon: crearIcono(d.tipo) })
+    const tipo = d.tipo || d.tipo_osm || "";
+    const m = L.marker([d.lat, d.lon], { icon: crearIcono(tipo) })
       .addTo(mapa)
       .bindPopup(`
         <div>
           <div class="popup-nombre">${d.nombre}</div>
-          <div class="popup-tipo">${d.tipo || ""}</div>
+          <div class="popup-tipo">${tipo || ""}</div>
           ${d.descripcion ? `<p style="font-size:.8rem;margin-top:.4rem">${d.descripcion.substring(0,100)}…</p>` : ""}
           <button onclick="abrirDetalle('${encodeURIComponent(JSON.stringify(d))}')"
             style="margin-top:.5rem;background:#1a5276;color:#fff;border:none;
@@ -588,12 +589,14 @@ function renderTripletasTabla(tripletas) {
 const EJEMPLOS_SPARQL = {
   todos_destinos: `PREFIX ts: <http://turismo-semantico.es/ontologia#>
 PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 
 SELECT ?nombre ?lat ?lon WHERE {
-  ?destino rdf:type ts:Destino ;
+  ?destino rdf:type ?tipo ;
            ts:nombre ?nombre ;
            ts:latitud ?lat ;
            ts:longitud ?lon .
+  ?tipo rdfs:subClassOf* ts:Destino .
 }
 LIMIT 20`,
 
