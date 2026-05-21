@@ -157,7 +157,7 @@ def _cargar_osm_background():
     estado["osm_error"] = ""
     try:
         log("OSM en segundo plano: consultando Overpass...")
-        osm_patrimonio = get_patrimonio_nacional(max_results=300)
+        osm_patrimonio = get_patrimonio_nacional(max_results=220, max_total_seconds=90)
         if not osm_patrimonio:
             estado["osm_status"] = "error"
             estado["osm_error"] = "OSM sin resultados"
@@ -191,15 +191,15 @@ def _cargar_osm_background():
                 grafo_new.serialize(format="turtle"), encoding="utf-8"
             )
 
-        estado["osm_status"] = "indexing"
+        estado["osm_status"] = "ok"
         estado["osm_count"] = len(osm_patrimonio)
         log(f"OSM en segundo plano: agregados {len(merged) - len(base_actual)} destinos nuevos")
+        log("OSM en segundo plano: mapa y cache actualizados; reindexando busqueda semantica")
 
         ok = indexar_destinos(merged)
         estado["embeddings_ok"] = ok
-        estado["osm_status"] = "ok"
         estado["osm_count"] = len(osm_patrimonio)
-        log("OSM en segundo plano: grafo, cache y busqueda semantica actualizados")
+        log("OSM en segundo plano: busqueda semantica actualizada")
     except Exception as e:
         estado["osm_status"] = "error"
         estado["osm_error"] = str(e)

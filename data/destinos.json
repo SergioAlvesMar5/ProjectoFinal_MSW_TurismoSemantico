@@ -30,6 +30,16 @@
     "texto_embedding": "Mainake. Destino turístico en España: Mainake"
   },
   {
+    "id": "Q55684",
+    "nombre": "Palacio - Castillo de Alacuás",
+    "lat": 39.457825,
+    "lon": -0.45680278,
+    "descripcion": "monumento en Alaquàs, España",
+    "tipo": "atracción turística",
+    "wikidata_id": "Q55684",
+    "texto_embedding": "Palacio - Castillo de Alacuás. monumento en Alaquàs, España"
+  },
+  {
     "id": "Q580743",
     "nombre": "Maspalomas",
     "lat": 27.76057,
@@ -130,14 +140,14 @@
     "texto_embedding": "Olite. municipio de Navarra, España"
   },
   {
-    "id": "Q5039690",
-    "nombre": "Carissa Aurelia",
-    "lat": 36.870874863,
-    "lon": -5.728729834,
-    "descripcion": "bien de interés cultural",
-    "tipo": "ciudad",
-    "wikidata_id": "Q5039690",
-    "texto_embedding": "Carissa Aurelia. bien de interés cultural"
+    "id": "Q546180",
+    "nombre": "Mesa de los Tres Reyes",
+    "lat": 42.919411,
+    "lon": -0.7275039,
+    "descripcion": "Destino turístico en España: Mesa de los Tres Reyes",
+    "tipo": "atracción turística",
+    "wikidata_id": "Q546180",
+    "texto_embedding": "Mesa de los Tres Reyes. Destino turístico en España: Mesa de los Tres Reyes"
   },
   {
     "id": "Q487679",
@@ -158,16 +168,6 @@
     "tipo": "ciudad",
     "wikidata_id": "Q15684",
     "texto_embedding": "Segovia. municipio de la provincia de Segovia, Castilla y León, España"
-  },
-  {
-    "id": "Q5562219",
-    "nombre": "Obúlcula",
-    "lat": 37.515766,
-    "lon": -5.316314,
-    "descripcion": "bien de interés cultural",
-    "tipo": "ciudad",
-    "wikidata_id": "Q5562219",
-    "texto_embedding": "Obúlcula. bien de interés cultural"
   },
   {
     "id": "Q54898",
@@ -221,14 +221,14 @@
     "texto_embedding": "Arrecife. municipio capital de la isla de Lanzarote, España"
   },
   {
-    "id": "Q31910934",
+    "id": "Q486792",
     "nombre": "Aranjuez",
-    "lat": 40.03340145,
-    "lon": -3.60279693,
-    "descripcion": "Villa capital del municipio de Aranjuez",
+    "lat": 40.033333333,
+    "lon": -3.602777777,
+    "descripcion": "municipio de la Comunidad de Madrid, España",
     "tipo": "ciudad",
-    "wikidata_id": "Q31910934",
-    "texto_embedding": "Aranjuez. Villa capital del municipio de Aranjuez"
+    "wikidata_id": "Q486792",
+    "texto_embedding": "Aranjuez. municipio de la Comunidad de Madrid, España"
   },
   {
     "id": "Q584446",
@@ -239,16 +239,6 @@
     "tipo": "ciudad",
     "wikidata_id": "Q584446",
     "texto_embedding": "Valle Gran Rey. municipio de la isla de La Gomera, España"
-  },
-  {
-    "id": "Q4745109",
-    "nombre": "Torreparedones",
-    "lat": 37.754514248,
-    "lon": -4.377538357,
-    "descripcion": "bien de interés cultural",
-    "tipo": "ciudad",
-    "wikidata_id": "Q4745109",
-    "texto_embedding": "Torreparedones. bien de interés cultural"
   },
   {
     "id": "Q1635908",
@@ -321,6 +311,16 @@
     "texto_embedding": "Benidorm. municipio de la provincia de Alicante, Comunidad Valenciana, España"
   },
   {
+    "id": "Q239935",
+    "nombre": "Ciudad de las Artes y las Ciencias",
+    "lat": 39.454527777,
+    "lon": -0.350363888,
+    "descripcion": "complejo arquitectónico, cultural y de entretenimiento de Valencia, España",
+    "tipo": "atracción turística",
+    "wikidata_id": "Q239935",
+    "texto_embedding": "Ciudad de las Artes y las Ciencias. complejo arquitectónico, cultural y de entretenimiento de Valencia, España"
+  },
+  {
     "id": "Q302099",
     "nombre": "Requena",
     "lat": 39.488538,
@@ -329,6 +329,16 @@
     "tipo": "ciudad",
     "wikidata_id": "Q302099",
     "texto_embedding": "Requena. municipio de la provincia de Valencia, España"
+  },
+  {
+    "id": "Q160112",
+    "nombre": "Museo del Prado",
+    "lat": 40.413888888,
+    "lon": -3.692222222,
+    "descripcion": "museo de arte de Madrid, España",
+    "tipo": "atracción turística",
+    "wikidata_id": "Q160112",
+    "texto_embedding": "Museo del Prado. museo de arte de Madrid, España"
   },
   {
     "id": "Q164197",
@@ -392,6 +402,36 @@
     "texto_embedding": "Torrente. municipio de la provincia de Valencia, España"
   },
   {
+    "id": "Q29575107",
+    "nombre": "Segontia",
+    "lat": 41.066666666,
+    "lon": -2.65,
+    "descripcion": "mansio situada en el itinerario de Antonino XXV sidentificada habitualmente con Sigüenza",
+    "tipo": "ciudad",
+    "wikidata_id": "Q29575107",
+    "texto_embedding": "Segontia. mansio situada en el itinerario de Antonino XXV sidentificada habitualmente con Sigüenza"
+  },
+  {
+    "id": "Q171517",
+    "nombre": "Palacio Real de Madrid",
+    "lat": 40.417955,
+    "lon": -3.714312,
+    "descripcion": "residencia oficial del rey de España y bien de interés cultural",
+    "tipo": "atracción turística",
+    "wikidata_id": "Q171517",
+    "texto_embedding": "Palacio Real de Madrid. residencia oficial del rey de España y bien de interés cultural"
+  },
+  {
+    "id": "Q47476",
+    "nombre": "Alhambra",
+    "lat": 37.17634,
+    "lon": -3.58821,
+    "descripcion": "conjunto palaciego en Granada",
+    "tipo": "atracción turística",
+    "wikidata_id": "Q47476",
+    "texto_embedding": "Alhambra. conjunto palaciego en Granada"
+  },
+  {
     "id": "Q965924",
     "nombre": "Medina Alzahira",
     "lat": 37.95397,
@@ -412,16 +452,6 @@
     "texto_embedding": "Barcelona. capital de Cataluña, España"
   },
   {
-    "id": "Q3552479",
-    "nombre": "Urso",
-    "lat": 37.242284,
-    "lon": -5.090233,
-    "descripcion": "patrimonio histórico de Andalucía de importancia arqueológica en Osuna, España",
-    "tipo": "ciudad",
-    "wikidata_id": "Q3552479",
-    "texto_embedding": "Urso. patrimonio histórico de Andalucía de importancia arqueológica en Osuna, España"
-  },
-  {
     "id": "Q501090",
     "nombre": "Castro-Urdiales",
     "lat": 43.384444444,
@@ -440,16 +470,6 @@
     "tipo": "ciudad",
     "wikidata_id": "Q13939",
     "texto_embedding": "Tarrasa. municipio en la comarca del valles occidental, Cataluña, España"
-  },
-  {
-    "id": "Q4890124",
-    "nombre": "Virovesca",
-    "lat": 42.54166667,
-    "lon": -3.32527778,
-    "descripcion": "Destino turístico en España: Virovesca",
-    "tipo": "ciudad",
-    "wikidata_id": "Q4890124",
-    "texto_embedding": "Virovesca. Destino turístico en España: Virovesca"
   },
   {
     "id": "Q888390",
@@ -482,15 +502,14 @@
     "texto_embedding": "Badajoz. capital de la provincia de Badajoz, Extremadura, España"
   },
   {
-    "id": "Q11918155",
+    "id": "Q473914",
     "nombre": "Ibiza",
-    "lat": 38.91113889,
-    "lon": 1.435194444,
-    "imagen": "http://commons.wikimedia.org/wiki/Special:FilePath/ForbysIbizaTown%2002.jpg",
-    "descripcion": "Patrimonio de la Humanidad de España",
-    "anio_patrimonio": "",
-    "tipo": "patrimonio_unesco",
-    "wikidata_id": "Q11918155"
+    "lat": 38.908888888,
+    "lon": 1.432777777,
+    "descripcion": "municipio de Baleares, España",
+    "tipo": "ciudad",
+    "wikidata_id": "Q473914",
+    "texto_embedding": "Ibiza. municipio de Baleares, España"
   },
   {
     "id": "Q241767",
@@ -503,34 +522,24 @@
     "texto_embedding": "Plasencia. municipio de la provincia de Cáceres, España"
   },
   {
-    "id": "Q31844059",
-    "nombre": "Ciudad de Toledo",
-    "lat": 39.8565219,
-    "lon": -4.024974933,
-    "descripcion": "ciudad española, capital del municipio homónimo",
-    "tipo": "ciudad",
-    "wikidata_id": "Q31844059",
-    "texto_embedding": "Ciudad de Toledo. ciudad española, capital del municipio homónimo"
+    "id": "Q1303386",
+    "nombre": "Jardín Botánico Viera y Clavijo",
+    "lat": 28.06361,
+    "lon": -15.46333,
+    "descripcion": "Destino turístico en España: Jardín Botánico Viera y Clavijo",
+    "tipo": "atracción turística",
+    "wikidata_id": "Q1303386",
+    "texto_embedding": "Jardín Botánico Viera y Clavijo. Destino turístico en España: Jardín Botánico Viera y Clavijo"
   },
   {
-    "id": "Q31917885",
-    "nombre": "Ciudad de Lugo",
-    "lat": 43.00992,
-    "lon": -7.55602,
-    "descripcion": "Destino turístico en España: Ciudad de Lugo",
+    "id": "Q23984135",
+    "nombre": "Melilla",
+    "lat": 35.29369,
+    "lon": -2.93833,
+    "descripcion": "ciudad española del norte de África",
     "tipo": "ciudad",
-    "wikidata_id": "Q31917885",
-    "texto_embedding": "Ciudad de Lugo. Destino turístico en España: Ciudad de Lugo"
-  },
-  {
-    "id": "Q97619318",
-    "nombre": "Palacio Carrizosa",
-    "lat": 36.685661294,
-    "lon": -6.143643891,
-    "descripcion": "yacimiento arqueológico, patrimonio histórico de Andalucía en Jerez de la Frontera, España",
-    "tipo": "ciudad",
-    "wikidata_id": "Q97619318",
-    "texto_embedding": "Palacio Carrizosa. yacimiento arqueológico, patrimonio histórico de Andalucía en Jerez de la Frontera, España"
+    "wikidata_id": "Q23984135",
+    "texto_embedding": "Melilla. ciudad española del norte de África"
   },
   {
     "id": "Q12833394",
@@ -543,6 +552,16 @@
     "texto_embedding": "Ciudad de Guadalajara. ciudad española, capital del municipio homónimo"
   },
   {
+    "id": "Q24013138",
+    "nombre": "Ponferrada",
+    "lat": 42.54664,
+    "lon": -6.59619,
+    "descripcion": "localidad de Ponferrada, España",
+    "tipo": "ciudad",
+    "wikidata_id": "Q24013138",
+    "texto_embedding": "Ponferrada. localidad de Ponferrada, España"
+  },
+  {
     "id": "Q899302",
     "nombre": "Cueva de Altamira y arte rupestre paleolítico del norte de España",
     "lat": 43.3825,
@@ -552,6 +571,17 @@
     "anio_patrimonio": "1985",
     "tipo": "patrimonio_unesco",
     "wikidata_id": "Q899302"
+  },
+  {
+    "id": "Q11918155",
+    "nombre": "Ibiza",
+    "lat": 38.91113889,
+    "lon": 1.435194444,
+    "imagen": "http://commons.wikimedia.org/wiki/Special:FilePath/ForbysIbizaTown%2002.jpg",
+    "descripcion": "Patrimonio de la Humanidad de España",
+    "anio_patrimonio": "",
+    "tipo": "patrimonio_unesco",
+    "wikidata_id": "Q11918155"
   },
   {
     "id": "Q110524059",
@@ -741,293 +771,303 @@
     "wikidata_id": "Q2284354"
   },
   {
-    "id": "Q3329927",
-    "nombre": "Museo del Mar (Peñíscola)",
-    "lat": 40.3573,
-    "lon": 0.408195,
-    "imagen": "http://commons.wikimedia.org/wiki/Special:FilePath/Museu%20de%20la%20Mar%2C%20Peniscola%2009.JPG",
-    "ciudad": "Peñíscola",
+    "id": "Q876383",
+    "nombre": "Museo de Historia de Madrid",
+    "lat": 40.425833,
+    "lon": -3.700833,
+    "imagen": "http://commons.wikimedia.org/wiki/Special:FilePath/Museo%20de%20Historia%20de%20Madrid%20%28Espa%C3%B1a%29%2003.jpg",
+    "ciudad": "Madrid",
     "tipo": "museo",
-    "wikidata_id": "Q3329927"
+    "wikidata_id": "Q876383"
   },
   {
-    "id": "Q17043323",
-    "nombre": "Museo del Mar",
-    "lat": 39.7977,
-    "lon": 2.69145,
-    "imagen": "http://commons.wikimedia.org/wiki/Special:FilePath/MuseudelaMar.jpg",
-    "ciudad": "Sóller",
+    "id": "Q1421776",
+    "nombre": "museo Vostell-Malpartida",
+    "lat": 39.421913669,
+    "lon": -6.504153194,
+    "imagen": "http://commons.wikimedia.org/wiki/Special:FilePath/Panor%C3%A1mica%20del%20Museo%20Vostell.jpg",
+    "ciudad": "Los Barruecos",
     "tipo": "museo",
-    "wikidata_id": "Q17043323"
+    "wikidata_id": "Q1421776"
   },
   {
-    "id": "Q10940111",
-    "nombre": "Museo Diocesano de Huesca",
-    "lat": 42.140561111,
-    "lon": -0.408330555,
-    "imagen": "http://commons.wikimedia.org/wiki/Special:FilePath/Catedral%20de%20Huesca%2C%20Museo%20Diocesano.JPG",
-    "ciudad": "Huesca",
+    "id": "Q110656878",
+    "nombre": "Filmoteca de Castilla y León",
+    "lat": 40.96452298,
+    "lon": -5.661498039,
+    "imagen": "http://commons.wikimedia.org/wiki/Special:FilePath/Filmoteca%20de%20Castilla%20y%20Le%C3%B3n%20%2830898362003%29%20v2.jpg",
+    "ciudad": "Salamanca",
     "tipo": "museo",
-    "wikidata_id": "Q10940111"
+    "wikidata_id": "Q110656878"
   },
   {
-    "id": "Q560041",
-    "nombre": "Museo Diocesano de Tarragona",
-    "lat": 41.115277777,
-    "lon": 1.263888888,
-    "imagen": "http://commons.wikimedia.org/wiki/Special:FilePath/CATEDRAL%20DE%20TARRAGONA.jpg",
-    "ciudad": "Tarragona",
+    "id": "Q99435527",
+    "nombre": "El submarí Barcelona",
+    "lat": 41.4145,
+    "lon": 2.13209,
+    "imagen": "http://commons.wikimedia.org/wiki/Special:FilePath/Submar%C3%AD%20Barcelona%20P1180787.JPG",
+    "ciudad": "Sant Gervasi-La Bonanova",
     "tipo": "museo",
-    "wikidata_id": "Q560041"
+    "wikidata_id": "Q99435527"
   },
   {
-    "id": "Q18047912",
-    "nombre": "Museo de la Pesca",
-    "lat": 41.843611111,
-    "lon": 3.123333333,
-    "imagen": "http://commons.wikimedia.org/wiki/Special:FilePath/Port%20de%20Palamos%20Fishery%20Museum.jpg",
-    "ciudad": "Palamós",
-    "tipo": "museo",
-    "wikidata_id": "Q18047912"
-  },
-  {
-    "id": "Q1954347",
-    "nombre": "Museu Diocesà de Menorca",
-    "lat": 40.001576,
-    "lon": 3.8387211,
-    "imagen": "",
-    "ciudad": "Ciudadela de Menorca",
-    "tipo": "museo",
-    "wikidata_id": "Q1954347"
-  },
-  {
-    "id": "Q6033498",
-    "nombre": "Museo Marítimo de Asturias",
-    "lat": 43.613624,
-    "lon": -5.793002,
-    "imagen": "http://commons.wikimedia.org/wiki/Special:FilePath/Museo%20Mar%C3%ADtimo%20de%20Asturias.jpg",
-    "ciudad": "Luanco",
-    "tipo": "museo",
-    "wikidata_id": "Q6033498"
-  },
-  {
-    "id": "Q83618981",
-    "nombre": "Maritime Museum Mallorca",
-    "lat": 39.797621024,
-    "lon": 2.691444948,
-    "imagen": "",
-    "ciudad": "Sóller",
-    "tipo": "museo",
-    "wikidata_id": "Q83618981"
-  },
-  {
-    "id": "Q616329",
-    "nombre": "Museo del Grabado de Goya",
-    "lat": 41.34,
-    "lon": -0.93,
-    "imagen": "http://commons.wikimedia.org/wiki/Special:FilePath/MuseoGrabadoGoya.jpg",
-    "ciudad": "Fuendetodos",
-    "tipo": "museo",
-    "wikidata_id": "Q616329"
-  },
-  {
-    "id": "Q29961308",
-    "nombre": "Museo Catedralicio Diocesano de León",
-    "lat": 42.599444444,
-    "lon": -5.566666666,
-    "imagen": "http://commons.wikimedia.org/wiki/Special:FilePath/Museo%20catedralicio-diocesano.jpg",
-    "ciudad": "León",
-    "tipo": "museo",
-    "wikidata_id": "Q29961308"
-  },
-  {
-    "id": "Q1394017",
-    "nombre": "Museo del Mar de Galicia",
-    "lat": 42.224138888,
-    "lon": -8.770166666,
-    "imagen": "http://commons.wikimedia.org/wiki/Special:FilePath/Museo%20do%20Mar.jpg",
+    "id": "Q18810179",
+    "nombre": "Pinacoteca Francisco Fernández del Riego",
+    "lat": 42.237861111,
+    "lon": -8.726027777,
+    "imagen": "http://commons.wikimedia.org/wiki/Special:FilePath/Pinacoteca%20Francisco%20Fern%C3%A1ndez%20del%20Riego.jpg",
     "ciudad": "Vigo",
     "tipo": "museo",
-    "wikidata_id": "Q1394017"
+    "wikidata_id": "Q18810179"
   },
   {
-    "id": "Q1286354",
-    "nombre": "Museo Marítimo de Barcelona",
-    "lat": 41.37502778,
-    "lon": 2.17636944,
-    "imagen": "http://commons.wikimedia.org/wiki/Special:FilePath/Drassanes%20barcelona.jpg",
+    "id": "Q1310820",
+    "nombre": "Museo del Mar (Lloret de Mar)",
+    "lat": 41.69956,
+    "lon": 2.85073,
+    "imagen": "http://commons.wikimedia.org/wiki/Special:FilePath/Can%20Garriga-Lloret%20de%20Mar%20%284%29.jpg",
+    "ciudad": "Lloret de Mar",
+    "tipo": "museo",
+    "wikidata_id": "Q1310820"
+  },
+  {
+    "id": "Q6034305",
+    "nombre": "Museo de la Siderurgia y la Minería de Castilla y León",
+    "lat": 42.83825,
+    "lon": -5.153638888,
+    "imagen": "http://commons.wikimedia.org/wiki/Special:FilePath/Sabero%2001%20plaza%20cerrada%20by-dpc.jpg",
+    "ciudad": "Sabero",
+    "tipo": "museo",
+    "wikidata_id": "Q6034305"
+  },
+  {
+    "id": "Q1126981",
+    "nombre": "Ermita de San Baudelio de Berlanga",
+    "lat": 41.41833333,
+    "lon": -2.79027778,
+    "imagen": "http://commons.wikimedia.org/wiki/Special:FilePath/San%20Baudelio%20Frontal.jpg",
+    "ciudad": "Caltojar",
+    "tipo": "museo",
+    "wikidata_id": "Q1126981"
+  },
+  {
+    "id": "Q1577723",
+    "nombre": "L'ETNO, Museu Valencià d'Etnologia",
+    "lat": 39.478422222,
+    "lon": -0.383127777,
+    "imagen": "http://commons.wikimedia.org/wiki/Special:FilePath/Museu%20Valenci%C3%A0%20d%27Etnologia%2C%20sala%20Sec%C3%A0%20i%20Muntanya%2C%20carro%20de%20televisions.JPG",
+    "ciudad": "Valencia",
+    "tipo": "museo",
+    "wikidata_id": "Q1577723"
+  },
+  {
+    "id": "Q2437999",
+    "nombre": "L'Umbracle",
+    "lat": 39.45547222,
+    "lon": -0.35400833,
+    "imagen": "http://commons.wikimedia.org/wiki/Special:FilePath/L%27Umbracle%2C%20Valencia%2C%20Spain%20-%20Jan%202007.jpg",
+    "ciudad": "Valencia",
+    "tipo": "museo",
+    "wikidata_id": "Q2437999"
+  },
+  {
+    "id": "Q12257480",
+    "nombre": "Museo de la Minería del País Vasco",
+    "lat": 43.311435,
+    "lon": -3.07006,
+    "imagen": "http://commons.wikimedia.org/wiki/Special:FilePath/Abanto%20Zierbena%20-%20Museo%20de%20la%20Miner%C3%ADa%20del%20Pa%C3%ADs%20Vasco%2001.jpg",
+    "ciudad": "Abanto y Ciérvana",
+    "tipo": "museo",
+    "wikidata_id": "Q12257480"
+  },
+  {
+    "id": "Q634421",
+    "nombre": "Centre de Documentació i Museu de les Arts Escèniques",
+    "lat": 41.37119722,
+    "lon": 2.15775,
+    "imagen": "http://commons.wikimedia.org/wiki/Special:FilePath/Museu%20de%20les%20Arts%20Esc%C3%A8niques%20hall.JPG",
+    "ciudad": "Barcelona",
+    "tipo": "museo",
+    "wikidata_id": "Q634421"
+  },
+  {
+    "id": "Q516917",
+    "nombre": "Museo de Historia de Arévalo",
+    "lat": 41.066216666,
+    "lon": -4.719797222,
+    "imagen": "http://commons.wikimedia.org/wiki/Special:FilePath/Casa%20de%20los%20Sexmos.JPG",
+    "ciudad": "Arévalo",
+    "tipo": "museo",
+    "wikidata_id": "Q516917"
+  },
+  {
+    "id": "Q944049",
+    "nombre": "Castillo de Guardias Viejas",
+    "lat": 36.70040446,
+    "lon": -2.851461251,
+    "imagen": "http://commons.wikimedia.org/wiki/Special:FilePath/Guardias%20Viejas.jpg",
+    "ciudad": "El Ejido",
+    "tipo": "museo",
+    "wikidata_id": "Q944049"
+  },
+  {
+    "id": "Q1368571",
+    "nombre": "Palacio Real de El Pardo",
+    "lat": 40.521288,
+    "lon": -3.77506,
+    "imagen": "http://commons.wikimedia.org/wiki/Special:FilePath/El%20Palacio%20de%20El%20Pardo.JPG",
+    "ciudad": "Madrid",
+    "tipo": "museo",
+    "wikidata_id": "Q1368571"
+  },
+  {
+    "id": "Q1049274",
+    "nombre": "Castillo de la Luz",
+    "lat": 28.14861111,
+    "lon": -15.42486111,
+    "imagen": "http://commons.wikimedia.org/wiki/Special:FilePath/Castillo%20de%20la%20Luz%20D81%206161%20%2832252019751%29.jpg",
+    "ciudad": "Las Palmas de Gran Canaria",
+    "tipo": "museo",
+    "wikidata_id": "Q1049274"
+  },
+  {
+    "id": "Q1031852",
+    "nombre": "Can Prunera",
+    "lat": 39.7679727,
+    "lon": 2.7181,
+    "imagen": "http://commons.wikimedia.org/wiki/Special:FilePath/080%20Can%20Prunera%2C%20c.%20Lluna%2090%20%28S%C3%B3ller%29.jpg",
+    "ciudad": "Sóller",
+    "tipo": "museo",
+    "wikidata_id": "Q1031852"
+  },
+  {
+    "id": "Q1583169",
+    "nombre": "Parque Juan Carlos I",
+    "lat": 40.460111111,
+    "lon": -3.60605,
+    "imagen": "http://commons.wikimedia.org/wiki/Special:FilePath/Parque%20Juan%20Carlos%20I%20view03.jpg",
+    "ciudad": "Madrid",
+    "tipo": "museo",
+    "wikidata_id": "Q1583169"
+  },
+  {
+    "id": "Q116059349",
+    "nombre": "Museo de la Educación de las Islas Baleares",
+    "lat": 39.721044923,
+    "lon": 2.904558319,
+    "imagen": "http://commons.wikimedia.org/wiki/Special:FilePath/Museu%20de%20l%27Educaci%C3%B3%20de%20les%20Balears.jpg",
+    "ciudad": "Inca",
+    "tipo": "museo",
+    "wikidata_id": "Q116059349"
+  },
+  {
+    "id": "Q386570",
+    "nombre": "Museo Lázaro Galdiano",
+    "lat": 40.436911,
+    "lon": -3.685848,
+    "imagen": "http://commons.wikimedia.org/wiki/Special:FilePath/Museo%20L%C3%A1zaro%20Galdiano%20%28Madrid%29%2005.jpg",
+    "ciudad": "Madrid",
+    "tipo": "museo",
+    "wikidata_id": "Q386570"
+  },
+  {
+    "id": "Q5449162",
+    "nombre": "Filmoteca Española",
+    "lat": 40.41250763,
+    "lon": -3.702092085,
+    "imagen": "http://commons.wikimedia.org/wiki/Special:FilePath/Cine%20Dor%C3%A9.jpg",
+    "ciudad": "Madrid",
+    "tipo": "museo",
+    "wikidata_id": "Q5449162"
+  },
+  {
+    "id": "Q284916",
+    "nombre": "Gabinete de las Artes Gráficas",
+    "lat": 41.388388888,
+    "lon": 2.117027777,
+    "imagen": "",
+    "ciudad": "Barcelona",
+    "tipo": "museo",
+    "wikidata_id": "Q284916"
+  },
+  {
+    "id": "Q3817998",
+    "nombre": "Museo de Historia de la Inmigración de Cataluña",
+    "lat": 41.428557875,
+    "lon": 2.212404411,
+    "imagen": "http://commons.wikimedia.org/wiki/Special:FilePath/MIGRAR.jpg",
+    "ciudad": "San Adrián de Besós",
+    "tipo": "museo",
+    "wikidata_id": "Q3817998"
+  },
+  {
+    "id": "Q429192",
+    "nombre": "Capilla Real de Granada",
+    "lat": 37.175986111,
+    "lon": -3.599036111,
+    "imagen": "http://commons.wikimedia.org/wiki/Special:FilePath/Royal%20Chapel%20of%20Granada%20%28Spain%29.jpg",
+    "ciudad": "Granada",
+    "tipo": "museo",
+    "wikidata_id": "Q429192"
+  },
+  {
+    "id": "Q17578641",
+    "nombre": "Q17578641",
+    "lat": 39.568042,
+    "lon": 2.64814,
+    "imagen": "",
+    "ciudad": "Palma de Mallorca",
+    "tipo": "museo",
+    "wikidata_id": "Q17578641"
+  },
+  {
+    "id": "Q212867",
+    "nombre": "Park Güell",
+    "lat": 41.413611111,
+    "lon": 2.152777777,
+    "imagen": "http://commons.wikimedia.org/wiki/Special:FilePath/Outdoor-architecture-structure-palace-europe-museum-829420.jpg",
+    "ciudad": "La Salud",
+    "tipo": "museo",
+    "wikidata_id": "Q212867"
+  },
+  {
+    "id": "Q1658710",
+    "nombre": "Isla de las Esculturas",
+    "lat": 42.44,
+    "lon": -8.633889,
+    "imagen": "http://commons.wikimedia.org/wiki/Special:FilePath/Pontevedra%20capital%20Parque%20de%20la%20Isla%20de%20las%20Esculturas%2C%20entrada%20principal.jpg",
+    "ciudad": "Pontevedra",
+    "tipo": "museo",
+    "wikidata_id": "Q1658710"
+  },
+  {
+    "id": "Q11914754",
+    "nombre": "Col·lecció d'Automòbils Salvador Claret",
+    "lat": 41.83381111,
+    "lon": 2.75703056,
+    "imagen": "http://commons.wikimedia.org/wiki/Special:FilePath/Spanien%20Sils%20Museumsgeb%C3%A4ude.JPG",
+    "ciudad": "Sils",
+    "tipo": "museo",
+    "wikidata_id": "Q11914754"
+  },
+  {
+    "id": "Q4894418",
+    "nombre": "Filmoteca de Cataluña",
+    "lat": 41.378666666,
+    "lon": 2.170916666,
+    "imagen": "http://commons.wikimedia.org/wiki/Special:FilePath/Filmoteca%20de%20Catalunya-seu%20Raval.JPG",
     "ciudad": "El Raval",
     "tipo": "museo",
-    "wikidata_id": "Q1286354"
+    "wikidata_id": "Q4894418"
   },
   {
-    "id": "Q6033504",
-    "nombre": "Museo Marítimo del Cantábrico",
-    "lat": 43.4633101,
-    "lon": -3.7856919,
-    "imagen": "http://commons.wikimedia.org/wiki/Special:FilePath/Santander%20-%20Museo%20Mar%C3%ADtimo%20del%20Cant%C3%A1brico%2005.jpg",
-    "ciudad": "Santander",
+    "id": "Q1592523",
+    "nombre": "Museo Sorolla",
+    "lat": 40.435404,
+    "lon": -3.692539,
+    "imagen": "http://commons.wikimedia.org/wiki/Special:FilePath/Museo%20Sorolla%20%28Madrid%29%2007.jpg",
+    "ciudad": "Madrid",
     "tipo": "museo",
-    "wikidata_id": "Q6033504"
-  },
-  {
-    "id": "Q5396828",
-    "nombre": "Museo del Mar de Altea",
-    "lat": 38.593888888,
-    "lon": -0.05625,
-    "imagen": "",
-    "ciudad": "Altea",
-    "tipo": "museo",
-    "wikidata_id": "Q5396828"
-  },
-  {
-    "id": "Q3042272",
-    "nombre": "Museo Marítimo Itsasmuseum Bilbao",
-    "lat": 43.266147,
-    "lon": -2.946339,
-    "imagen": "http://commons.wikimedia.org/wiki/Special:FilePath/Itsasmuseum%20Bilbao.jpg",
-    "ciudad": "Bilbao",
-    "tipo": "museo",
-    "wikidata_id": "Q3042272"
-  },
-  {
-    "id": "Q6033280",
-    "nombre": "Museo Diocesano de Arte Sacro (Orihuela)",
-    "lat": 38.0855,
-    "lon": -0.946305555,
-    "imagen": "http://commons.wikimedia.org/wiki/Special:FilePath/Fa%C3%A7ana%20del%20palau%20episcopal%20d%27Oriola.JPG",
-    "ciudad": "Orihuela",
-    "tipo": "museo",
-    "wikidata_id": "Q6033280"
-  },
-  {
-    "id": "Q137211109",
-    "nombre": "Museo de la catedral de Burgos",
-    "lat": 42.341062156,
-    "lon": -3.703852774,
-    "imagen": "http://commons.wikimedia.org/wiki/Special:FilePath/Retablo%20mayor%20de%20Santiago%2C%20Fernando%20Gonz%C3%A1lez%20de%20Lara.jpg",
-    "ciudad": "Burgos",
-    "tipo": "museo",
-    "wikidata_id": "Q137211109"
-  },
-  {
-    "id": "Q107611885",
-    "nombre": "Museo de Historia de la Computación",
-    "lat": 39.939175997,
-    "lon": -5.749593624,
-    "imagen": "http://commons.wikimedia.org/wiki/Special:FilePath/MuseoHC%20planta%20superior.jpg",
-    "ciudad": "Majadas de Tiétar",
-    "tipo": "museo",
-    "wikidata_id": "Q107611885"
-  },
-  {
-    "id": "Q16481802",
-    "nombre": "Museo Diocesano de Jaca",
-    "lat": 42.571066,
-    "lon": -0.549041,
-    "imagen": "http://commons.wikimedia.org/wiki/Special:FilePath/Jaca%20-%20Catedral%2C%20claustro%20y%20Museo%20Diocesano%2003.jpg",
-    "ciudad": "Jaca",
-    "tipo": "museo",
-    "wikidata_id": "Q16481802"
-  },
-  {
-    "id": "Q17279793",
-    "nombre": "Museo Diocesano Regina Coeli (Cantabria)",
-    "lat": 43.388555555,
-    "lon": -4.108916666,
-    "imagen": "http://commons.wikimedia.org/wiki/Special:FilePath/Museo%20Diocesano%20Regina%20Coeli%20-%20Santillana%20del%20Mar%20-%20panoramio.jpg",
-    "ciudad": "Santillana del Mar",
-    "tipo": "museo",
-    "wikidata_id": "Q17279793"
-  },
-  {
-    "id": "Q1741117",
-    "nombre": "Museo Regional de Artà",
-    "lat": 39.695,
-    "lon": 3.35125,
-    "imagen": "http://commons.wikimedia.org/wiki/Special:FilePath/Art%C3%A0%20-%20Museu%20Regional%20d%27Art%C3%A0%2002%20ies-2.jpg",
-    "ciudad": "Artá",
-    "tipo": "museo",
-    "wikidata_id": "Q1741117"
-  },
-  {
-    "id": "Q4889477",
-    "nombre": "Museo del Diseño de Barcelona",
-    "lat": 41.40222222,
-    "lon": 2.1875,
-    "imagen": "http://commons.wikimedia.org/wiki/Special:FilePath/DHUB%200873.JPG",
-    "ciudad": "El Parc i la Llacuna del Poblenou",
-    "tipo": "museo",
-    "wikidata_id": "Q4889477"
-  },
-  {
-    "id": "Q6033273",
-    "nombre": "Museo Diocesano de Albarracín",
-    "lat": 40.406277777,
-    "lon": -1.445083333,
-    "imagen": "http://commons.wikimedia.org/wiki/Special:FilePath/Museu%20Dioces%C3%A0%20d%27Albarras%C3%AD%2C%20sala%20d%27orfebreria.JPG",
-    "ciudad": "Albarracín",
-    "tipo": "museo",
-    "wikidata_id": "Q6033273"
-  },
-  {
-    "id": "Q125887226",
-    "nombre": "Museo Diocesano e Catedralicio de Mondoñedo",
-    "lat": 43.428222,
-    "lon": -7.363111,
-    "imagen": "",
-    "ciudad": "Mondoñedo",
-    "tipo": "museo",
-    "wikidata_id": "Q125887226"
-  },
-  {
-    "id": "Q16609717",
-    "nombre": "Alma Mater Museum",
-    "lat": 41.65552,
-    "lon": -0.87556,
-    "imagen": "http://commons.wikimedia.org/wiki/Special:FilePath/Elisabeth%2C%20mother%20of%20John%20the%20Baptist%20-%20Master%20from%20Villalcazar%20de%20Sirga.JPG",
-    "ciudad": "Zaragoza",
-    "tipo": "museo",
-    "wikidata_id": "Q16609717"
-  },
-  {
-    "id": "Q9046810",
-    "nombre": "Museo Diocesano y Comarcal de Solsona",
-    "lat": 41.994167,
-    "lon": 1.518889,
-    "imagen": "http://commons.wikimedia.org/wiki/Special:FilePath/Palau%20Episcopal%20Solsona.jpg",
-    "ciudad": "Solsona",
-    "tipo": "museo",
-    "wikidata_id": "Q9046810"
-  },
-  {
-    "id": "Q113368084",
-    "nombre": "Museo catedralicio de Tarazona",
-    "lat": 41.90279731,
-    "lon": -1.725123111,
-    "imagen": "",
-    "ciudad": "Tarazona",
-    "tipo": "museo",
-    "wikidata_id": "Q113368084"
-  },
-  {
-    "id": "Q6033277",
-    "nombre": "Museo Diocesano de Arte Antiguo (Sigüenza)",
-    "lat": 41.068027777,
-    "lon": -2.641611111,
-    "imagen": "http://commons.wikimedia.org/wiki/Special:FilePath/007095%20-%20Sig%C3%BCenza%20%288371806561%29.jpg",
-    "ciudad": "Sigüenza",
-    "tipo": "museo",
-    "wikidata_id": "Q6033277"
-  },
-  {
-    "id": "Q616238",
-    "nombre": "Museo del Fútbol Club Barcelona",
-    "lat": 41.38039,
-    "lon": 2.1206365,
-    "imagen": "http://commons.wikimedia.org/wiki/Special:FilePath/Barcelona%20274.JPG",
-    "ciudad": "La Maternitat i Sant Ramon",
-    "tipo": "museo",
-    "wikidata_id": "Q616238"
+    "wikidata_id": "Q1592523"
   }
 ]

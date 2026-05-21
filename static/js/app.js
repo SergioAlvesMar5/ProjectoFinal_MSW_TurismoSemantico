@@ -21,11 +21,11 @@ function iniciarMapa() {
 }
 
 const ICONOS = {
-  destino:           "📍",
-  ciudad:            "📍",
-  municipio:         "📍",
-  "municipio de España": "📍",
-  "destino turístico": "📍",
+  destino:           "🏙️",
+  ciudad:            "🏙️",
+  municipio:         "🏘️",
+  "municipio de España": "🏘️",
+  "destino turístico": "🏙️",
   patrimonio_unesco: "🏛️",
   museo:             "🖼️",
   castle:            "🏰",
@@ -41,11 +41,11 @@ const ICONOS = {
 };
 
 const COLORES = {
-  destino:           "#D32F2F",
-  ciudad:            "#D32F2F",
-  municipio:         "#D32F2F",
-  "municipio de España": "#D32F2F",
-  "destino turístico": "#D32F2F",
+  destino:           "#0F766E",
+  ciudad:            "#0F766E",
+  municipio:         "#0F766E",
+  "municipio de España": "#0F766E",
+  "destino turístico": "#0F766E",
   patrimonio_unesco: "#2196F3",
   museo:             "#FF9800",
   castle:            "#9C27B0",
@@ -57,7 +57,7 @@ const COLORES = {
   place_of_worship:  "#455A64",
   artwork:           "#C2185B",
   gallery:           "#FF9800",
-  default:           "#D32F2F",
+  default:           "#0F766E",
 };
 
 function normalizarTipoMapa(tipo) {
@@ -349,6 +349,8 @@ function irADestino(lat, lon, nombre) {
 }
 
 // ── Chatbot RAG ───────────────────────────────────────────────────────────
+let mensajeSeq = 0;
+
 async function enviarChat() {
   const input = document.getElementById("inputChat");
   const q     = input.value.trim();
@@ -377,7 +379,7 @@ async function enviarChat() {
 
 function agregarMensaje(tipo, texto, cls = "") {
   const cont = document.getElementById("chatContenedor");
-  const id   = "msg_" + Date.now();
+  const id   = `msg_${Date.now()}_${++mensajeSeq}`;
   const div  = document.createElement("div");
   const cuerpo = (tipo === "bot" ? String(texto) : escaparHtml(String(texto)))
     .replace(/\n/g, "<br>");

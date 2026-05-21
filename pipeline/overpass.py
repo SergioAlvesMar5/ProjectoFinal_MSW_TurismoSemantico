@@ -147,28 +147,30 @@ def get_monumentos_ciudad(ciudad: str, radio_km: float = 10.0) -> list[dict]:
 
 def get_patrimonio_nacional(
     limit_bbox: tuple = (36.0, -9.5, 43.8, 4.5),
-    max_results: int = 300,
+    max_results: int = 220,
+    max_total_seconds: float = 90.0,
 ) -> list[dict]:
     """
     Obtiene castillos y patrimonio histórico nacional en la bbox de España.
     bbox = (lat_min, lon_min, lat_max, lon_max)
     """
-    tiles = _split_bbox(limit_bbox, rows=4, cols=4)
+    tiles = _split_bbox(limit_bbox, rows=3, cols=3)
     elementos = []
+    start = time.monotonic()
 
     for ts, tw, tn, te in tiles:
+        remaining = max_total_seconds - (time.monotonic() - start)
+        if remaining <= 0:
+            break
         query = f"""
-        [out:json][timeout:45];
+        [out:json][timeout:20];
         (
             node["historic"~"castle|monument|ruins|archaeological_site|fort|city_gate"]["name"]({ts},{tw},{tn},{te});
             way["historic"~"castle|monument|ruins|archaeological_site|fort|city_gate"]["name"]({ts},{tw},{tn},{te});
-            relation["historic"~"castle|monument|ruins|archaeological_site|fort|city_gate"]["name"]({ts},{tw},{tn},{te});
             node["heritage"]["name"]({ts},{tw},{tn},{te});
             way["heritage"]["name"]({ts},{tw},{tn},{te});
-            relation["heritage"]["name"]({ts},{tw},{tn},{te});
             node["tourism"~"museum|attraction|artwork|gallery"]["name"]({ts},{tw},{tn},{te});
             way["tourism"~"museum|attraction|artwork|gallery"]["name"]({ts},{tw},{tn},{te});
-            relation["tourism"~"museum|attraction|artwork|gallery"]["name"]({ts},{tw},{tn},{te});
             node["amenity"="place_of_worship"]["name"]["historic"]({ts},{tw},{tn},{te});
             way["amenity"="place_of_worship"]["name"]["historic"]({ts},{tw},{tn},{te});
         );
@@ -176,10 +178,10 @@ def get_patrimonio_nacional(
         """
         elementos.extend(_overpass_query(
             query,
-            timeout=45,
+            timeout=min(20, max(8, int(remaining))),
             retries=0,
-            max_urls=2,
-            max_total_seconds=55,
+            max_urls=1,
+            max_total_seconds=min(24, remaining),
         ))
         if len(_dedupe_elements(elementos)) >= max_results:
             break
