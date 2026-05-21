@@ -18,10 +18,20 @@ OVERPASS_URLS = [
 HEADERS = {"User-Agent": "TurismoSemantico/1.0 (universidad; proyecto academico)"}
 
 
-def _overpass_query(query: str, timeout: int = 30, retries: int = 1) -> list[dict]:
+def _overpass_query(
+    query: str,
+    timeout: int = 30,
+    retries: int = 1,
+    max_urls: int | None = None,
+    max_total_seconds: float | None = None,
+) -> list[dict]:
     """Ejecuta una consulta Overpass QL y devuelve los elementos."""
     last_err = None
-    for url in OVERPASS_URLS:
+    urls = OVERPASS_URLS[:max_urls] if max_urls else OVERPASS_URLS
+    start = time.monotonic()
+    for url in urls:
+        if max_total_seconds and (time.monotonic() - start) > max_total_seconds:
+            break
         for attempt in range(retries + 1):
             try:
                 resp = requests.post(
@@ -38,6 +48,34 @@ def _overpass_query(query: str, timeout: int = 30, retries: int = 1) -> list[dic
                     time.sleep(1.0 * (attempt + 1))
         print(f"[Overpass] Error: {last_err}")
     return []
+
+
+def _split_bbox(limit_bbox: tuple, rows: int = 2, cols: int = 2) -> list[tuple]:
+    s, w, n, e = limit_bbox
+    lat_step = (n - s) / rows
+    lon_step = (e - w) / cols
+    tiles = []
+    for i in range(rows):
+        for j in range(cols):
+            tiles.append((
+                s + i * lat_step,
+                w + j * lon_step,
+                s + (i + 1) * lat_step,
+                w + (j + 1) * lon_step,
+            ))
+    return tiles
+
+
+def _dedupe_elements(elements: list[dict]) -> list[dict]:
+    seen = set()
+    output = []
+    for el in elements:
+        key = f"{el.get('type', '')}_{el.get('id')}"
+        if key in seen:
+            continue
+        seen.add(key)
+        output.append(el)
+    return output
 
 
 def get_monumentos_ciudad(ciudad: str, radio_km: float = 10.0) -> list[dict]:
@@ -112,31 +150,50 @@ def get_patrimonio_nacional(limit_bbox: tuple = (36.0, -9.5, 43.8, 4.5)) -> list
     Obtiene castillos y patrimonio histórico nacional en la bbox de España.
     bbox = (lat_min, lon_min, lat_max, lon_max)
     """
-    s, w, n, e = limit_bbox
-    query_nodes = f"""
-    [out:json][timeout:35];
-    (
-        node["historic"="castle"]({s},{w},{n},{e});
-        node["historic"="ruins"]({s},{w},{n},{e});
-        node["heritage"]["name"]({s},{w},{n},{e});
-    );
-    out tags;
-    """
-    elementos = _overpass_query(query_nodes, timeout=35)
+    tiles = _split_bbox(limit_bbox, rows=2, cols=2)
+    elementos = []
 
-    if not elementos:
-        query_full = f"""
-        [out:json][timeout:45];
+    for ts, tw, tn, te in tiles:
+        query_nodes = f"""
+        [out:json][timeout:25];
         (
-            node["historic"="castle"]({s},{w},{n},{e});
-            node["historic"="ruins"]({s},{w},{n},{e});
-            node["heritage"]["name"]({s},{w},{n},{e});
-            way["historic"="castle"]({s},{w},{n},{e});
-            way["heritage"]["name"]({s},{w},{n},{e});
+            node["historic"="castle"]({ts},{tw},{tn},{te});
+            node["historic"="ruins"]({ts},{tw},{tn},{te});
+            node["heritage"]["name"]({ts},{tw},{tn},{te});
         );
-        out center tags;
+        out tags;
         """
-        elementos = _overpass_query(query_full, timeout=45)
+        elementos.extend(_overpass_query(
+            query_nodes,
+            timeout=20,
+            retries=0,
+            max_urls=1,
+            max_total_seconds=20,
+        ))
+
+    elementos = _dedupe_elements(elementos)
+
+    if len(elementos) < 10:
+        for ts, tw, tn, te in tiles:
+            query_full = f"""
+            [out:json][timeout:40];
+            (
+                node["historic"="castle"]({ts},{tw},{tn},{te});
+                node["historic"="ruins"]({ts},{tw},{tn},{te});
+                node["heritage"]["name"]({ts},{tw},{tn},{te});
+                way["historic"="castle"]({ts},{tw},{tn},{te});
+                way["heritage"]["name"]({ts},{tw},{tn},{te});
+            );
+            out center tags;
+            """
+            elementos.extend(_overpass_query(
+                query_full,
+                timeout=35,
+                retries=0,
+                max_urls=1,
+                max_total_seconds=25,
+            ))
+        elementos = _dedupe_elements(elementos)
     results = []
     for el in elementos[:60]:  # max 60
         tags = el.get("tags", {})

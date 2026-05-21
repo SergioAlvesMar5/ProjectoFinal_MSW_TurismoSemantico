@@ -40,10 +40,14 @@ estado = {
     "embeddings_ok": False,
     "cargando": False,
     "error": "",
+    "osm_status": "idle",
+    "osm_count": 0,
+    "osm_error": "",
     "log": [],
 }
 grafo_global = None
 destinos_global: list[dict] = []
+data_lock = threading.Lock()
 
 DATA_FILE = Path("data/destinos.json")
 DATA_FILE.parent.mkdir(exist_ok=True)
@@ -73,6 +77,65 @@ def _load_cache_json(path: Path) -> list[dict] | None:
     except Exception as e:
         log(f"Error leyendo cache: {e}")
         return None
+
+
+def _merge_destinos(base: list[dict], extra: list[dict]) -> list[dict]:
+    merged = {}
+    for d in base:
+        nombre = d.get("nombre")
+        if nombre:
+            merged[nombre] = d
+    for d in extra:
+        nombre = d.get("nombre")
+        if nombre and nombre not in merged:
+            merged[nombre] = d
+    return list(merged.values())
+
+
+def _cargar_osm_background():
+    global grafo_global, destinos_global
+    estado["osm_status"] = "loading"
+    estado["osm_error"] = ""
+    try:
+        log("OSM en segundo plano: consultando Overpass...")
+        osm_patrimonio = get_patrimonio_nacional()
+        if not osm_patrimonio:
+            estado["osm_status"] = "error"
+            estado["osm_error"] = "OSM sin resultados"
+            log("OSM en segundo plano: sin resultados")
+            return
+
+        with data_lock:
+            merged = _merge_destinos(destinos_global, osm_patrimonio)
+            if len(merged) == len(destinos_global):
+                estado["osm_status"] = "ok"
+                estado["osm_count"] = len(osm_patrimonio)
+                log("OSM en segundo plano: sin cambios en destinos")
+                return
+
+            grafo_new = construir_ontologia()
+            poblar_grafo(grafo_new, merged)
+            grafo_global = grafo_new
+            destinos_global = merged
+            estado["num_destinos"] = len(merged)
+            estado["num_tripletas"] = len(grafo_new)
+
+            DATA_FILE.write_text(
+                json.dumps(merged, ensure_ascii=False, indent=2),
+                encoding="utf-8",
+            )
+            Path("data/grafo.ttl").write_text(
+                grafo_new.serialize(format="turtle"), encoding="utf-8"
+            )
+
+        estado["osm_status"] = "ok"
+        estado["osm_count"] = len(osm_patrimonio)
+        log(f"OSM en segundo plano: agregado {len(osm_patrimonio)} items")
+        log("Nota: embeddings no se reindexan para OSM.")
+    except Exception as e:
+        estado["osm_status"] = "error"
+        estado["osm_error"] = str(e)
+        log(f"OSM en segundo plano: error {e}")
 
 
 # ── Carga de datos (se ejecuta en hilo separado) ─────────────────────────────
@@ -111,20 +174,21 @@ def cargar_datos_background():
                 log("  ⚠️ Wikidata devolvio 0 destinos generales")
         log(f"  → {len(generales)} destinos generales obtenidos")
 
-        # 2. OpenStreetMap: patrimonio historico nacional
-        log("Consultando OpenStreetMap (castillos y patrimonio)...")
-        osm_patrimonio = get_patrimonio_nacional()
-        if not osm_patrimonio:
-            prev_cache = _load_cache_json(DATA_FILE) or []
-            osm_prev = [d for d in prev_cache if d.get("fuente") == "OpenStreetMap"]
-            if osm_prev:
-                log(f"  ⚠️ OSM devolvio 0 resultados. Reutilizando {len(osm_prev)} de cache")
-                osm_patrimonio = osm_prev
-        log(f"  → {len(osm_patrimonio)} elementos patrimoniales de OSM obtenidos")
+        # 2. OpenStreetMap: patrimonio historico nacional (no bloquear carga principal)
+        osm_patrimonio = []
+        prev_cache = _load_cache_json(DATA_FILE) or []
+        osm_prev = [d for d in prev_cache if d.get("fuente") == "OpenStreetMap"]
+        if osm_prev:
+            log(f"  ⚠️ Reutilizando {len(osm_prev)} OSM desde cache")
+            osm_patrimonio = osm_prev
+            estado["osm_status"] = "cache"
+            estado["osm_count"] = len(osm_prev)
+        else:
+            log("  ℹ️ OSM se cargara en segundo plano")
+            estado["osm_status"] = "pending"
 
         # Fusionar y deduplicar por nombre
-        todos = {d["nombre"]: d for d in (generales + patrimonio + museos + osm_patrimonio)}
-        destinos_new = list(todos.values())
+        destinos_new = _merge_destinos(generales + patrimonio + museos, osm_patrimonio)
         log(f"Total destinos unicos: {len(destinos_new)}")
 
         # Guardar en disco como cache
@@ -154,12 +218,17 @@ def cargar_datos_background():
         log(f"Embeddings: {'OK' if ok else 'Usando TF-IDF (instala sentence-transformers)'}")
 
         # Aplicar cambios al estado global solo si todo fue OK
-        destinos_global = destinos_new
-        grafo_global = grafo_new
-        estado["num_destinos"] = len(destinos_new)
-        estado["num_tripletas"] = num_tripletas
+        with data_lock:
+            destinos_global = destinos_new
+            grafo_global = grafo_new
+            estado["num_destinos"] = len(destinos_new)
+            estado["num_tripletas"] = num_tripletas
         estado["cargado"] = True
         log("✅ Carga completa. La aplicacion esta lista.")
+
+        if not osm_prev:
+            t_osm = threading.Thread(target=_cargar_osm_background, daemon=True)
+            t_osm.start()
     except Exception as e:
         estado["cargado"] = False
         estado["embeddings_ok"] = False
@@ -200,6 +269,13 @@ def api_cargar():
             Path("data/grafo.ttl").write_text(
                 grafo_global.serialize(format="turtle"), encoding="utf-8"
             )
+            osm_cached = [d for d in destinos_global if d.get("fuente") == "OpenStreetMap"]
+            if osm_cached:
+                estado["osm_status"] = "cache"
+                estado["osm_count"] = len(osm_cached)
+            else:
+                estado["osm_status"] = "idle"
+                estado["osm_count"] = 0
             estado["embeddings_ok"] = indexar_destinos(destinos_global)
             estado["cargado"] = True
             estado["num_destinos"] = len(destinos_global)
@@ -219,7 +295,8 @@ def api_cargar():
 def api_destinos():
     tipo   = request.args.get("tipo", "")
     limite = int(request.args.get("limite", 200))
-    datos  = destinos_global
+    with data_lock:
+        datos = list(destinos_global)
     if tipo:
         datos = [d for d in datos if d.get("tipo") == tipo or d.get("tipo_osm") == tipo]
     # Solo campos necesarios para el mapa
@@ -290,10 +367,12 @@ def api_chat():
 
 @app.route("/api/grafo")
 def api_grafo():
-    if grafo_global is None:
+    with data_lock:
+        g = grafo_global
+    if g is None:
         return jsonify({"tripletas": [], "total": 0})
-    tripletas = grafo_a_json(grafo_global)
-    return jsonify({"tripletas": tripletas, "total": len(grafo_global)})
+    tripletas = grafo_a_json(g)
+    return jsonify({"tripletas": tripletas, "total": len(g)})
 
 
 @app.route("/api/sparql", methods=["GET", "POST"])
@@ -305,10 +384,13 @@ def api_sparql():
 
     if not q:
         return jsonify({"error": "Query SPARQL requerida"}), 400
-    if grafo_global is None:
+    with data_lock:
+        g = grafo_global
+
+    if g is None:
         return jsonify({"error": "Grafo no construido aún"}), 503
 
-    resultados, err = sparql_local(grafo_global, q)
+    resultados, err = sparql_local(g, q)
     if err:
         return jsonify({"error": f"SPARQL error: {err}"}), 400
     return jsonify({"resultados": resultados, "total": len(resultados)})

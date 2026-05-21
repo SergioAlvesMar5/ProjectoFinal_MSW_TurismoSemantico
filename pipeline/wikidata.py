@@ -16,29 +16,29 @@ HEADERS = {
 
 
 def _run_query(sparql: str, timeout: int = 20, max_retries: int = 1) -> tuple[list[dict], str | None]:
-  """Ejecuta una consulta SPARQL y devuelve (bindings, error)."""
-  last_err = None
-  for attempt in range(max_retries + 1):
-    try:
-      resp = requests.get(
-        SPARQL_ENDPOINT,
-        params={"query": sparql, "format": "json"},
-        headers=HEADERS,
-        timeout=timeout,
-      )
-      if resp.status_code != 200:
-        preview = (resp.text or "")[:300].replace("\n", " ")
-        last_err = f"HTTP {resp.status_code}: {preview}"
-      else:
-        return resp.json()["results"]["bindings"], None
-    except Exception as e:
-      last_err = str(e)
+    """Ejecuta una consulta SPARQL y devuelve (bindings, error)."""
+    last_err = None
+    for attempt in range(max_retries + 1):
+        try:
+            resp = requests.get(
+                SPARQL_ENDPOINT,
+                params={"query": sparql, "format": "json"},
+                headers=HEADERS,
+                timeout=timeout,
+            )
+            if resp.status_code != 200:
+                preview = (resp.text or "")[:300].replace("\n", " ")
+                last_err = f"HTTP {resp.status_code}: {preview}"
+            else:
+                return resp.json()["results"]["bindings"], None
+        except Exception as e:
+            last_err = str(e)
 
-    if attempt < max_retries:
-      time.sleep(1.5 * (attempt + 1))
+        if attempt < max_retries:
+            time.sleep(1.5 * (attempt + 1))
 
-  print(f"[Wikidata] Error: {last_err}")
-  return [], last_err
+    print(f"[Wikidata] Error: {last_err}")
+    return [], last_err
 
 
 def get_destinos_patrimonio_unesco(limit: int = 30) -> list[dict]:
@@ -61,7 +61,7 @@ def get_destinos_patrimonio_unesco(limit: int = 30) -> list[dict]:
     """
     rows, err = _run_query(query, timeout=25)
     if err:
-      return []
+        return []
     results = []
     for r in rows:
         try:
@@ -100,7 +100,7 @@ def get_museos_espana(limit: int = 40) -> list[dict]:
     """
     rows, err = _run_query(query, timeout=25)
     if err:
-      return []
+        return []
     results = []
     for r in rows:
         try:

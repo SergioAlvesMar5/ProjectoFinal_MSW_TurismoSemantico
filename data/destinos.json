@@ -20,6 +20,16 @@
     "texto_embedding": "Sangüesa. ciudad y municipio de Navarra, España"
   },
   {
+    "id": "Q12833394",
+    "nombre": "Ciudad de Guadalajara",
+    "lat": 40.633483333,
+    "lon": -3.1669,
+    "descripcion": "ciudad española, capital del municipio homónimo",
+    "tipo": "ciudad",
+    "wikidata_id": "Q12833394",
+    "texto_embedding": "Ciudad de Guadalajara. ciudad española, capital del municipio homónimo"
+  },
+  {
     "id": "Q373865",
     "nombre": "Mainake",
     "lat": 36.7335,
@@ -28,16 +38,6 @@
     "tipo": "ciudad",
     "wikidata_id": "Q373865",
     "texto_embedding": "Mainake. Destino turístico en España: Mainake"
-  },
-  {
-    "id": "Q11931146",
-    "nombre": "Q11931146",
-    "lat": 42.59649,
-    "lon": -5.209292,
-    "descripcion": "Destino turístico en España: Q11931146",
-    "tipo": "ciudad",
-    "wikidata_id": "Q11931146",
-    "texto_embedding": "Q11931146. Destino turístico en España: Q11931146"
   },
   {
     "id": "Q580743",
@@ -68,16 +68,6 @@
     "tipo": "ciudad",
     "wikidata_id": "Q77433",
     "texto_embedding": "Leganés. municipio en la comunidad de Madrid, España"
-  },
-  {
-    "id": "Q11946622",
-    "nombre": "Q11946622",
-    "lat": 36.5522,
-    "lon": -5.83361,
-    "descripcion": "Destino turístico en España: Q11946622",
-    "tipo": "ciudad",
-    "wikidata_id": "Q11946622",
-    "texto_embedding": "Q11946622. Destino turístico en España: Q11946622"
   },
   {
     "id": "Q548441",
@@ -150,6 +140,16 @@
     "texto_embedding": "Olite. municipio de Navarra, España"
   },
   {
+    "id": "Q5039690",
+    "nombre": "Carissa Aurelia",
+    "lat": 36.870874863,
+    "lon": -5.728729834,
+    "descripcion": "bien de interés cultural",
+    "tipo": "ciudad",
+    "wikidata_id": "Q5039690",
+    "texto_embedding": "Carissa Aurelia. bien de interés cultural"
+  },
+  {
     "id": "Q487679",
     "nombre": "Alcobendas",
     "lat": 40.533333333,
@@ -168,6 +168,16 @@
     "tipo": "ciudad",
     "wikidata_id": "Q15684",
     "texto_embedding": "Segovia. municipio de la provincia de Segovia, Castilla y León, España"
+  },
+  {
+    "id": "Q5562219",
+    "nombre": "Obúlcula",
+    "lat": 37.515766,
+    "lon": -5.316314,
+    "descripcion": "bien de interés cultural",
+    "tipo": "ciudad",
+    "wikidata_id": "Q5562219",
+    "texto_embedding": "Obúlcula. bien de interés cultural"
   },
   {
     "id": "Q54898",
@@ -191,14 +201,14 @@
     "texto_embedding": "Teatro romano de Cádiz. Teatro romano en Andalucía (España)"
   },
   {
-    "id": "Q11931246",
-    "nombre": "Q11931246",
-    "lat": 37.608089,
-    "lon": -6.545287,
-    "descripcion": "Destino turístico en España: Q11931246",
+    "id": "Q3867196",
+    "nombre": "Cerro de los Infantes",
+    "lat": 37.2672,
+    "lon": -3.767283,
+    "descripcion": "bien de interés cultural",
     "tipo": "ciudad",
-    "wikidata_id": "Q11931246",
-    "texto_embedding": "Q11931246. Destino turístico en España: Q11931246"
+    "wikidata_id": "Q3867196",
+    "texto_embedding": "Cerro de los Infantes. bien de interés cultural"
   },
   {
     "id": "Q494693",
@@ -239,6 +249,16 @@
     "tipo": "ciudad",
     "wikidata_id": "Q584446",
     "texto_embedding": "Valle Gran Rey. municipio de la isla de La Gomera, España"
+  },
+  {
+    "id": "Q4745109",
+    "nombre": "Torreparedones",
+    "lat": 37.754514248,
+    "lon": -4.377538357,
+    "descripcion": "bien de interés cultural",
+    "tipo": "ciudad",
+    "wikidata_id": "Q4745109",
+    "texto_embedding": "Torreparedones. bien de interés cultural"
   },
   {
     "id": "Q1635908",
@@ -309,16 +329,6 @@
     "tipo": "ciudad",
     "wikidata_id": "Q487981",
     "texto_embedding": "Benidorm. municipio de la provincia de Alicante, Comunidad Valenciana, España"
-  },
-  {
-    "id": "Q11936483",
-    "nombre": "Q11936483",
-    "lat": 37.650415,
-    "lon": -3.734905,
-    "descripcion": "Destino turístico en España: Q11936483",
-    "tipo": "ciudad",
-    "wikidata_id": "Q11936483",
-    "texto_embedding": "Q11936483. Destino turístico en España: Q11936483"
   },
   {
     "id": "Q302099",
@@ -402,16 +412,6 @@
     "texto_embedding": "Medina Alzahira. antigua ciudad palatina en Córdoba, España"
   },
   {
-    "id": "Q11930644",
-    "nombre": "Navarrería",
-    "lat": 42.819490247,
-    "lon": -1.641780316,
-    "descripcion": "antiguo barrio de Pamplona, civitas episcopalis",
-    "tipo": "ciudad",
-    "wikidata_id": "Q11930644",
-    "texto_embedding": "Navarrería. antiguo barrio de Pamplona, civitas episcopalis"
-  },
-  {
     "id": "Q1492",
     "nombre": "Barcelona",
     "lat": 41.3825,
@@ -422,14 +422,14 @@
     "texto_embedding": "Barcelona. capital de Cataluña, España"
   },
   {
-    "id": "Q11937880",
-    "nombre": "Q11937880",
-    "lat": 37.583333333,
-    "lon": -4.633333333,
-    "descripcion": "Destino turístico en España: Q11937880",
+    "id": "Q3552479",
+    "nombre": "Urso",
+    "lat": 37.242284,
+    "lon": -5.090233,
+    "descripcion": "patrimonio histórico de Andalucía de importancia arqueológica en Osuna, España",
     "tipo": "ciudad",
-    "wikidata_id": "Q11937880",
-    "texto_embedding": "Q11937880. Destino turístico en España: Q11937880"
+    "wikidata_id": "Q3552479",
+    "texto_embedding": "Urso. patrimonio histórico de Andalucía de importancia arqueológica en Osuna, España"
   },
   {
     "id": "Q501090",
@@ -450,6 +450,16 @@
     "tipo": "ciudad",
     "wikidata_id": "Q13939",
     "texto_embedding": "Tarrasa. municipio en la comarca del valles occidental, Cataluña, España"
+  },
+  {
+    "id": "Q4890124",
+    "nombre": "Virovesca",
+    "lat": 42.54166667,
+    "lon": -3.32527778,
+    "descripcion": "Destino turístico en España: Virovesca",
+    "tipo": "ciudad",
+    "wikidata_id": "Q4890124",
+    "texto_embedding": "Virovesca. Destino turístico en España: Virovesca"
   },
   {
     "id": "Q888390",
@@ -503,14 +513,44 @@
     "texto_embedding": "Plasencia. municipio de la provincia de Cáceres, España"
   },
   {
-    "id": "Q5710505",
-    "nombre": "Ategua",
-    "lat": 37.755321505,
-    "lon": -4.572888211,
-    "descripcion": "yacimiento arqueológico de Córdoba, España",
+    "id": "Q24015194",
+    "nombre": "Albarracín",
+    "lat": 40.40818,
+    "lon": -1.44375,
+    "descripcion": "localidad, capital del municipio de Albarracín, provincia de Teruel, Aragón, España",
     "tipo": "ciudad",
-    "wikidata_id": "Q5710505",
-    "texto_embedding": "Ategua. yacimiento arqueológico de Córdoba, España"
+    "wikidata_id": "Q24015194",
+    "texto_embedding": "Albarracín. localidad, capital del municipio de Albarracín, provincia de Teruel, Aragón, España"
+  },
+  {
+    "id": "Q23984135",
+    "nombre": "Melilla",
+    "lat": 35.29369,
+    "lon": -2.93833,
+    "descripcion": "ciudad española del norte de África",
+    "tipo": "ciudad",
+    "wikidata_id": "Q23984135",
+    "texto_embedding": "Melilla. ciudad española del norte de África"
+  },
+  {
+    "id": "Q24013138",
+    "nombre": "Ponferrada",
+    "lat": 42.54664,
+    "lon": -6.59619,
+    "descripcion": "localidad de Ponferrada, España",
+    "tipo": "ciudad",
+    "wikidata_id": "Q24013138",
+    "texto_embedding": "Ponferrada. localidad de Ponferrada, España"
+  },
+  {
+    "id": "Q55684",
+    "nombre": "Palacio - Castillo de Alacuás",
+    "lat": 39.457825,
+    "lon": -0.45680278,
+    "descripcion": "monumento en Alaquàs, España",
+    "tipo": "atracción turística",
+    "wikidata_id": "Q55684",
+    "texto_embedding": "Palacio - Castillo de Alacuás. monumento en Alaquàs, España"
   },
   {
     "id": "Q899302",
@@ -634,6 +674,17 @@
     "wikidata_id": "Q33200"
   },
   {
+    "id": "Q557337",
+    "nombre": "Real Alcázar de Segovia",
+    "lat": 40.9525,
+    "lon": -4.1325,
+    "imagen": "http://commons.wikimedia.org/wiki/Special:FilePath/Panor%C3%A1mica%20Oto%C3%B1o%20Alc%C3%A1zar%20de%20Segovia.jpg",
+    "descripcion": "castillo de Segovia (España), que fue residencia de los reyes de Castilla",
+    "anio_patrimonio": "1200",
+    "tipo": "patrimonio_unesco",
+    "wikidata_id": "Q557337"
+  },
+  {
     "id": "Q98824936",
     "nombre": "basílica romana de Santa Eulalia",
     "lat": 38.920352777,
@@ -700,57 +751,6 @@
     "wikidata_id": "Q1975533"
   },
   {
-    "id": "Q2284354",
-    "nombre": "Monasterio de San Millán de la Cogolla",
-    "lat": 42.325833333,
-    "lon": -2.86505,
-    "imagen": "http://commons.wikimedia.org/wiki/Special:FilePath/Monasterio%20de%20Suso%20%282%29.jpg",
-    "descripcion": "institución religiosa en España",
-    "anio_patrimonio": "",
-    "tipo": "patrimonio_unesco",
-    "wikidata_id": "Q2284354"
-  },
-  {
-    "id": "Q949576",
-    "nombre": "Fundación Pilar y Joan Miró en Mallorca",
-    "lat": 39.555,
-    "lon": 2.60916667,
-    "imagen": "http://commons.wikimedia.org/wiki/Special:FilePath/Miro%27s%20Studio%20Sert%20-%20Palma%20de%20Mallorca.jpg",
-    "ciudad": "Cala Major",
-    "tipo": "museo",
-    "wikidata_id": "Q949576"
-  },
-  {
-    "id": "Q976019",
-    "nombre": "Museo Cerralbo",
-    "lat": 40.423684,
-    "lon": -3.714577,
-    "imagen": "http://commons.wikimedia.org/wiki/Special:FilePath/Palacio%20del%20Marqu%C3%A9s%20de%20Cerralbo%20%28Madrid%29%2001.jpg",
-    "ciudad": "Madrid",
-    "tipo": "museo",
-    "wikidata_id": "Q976019"
-  },
-  {
-    "id": "Q5861989",
-    "nombre": "Filmoteca de Extremadura",
-    "lat": 39.473316451,
-    "lon": -6.369805164,
-    "imagen": "",
-    "ciudad": "Cáceres",
-    "tipo": "museo",
-    "wikidata_id": "Q5861989"
-  },
-  {
-    "id": "Q1143722",
-    "nombre": "Teatro-Museo Dalí",
-    "lat": 42.268055555,
-    "lon": 2.959444444,
-    "imagen": "http://commons.wikimedia.org/wiki/Special:FilePath/Teatro-Museo%20Dal%C3%AD.jpg",
-    "ciudad": "Figueras",
-    "tipo": "museo",
-    "wikidata_id": "Q1143722"
-  },
-  {
     "id": "Q3329871",
     "nombre": "museo erótico de Barcelona",
     "lat": 41.38216,
@@ -781,16 +781,6 @@
     "wikidata_id": "Q3826724"
   },
   {
-    "id": "Q953919",
-    "nombre": "Casita del Infante",
-    "lat": 40.585312,
-    "lon": -4.158063,
-    "imagen": "http://commons.wikimedia.org/wiki/Special:FilePath/Casita%20de%20Arriba.jpg",
-    "ciudad": "San Lorenzo de El Escorial",
-    "tipo": "museo",
-    "wikidata_id": "Q953919"
-  },
-  {
     "id": "Q116829475",
     "nombre": "Museo del Videojuego Arcade Vintage",
     "lat": 38.62649205,
@@ -799,6 +789,16 @@
     "ciudad": "Ibi",
     "tipo": "museo",
     "wikidata_id": "Q116829475"
+  },
+  {
+    "id": "Q25510008",
+    "nombre": "Parque escultórico de la Torre de Hércules",
+    "lat": 43.385833333,
+    "lon": -8.4025,
+    "imagen": "http://commons.wikimedia.org/wiki/Special:FilePath/Parque%20da%20Torre%20de%20H%C3%A9rcules%20-%207.jpg",
+    "ciudad": "La Coruña",
+    "tipo": "museo",
+    "wikidata_id": "Q25510008"
   },
   {
     "id": "Q530129",
@@ -881,6 +881,16 @@
     "wikidata_id": "Q1140249"
   },
   {
+    "id": "Q24021593",
+    "nombre": "Parque Hernández",
+    "lat": 35.291886,
+    "lon": -2.940939,
+    "imagen": "http://commons.wikimedia.org/wiki/Special:FilePath/Parque%20Hern%C3%A1ndez%2C%20puerta%20principal.jpg",
+    "ciudad": "Melilla",
+    "tipo": "museo",
+    "wikidata_id": "Q24021593"
+  },
+  {
     "id": "Q720740",
     "nombre": "Museu Terra",
     "lat": 41.396868,
@@ -919,16 +929,6 @@
     "ciudad": "Sevilla",
     "tipo": "museo",
     "wikidata_id": "Q670077"
-  },
-  {
-    "id": "Q876383",
-    "nombre": "Museo de Historia de Madrid",
-    "lat": 40.425833,
-    "lon": -3.700833,
-    "imagen": "http://commons.wikimedia.org/wiki/Special:FilePath/Museo%20de%20Historia%20de%20Madrid%20%28Espa%C3%B1a%29%2003.jpg",
-    "ciudad": "Madrid",
-    "tipo": "museo",
-    "wikidata_id": "Q876383"
   },
   {
     "id": "Q110656878",
@@ -999,5 +999,45 @@
     "ciudad": "Lugo",
     "tipo": "museo",
     "wikidata_id": "Q12393758"
+  },
+  {
+    "id": "Q53340172",
+    "nombre": "Parque Agustín Jerez",
+    "lat": 35.278105,
+    "lon": -2.93799,
+    "imagen": "http://commons.wikimedia.org/wiki/Special:FilePath/Parque%20Agust%C3%ADn%20Jerez%2C%20Melilla.jpg",
+    "ciudad": "Melilla",
+    "tipo": "museo",
+    "wikidata_id": "Q53340172"
+  },
+  {
+    "id": "Q2437999",
+    "nombre": "L'Umbracle",
+    "lat": 39.45547222,
+    "lon": -0.35400833,
+    "imagen": "http://commons.wikimedia.org/wiki/Special:FilePath/L%27Umbracle%2C%20Valencia%2C%20Spain%20-%20Jan%202007.jpg",
+    "ciudad": "Valencia",
+    "tipo": "museo",
+    "wikidata_id": "Q2437999"
+  },
+  {
+    "id": "Q12257480",
+    "nombre": "Museo de la Minería del País Vasco",
+    "lat": 43.311435,
+    "lon": -3.07006,
+    "imagen": "http://commons.wikimedia.org/wiki/Special:FilePath/Abanto%20Zierbena%20-%20Museo%20de%20la%20Miner%C3%ADa%20del%20Pa%C3%ADs%20Vasco%2001.jpg",
+    "ciudad": "Abanto y Ciérvana",
+    "tipo": "museo",
+    "wikidata_id": "Q12257480"
+  },
+  {
+    "id": "Q634421",
+    "nombre": "Centre de Documentació i Museu de les Arts Escèniques",
+    "lat": 41.37119722,
+    "lon": 2.15775,
+    "imagen": "http://commons.wikimedia.org/wiki/Special:FilePath/Museu%20de%20les%20Arts%20Esc%C3%A8niques%20hall.JPG",
+    "ciudad": "Barcelona",
+    "tipo": "museo",
+    "wikidata_id": "Q634421"
   }
 ]

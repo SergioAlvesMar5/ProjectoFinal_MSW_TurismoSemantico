@@ -10,7 +10,13 @@ Tecnologías del curso:
 
 import json
 import math
+import os
 from pathlib import Path
+
+# Desactivar telemetria si el entorno lo permite
+os.environ.setdefault("ANONYMIZED_TELEMETRY", "False")
+os.environ.setdefault("CHROMA_TELEMETRY", "FALSE")
+os.environ.setdefault("POSTHOG_DISABLED", "true")
 
 # Importaciones opcionales con fallback
 try:
