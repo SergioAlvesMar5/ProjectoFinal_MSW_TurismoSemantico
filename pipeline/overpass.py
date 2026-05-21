@@ -131,7 +131,7 @@ def get_monumentos_ciudad(ciudad: str, radio_km: float = 10.0) -> list[dict]:
         if not lat_el or not lon_el:
             continue
         results.append({
-            "id": f"osm_{el['id']}",
+            "id": f"osm_{el.get('type', 'item')}_{el['id']}",
             "nombre": nombre,
             "lat": float(lat_el),
             "lon": float(lon_el),
@@ -145,57 +145,48 @@ def get_monumentos_ciudad(ciudad: str, radio_km: float = 10.0) -> list[dict]:
     return results
 
 
-def get_patrimonio_nacional(limit_bbox: tuple = (36.0, -9.5, 43.8, 4.5)) -> list[dict]:
+def get_patrimonio_nacional(
+    limit_bbox: tuple = (36.0, -9.5, 43.8, 4.5),
+    max_results: int = 300,
+) -> list[dict]:
     """
     Obtiene castillos y patrimonio histórico nacional en la bbox de España.
     bbox = (lat_min, lon_min, lat_max, lon_max)
     """
-    tiles = _split_bbox(limit_bbox, rows=2, cols=2)
+    tiles = _split_bbox(limit_bbox, rows=4, cols=4)
     elementos = []
 
     for ts, tw, tn, te in tiles:
-        query_nodes = f"""
-        [out:json][timeout:25];
+        query = f"""
+        [out:json][timeout:45];
         (
-            node["historic"="castle"]({ts},{tw},{tn},{te});
-            node["historic"="ruins"]({ts},{tw},{tn},{te});
+            node["historic"~"castle|monument|ruins|archaeological_site|fort|city_gate"]["name"]({ts},{tw},{tn},{te});
+            way["historic"~"castle|monument|ruins|archaeological_site|fort|city_gate"]["name"]({ts},{tw},{tn},{te});
+            relation["historic"~"castle|monument|ruins|archaeological_site|fort|city_gate"]["name"]({ts},{tw},{tn},{te});
             node["heritage"]["name"]({ts},{tw},{tn},{te});
+            way["heritage"]["name"]({ts},{tw},{tn},{te});
+            relation["heritage"]["name"]({ts},{tw},{tn},{te});
+            node["tourism"~"museum|attraction|artwork|gallery"]["name"]({ts},{tw},{tn},{te});
+            way["tourism"~"museum|attraction|artwork|gallery"]["name"]({ts},{tw},{tn},{te});
+            relation["tourism"~"museum|attraction|artwork|gallery"]["name"]({ts},{tw},{tn},{te});
+            node["amenity"="place_of_worship"]["name"]["historic"]({ts},{tw},{tn},{te});
+            way["amenity"="place_of_worship"]["name"]["historic"]({ts},{tw},{tn},{te});
         );
-        out tags;
+        out center tags;
         """
         elementos.extend(_overpass_query(
-            query_nodes,
-            timeout=20,
+            query,
+            timeout=45,
             retries=0,
-            max_urls=1,
-            max_total_seconds=20,
+            max_urls=2,
+            max_total_seconds=55,
         ))
+        if len(_dedupe_elements(elementos)) >= max_results:
+            break
 
     elementos = _dedupe_elements(elementos)
-
-    if len(elementos) < 10:
-        for ts, tw, tn, te in tiles:
-            query_full = f"""
-            [out:json][timeout:40];
-            (
-                node["historic"="castle"]({ts},{tw},{tn},{te});
-                node["historic"="ruins"]({ts},{tw},{tn},{te});
-                node["heritage"]["name"]({ts},{tw},{tn},{te});
-                way["historic"="castle"]({ts},{tw},{tn},{te});
-                way["heritage"]["name"]({ts},{tw},{tn},{te});
-            );
-            out center tags;
-            """
-            elementos.extend(_overpass_query(
-                query_full,
-                timeout=35,
-                retries=0,
-                max_urls=1,
-                max_total_seconds=25,
-            ))
-        elementos = _dedupe_elements(elementos)
     results = []
-    for el in elementos[:60]:  # max 60
+    for el in elementos[:max_results]:
         tags = el.get("tags", {})
         nombre = tags.get("name:es") or tags.get("name")
         if not nombre:
@@ -205,12 +196,15 @@ def get_patrimonio_nacional(limit_bbox: tuple = (36.0, -9.5, 43.8, 4.5)) -> list
         if not lat_el or not lon_el:
             continue
         results.append({
-            "id": f"osm_{el['id']}",
+            "id": f"osm_{el.get('type', 'item')}_{el['id']}",
             "nombre": nombre,
             "lat": float(lat_el),
             "lon": float(lon_el),
-            "tipo_osm": tags.get("historic", "patrimonio"),
+            "tipo_osm": tags.get("tourism") or tags.get("historic") or tags.get("amenity") or "patrimonio",
             "descripcion": tags.get("description:es") or tags.get("description", ""),
+            "web": tags.get("website", ""),
+            "wikipedia": tags.get("wikipedia", ""),
+            "imagen": tags.get("image", ""),
             "fuente": "OpenStreetMap",
         })
     return results

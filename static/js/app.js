@@ -21,26 +21,58 @@ function iniciarMapa() {
 }
 
 const ICONOS = {
+  destino:           "📍",
+  ciudad:            "📍",
+  municipio:         "📍",
+  "municipio de España": "📍",
+  "destino turístico": "📍",
   patrimonio_unesco: "🏛️",
   museo:             "🖼️",
   castle:            "🏰",
+  monument:          "🗿",
   ruins:             "🏚️",
   attraction:        "⭐",
+  archaeological_site: "🏺",
+  heritage:          "🏛️",
+  place_of_worship:  "⛪",
+  artwork:           "🎨",
+  gallery:           "🖼️",
   default:           "📍",
 };
 
 const COLORES = {
+  destino:           "#D32F2F",
+  ciudad:            "#D32F2F",
+  municipio:         "#D32F2F",
+  "municipio de España": "#D32F2F",
+  "destino turístico": "#D32F2F",
   patrimonio_unesco: "#2196F3",
   museo:             "#FF9800",
   castle:            "#9C27B0",
+  monument:          "#607D8B",
   ruins:             "#795548",
   attraction:        "#4CAF50",
-  default:           "#1a5276",
+  archaeological_site: "#8D6E63",
+  heritage:          "#2196F3",
+  place_of_worship:  "#455A64",
+  artwork:           "#C2185B",
+  gallery:           "#FF9800",
+  default:           "#D32F2F",
 };
 
+function normalizarTipoMapa(tipo) {
+  const t = (tipo || "").trim();
+  const lower = t.toLowerCase();
+  if (lower.includes("municipio")) return "municipio";
+  if (lower.includes("ciudad")) return "ciudad";
+  if (lower.includes("destino")) return "destino";
+  return t;
+}
+
 function crearIcono(tipo) {
-  const emoji = ICONOS[tipo] || ICONOS.default;
-  const color  = COLORES[tipo] || COLORES.default;
+  const tipoKey = normalizarTipoMapa(tipo);
+  const emoji = ICONOS[tipoKey] || ICONOS.default;
+  const color  = COLORES[tipoKey] || COLORES.default;
   return L.divIcon({
     html: `<div style="background:${color};width:28px;height:28px;border-radius:50%;
                        display:flex;align-items:center;justify-content:center;
@@ -50,6 +82,10 @@ function crearIcono(tipo) {
     iconAnchor: [14, 14],
     className:  "",
   });
+}
+
+function iconoTipo(tipo) {
+  return ICONOS[normalizarTipoMapa(tipo)] || ICONOS.default;
 }
 
 function cargarMarcadores(destinos) {
@@ -79,9 +115,18 @@ function cargarMarcadores(destinos) {
 
 async function filtrarMapa() {
   const tipo = document.getElementById("filtroTipo").value;
-  const url  = tipo ? `/api/destinos?tipo=${tipo}` : "/api/destinos";
-  const data = await fetch(url).then(r => r.json()).catch(() => []);
+  const data = tipo ? await obtenerDestinos(tipo) : destinos_cache;
   cargarMarcadores(data);
+}
+
+async function obtenerDestinos(tipo = "") {
+  const url = tipo ? `/api/destinos?tipo=${encodeURIComponent(tipo)}` : "/api/destinos";
+  return fetch(url).then(r => r.json()).catch(() => []);
+}
+
+async function refrescarDestinosCacheYMapa() {
+  destinos_cache = await obtenerDestinos();
+  await filtrarMapa();
 }
 
 async function abrirDetalle(enc) {
@@ -128,7 +173,7 @@ async function buscarOSM() {
   data.pois.forEach(p => {
     const div = document.createElement("div");
     div.className = "poi-item";
-    div.textContent = `${ICONOS[p.tipo_osm] || "📍"} ${p.nombre}`;
+    div.textContent = `${iconoTipo(p.tipo_osm)} ${p.nombre}`;
     div.style.cursor = "pointer";
     div.onclick = () => mapa.setView([p.lat, p.lon], 15);
     el.appendChild(div);
@@ -140,6 +185,9 @@ async function buscarOSM() {
 // ── Carga de datos ────────────────────────────────────────────────────────
 let destinos_cache = [];
 let estadoPoll = null;
+let estadoRuntimePoll = null;
+let ultimoNumDestinos = 0;
+let ultimoOsmStatus = "";
 
 async function cargarDatos(desde_cache = false) {
   document.getElementById("btnCargar").disabled = true;
@@ -173,28 +221,57 @@ async function activarApp() {
   document.getElementById("mainContent").style.display = "block";
 
   iniciarMapa();
-  const destinos = await fetch("/api/destinos").then(r => r.json());
-  destinos_cache = destinos;
-  cargarMarcadores(destinos);
+  await refrescarDestinosCacheYMapa();
 
   const est = await fetch("/api/estado").then(r => r.json());
+  ultimoNumDestinos = est.num_destinos || destinos_cache.length;
+  ultimoOsmStatus = est.osm_status || "";
   document.getElementById("statTripletas").textContent = est.num_tripletas;
   actualizarEstadoBadge(est);
+  iniciarPollEstadoRuntime();
 }
 
 function actualizarEstadoBadge(est) {
   const icon = document.getElementById("estadoIcon");
   const txt  = document.getElementById("estadoTexto");
+  const osmActiva = ["pending", "loading", "indexing"].includes(est.osm_status);
+  const osmTxt = osmActiva
+    ? " · OSM actualizando"
+    : (est.osm_count ? ` · OSM ${est.osm_count}` : "");
   if (est.cargando) {
     icon.textContent = "⏳";
     txt.textContent  = "Cargando…";
   } else if (est.cargado) {
     icon.textContent = "✅";
-    txt.textContent  = `${est.num_destinos} destinos · ${est.num_tripletas} tripletas`;
+    txt.textContent  = `${est.num_destinos} destinos · ${est.num_tripletas} tripletas${osmTxt}`;
   } else {
     icon.textContent = "⚪";
     txt.textContent  = "Sin datos";
   }
+}
+
+function iniciarPollEstadoRuntime() {
+  if (estadoRuntimePoll) return;
+  estadoRuntimePoll = setInterval(async () => {
+    const est = await fetch("/api/estado").then(r => r.json()).catch(() => null);
+    if (!est) return;
+
+    actualizarEstadoBadge(est);
+    const numCambio = (est.num_destinos || 0) !== ultimoNumDestinos;
+    const osmCambio = (est.osm_status || "") !== ultimoOsmStatus;
+    if (numCambio || osmCambio) {
+      ultimoNumDestinos = est.num_destinos || 0;
+      ultimoOsmStatus = est.osm_status || "";
+      document.getElementById("statTripletas").textContent = est.num_tripletas;
+      await refrescarDestinosCacheYMapa();
+    }
+
+    const osmTerminada = !["pending", "loading", "indexing"].includes(est.osm_status);
+    if (!est.cargando && osmTerminada) {
+      clearInterval(estadoRuntimePoll);
+      estadoRuntimePoll = null;
+    }
+  }, 1500);
 }
 
 // ── Navegación ────────────────────────────────────────────────────────────
@@ -248,7 +325,7 @@ async function ejecutarBusqueda() {
     <div class="resultado-card" onclick="irADestino(${r.lat},${r.lon},'${r.nombre}')"
          role="listitem" tabindex="0" aria-label="${r.nombre}">
       <div class="res-nombre">${r.nombre}</div>
-      <div class="res-tipo">${ICONOS[r.tipo] || "📍"} ${r.tipo || "destino"}</div>
+      <div class="res-tipo">${iconoTipo(r.tipo)} ${r.tipo || "destino"}</div>
       <div class="res-desc">${r.descripcion || "Sin descripción."}</div>
       <div class="res-sim">Similitud: ${Math.round((r.similitud||0)*100)}%</div>
       <div class="sim-bar"><div class="sim-fill" style="width:${Math.round((r.similitud||0)*100)}%"></div></div>
@@ -302,15 +379,26 @@ function agregarMensaje(tipo, texto, cls = "") {
   const cont = document.getElementById("chatContenedor");
   const id   = "msg_" + Date.now();
   const div  = document.createElement("div");
+  const cuerpo = (tipo === "bot" ? String(texto) : escaparHtml(String(texto)))
+    .replace(/\n/g, "<br>");
   div.id = id;
   div.className = tipo === "bot" ? "msg-bot" : "msg-user";
   div.innerHTML = `
     <span class="msg-avatar">${tipo === "bot" ? "🤖" : "👤"}</span>
-    <div class="msg-burbuja ${cls}">${texto}</div>
+    <div class="msg-burbuja ${cls}">${cuerpo}</div>
   `;
   cont.appendChild(div);
   cont.scrollTop = cont.scrollHeight;
   return id;
+}
+
+function escaparHtml(texto) {
+  return texto
+    .replaceAll("&", "&amp;")
+    .replaceAll("<", "&lt;")
+    .replaceAll(">", "&gt;")
+    .replaceAll('"', "&quot;")
+    .replaceAll("'", "&#039;");
 }
 
 function preguntarChat(q) {

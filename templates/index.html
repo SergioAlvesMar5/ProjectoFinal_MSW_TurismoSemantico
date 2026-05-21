@@ -95,6 +95,7 @@
           <h3>🔎 Filtrar destinos</h3>
           <select id="filtroTipo" onchange="filtrarMapa()" aria-label="Filtrar por tipo">
             <option value="">Todos los tipos</option>
+            <option value="destino">Destinos / municipios</option>
             <option value="patrimonio_unesco">🏛️ Patrimonio UNESCO</option>
             <option value="museo">🖼️ Museos</option>
             <option value="castle">🏰 Castillos</option>
@@ -276,11 +277,11 @@ PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
 PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 
 SELECT ?nombre ?lat ?lon WHERE {
-        ?destino rdf:type ?tipo ;
-                 ts:nombre ?nombre ;
-                 ts:latitud ?lat ;
-                 ts:longitud ?lon .
-        ?tipo rdfs:subClassOf* ts:Destino .
+  ?destino rdf:type ?tipo ;
+           ts:nombre ?nombre ;
+           ts:latitud ?lat ;
+           ts:longitud ?lon .
+  ?tipo rdfs:subClassOf* ts:Destino .
 }
 LIMIT 20</textarea>
 

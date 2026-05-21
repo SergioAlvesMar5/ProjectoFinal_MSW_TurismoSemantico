@@ -48,9 +48,12 @@ estado = {
 grafo_global = None
 destinos_global: list[dict] = []
 data_lock = threading.Lock()
+osm_thread = None
+osm_thread_lock = threading.Lock()
 
 DATA_FILE = Path("data/destinos.json")
 DATA_FILE.parent.mkdir(exist_ok=True)
+OSM_CACHE_MIN_ITEMS = 120
 
 
 def log(msg: str):
@@ -81,15 +84,71 @@ def _load_cache_json(path: Path) -> list[dict] | None:
 
 def _merge_destinos(base: list[dict], extra: list[dict]) -> list[dict]:
     merged = {}
+    nombres = set()
     for d in base:
-        nombre = d.get("nombre")
-        if nombre:
-            merged[nombre] = d
+        key = _destino_key(d)
+        if key:
+            merged[key] = d
+            nombre = (d.get("nombre") or "").strip().casefold()
+            if nombre:
+                nombres.add(nombre)
     for d in extra:
-        nombre = d.get("nombre")
-        if nombre and nombre not in merged:
-            merged[nombre] = d
+        key = _destino_key(d)
+        nombre = (d.get("nombre") or "").strip().casefold()
+        if key and key not in merged and nombre not in nombres:
+            merged[key] = d
+            if nombre:
+                nombres.add(nombre)
     return list(merged.values())
+
+
+def _destino_key(d: dict) -> str:
+    if d.get("wikidata_id"):
+        return f"wd:{d['wikidata_id']}"
+    if d.get("id"):
+        return str(d["id"])
+    return (d.get("nombre") or "").strip().casefold()
+
+
+def _tipo_visible(d: dict) -> str:
+    return (d.get("tipo") or d.get("tipo_osm") or "destino").strip() or "destino"
+
+
+def _normalizar_tipo(tipo: str) -> str:
+    return (tipo or "").strip().casefold()
+
+
+def _es_destino_generico(d: dict) -> bool:
+    tipo = _normalizar_tipo(_tipo_visible(d))
+    if not tipo:
+        return True
+    tipos_especiales = {
+        "patrimonio_unesco", "museo", "museum", "castle", "castillo",
+        "ruins", "ruinas", "attraction", "monument", "archaeological_site",
+        "heritage", "place_of_worship", "artwork", "gallery",
+    }
+    if tipo in tipos_especiales:
+        return False
+    return (
+        "destino" in tipo
+        or "municipio" in tipo
+        or "ciudad" in tipo
+        or "localidad" in tipo
+        or "pueblo" in tipo
+        or d.get("fuente") != "OpenStreetMap"
+    )
+
+
+def _start_osm_background() -> bool:
+    global osm_thread
+    with osm_thread_lock:
+        if osm_thread and osm_thread.is_alive():
+            return False
+        estado["osm_status"] = "pending"
+        estado["osm_error"] = ""
+        osm_thread = threading.Thread(target=_cargar_osm_background, daemon=True)
+        osm_thread.start()
+        return True
 
 
 def _cargar_osm_background():
@@ -98,7 +157,7 @@ def _cargar_osm_background():
     estado["osm_error"] = ""
     try:
         log("OSM en segundo plano: consultando Overpass...")
-        osm_patrimonio = get_patrimonio_nacional()
+        osm_patrimonio = get_patrimonio_nacional(max_results=300)
         if not osm_patrimonio:
             estado["osm_status"] = "error"
             estado["osm_error"] = "OSM sin resultados"
@@ -106,15 +165,19 @@ def _cargar_osm_background():
             return
 
         with data_lock:
-            merged = _merge_destinos(destinos_global, osm_patrimonio)
-            if len(merged) == len(destinos_global):
-                estado["osm_status"] = "ok"
-                estado["osm_count"] = len(osm_patrimonio)
-                log("OSM en segundo plano: sin cambios en destinos")
-                return
+            base_actual = list(destinos_global)
 
-            grafo_new = construir_ontologia()
-            poblar_grafo(grafo_new, merged)
+        merged = _merge_destinos(base_actual, osm_patrimonio)
+        if len(merged) == len(base_actual):
+            estado["osm_status"] = "ok"
+            estado["osm_count"] = len(osm_patrimonio)
+            log("OSM en segundo plano: sin cambios en destinos")
+            return
+
+        grafo_new = construir_ontologia()
+        poblar_grafo(grafo_new, merged)
+
+        with data_lock:
             grafo_global = grafo_new
             destinos_global = merged
             estado["num_destinos"] = len(merged)
@@ -128,10 +191,15 @@ def _cargar_osm_background():
                 grafo_new.serialize(format="turtle"), encoding="utf-8"
             )
 
+        estado["osm_status"] = "indexing"
+        estado["osm_count"] = len(osm_patrimonio)
+        log(f"OSM en segundo plano: agregados {len(merged) - len(base_actual)} destinos nuevos")
+
+        ok = indexar_destinos(merged)
+        estado["embeddings_ok"] = ok
         estado["osm_status"] = "ok"
         estado["osm_count"] = len(osm_patrimonio)
-        log(f"OSM en segundo plano: agregado {len(osm_patrimonio)} items")
-        log("Nota: embeddings no se reindexan para OSM.")
+        log("OSM en segundo plano: grafo, cache y busqueda semantica actualizados")
     except Exception as e:
         estado["osm_status"] = "error"
         estado["osm_error"] = str(e)
@@ -178,11 +246,14 @@ def cargar_datos_background():
         osm_patrimonio = []
         prev_cache = _load_cache_json(DATA_FILE) or []
         osm_prev = [d for d in prev_cache if d.get("fuente") == "OpenStreetMap"]
+        osm_cache_incompleta = 0 < len(osm_prev) < OSM_CACHE_MIN_ITEMS
         if osm_prev:
             log(f"  ⚠️ Reutilizando {len(osm_prev)} OSM desde cache")
             osm_patrimonio = osm_prev
             estado["osm_status"] = "cache"
             estado["osm_count"] = len(osm_prev)
+            if osm_cache_incompleta:
+                log("  ℹ️ Cache OSM corto: se ampliara en segundo plano")
         else:
             log("  ℹ️ OSM se cargara en segundo plano")
             estado["osm_status"] = "pending"
@@ -226,9 +297,8 @@ def cargar_datos_background():
         estado["cargado"] = True
         log("✅ Carga completa. La aplicacion esta lista.")
 
-        if not osm_prev:
-            t_osm = threading.Thread(target=_cargar_osm_background, daemon=True)
-            t_osm.start()
+        if not osm_prev or osm_cache_incompleta:
+            _start_osm_background()
     except Exception as e:
         estado["cargado"] = False
         estado["embeddings_ok"] = False
@@ -270,6 +340,7 @@ def api_cargar():
                 grafo_global.serialize(format="turtle"), encoding="utf-8"
             )
             osm_cached = [d for d in destinos_global if d.get("fuente") == "OpenStreetMap"]
+            osm_cache_incompleta = 0 < len(osm_cached) < OSM_CACHE_MIN_ITEMS
             if osm_cached:
                 estado["osm_status"] = "cache"
                 estado["osm_count"] = len(osm_cached)
@@ -283,6 +354,9 @@ def api_cargar():
             estado["cargando"] = False
             estado["error"] = ""
             log(f"Datos cargados desde caché ({len(destinos_global)} destinos)")
+            if not osm_cached or osm_cache_incompleta:
+                log("Cache OSM ausente o corta: completando OpenStreetMap en segundo plano")
+                _start_osm_background()
             return jsonify({"ok": True, "msg": "Datos cargados desde caché.", "fuente": "cache"})
 
     # Carga completa en hilo separado
@@ -294,11 +368,21 @@ def api_cargar():
 @app.route("/api/destinos")
 def api_destinos():
     tipo   = request.args.get("tipo", "")
-    limite = int(request.args.get("limite", 200))
+    limite = int(request.args.get("limite", 1000))
     with data_lock:
         datos = list(destinos_global)
     if tipo:
-        datos = [d for d in datos if d.get("tipo") == tipo or d.get("tipo_osm") == tipo]
+        tipo_norm = _normalizar_tipo(tipo)
+        if tipo_norm == "destino":
+            datos = [d for d in datos if _es_destino_generico(d)]
+        else:
+            datos = [
+                d for d in datos
+                if _normalizar_tipo(d.get("tipo", "")) == tipo_norm
+                or _normalizar_tipo(d.get("tipo_osm", "")) == tipo_norm
+            ]
+    if limite > 0:
+        datos = datos[:limite]
     # Solo campos necesarios para el mapa
     resultado = [
         {
@@ -306,11 +390,11 @@ def api_destinos():
             "nombre":      d.get("nombre", ""),
             "lat":         d.get("lat", 0),
             "lon":         d.get("lon", 0),
-            "tipo":        d.get("tipo") or d.get("tipo_osm", ""),
+            "tipo":        _tipo_visible(d),
             "descripcion": (d.get("descripcion") or "")[:200],
             "imagen":      d.get("imagen", ""),
         }
-        for d in datos[:limite]
+        for d in datos
     ]
     return jsonify(resultado)
 

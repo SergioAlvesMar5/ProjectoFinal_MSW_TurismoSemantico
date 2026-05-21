@@ -44,6 +44,10 @@ _collection = None
 _destinos_cache: list[dict] = []
 
 
+def _tipo_destino(d: dict) -> str:
+    return (d.get("tipo") or d.get("tipo_osm") or "destino").strip() or "destino"
+
+
 def _get_modelo():
     global _modelo
     if _modelo is None and EMBEDDINGS_OK:
@@ -109,7 +113,7 @@ def indexar_destinos(destinos: list[dict]) -> bool:
             "nombre":     d.get("nombre", ""),
             "lat":        str(d.get("lat", 0)),
             "lon":        str(d.get("lon", 0)),
-            "tipo":       d.get("tipo", ""),
+            "tipo":       _tipo_destino(d),
             "descripcion": (d.get("descripcion") or "")[:500],
         }
         for d in destinos
@@ -169,7 +173,7 @@ def _buscar_tfidf(query: str, k: int) -> list[dict]:
         union     = len(query_words | texto_words)
         score     = intersect / union if union else 0
         if score > 0:
-            scored.append({**d, "similitud": round(score, 3)})
+            scored.append({**d, "tipo": _tipo_destino(d), "similitud": round(score, 3)})
     scored.sort(key=lambda x: x["similitud"], reverse=True)
     return scored[:k]
 
@@ -207,7 +211,7 @@ def construir_contexto_rag(destinos: list[dict], k: int = 3) -> str:
     for d in destinos[:k]:
         fragmentos.append(
             f"Destino: {d.get('nombre', '')}. "
-            f"Tipo: {d.get('tipo', '')}. "
+            f"Tipo: {_tipo_destino(d)}. "
             f"Ubicación: lat={d.get('lat','')}, lon={d.get('lon','')}. "
             f"Descripción: {d.get('descripcion', 'Sin descripción disponible.')}."
         )
@@ -233,7 +237,7 @@ def rag_pipeline(pregunta: str, k: int = 3) -> dict:
     contexto = construir_contexto_rag(destinos_relevantes, k=k)
 
     # Paso 4: LLM (Anthropic)
-    respuesta = _llamar_llm(pregunta, contexto)
+    respuesta = _llamar_llm(pregunta, contexto, destinos_relevantes)
 
     return {
         "pregunta":    pregunta,
@@ -244,24 +248,59 @@ def rag_pipeline(pregunta: str, k: int = 3) -> dict:
     }
 
 
-def _llamar_llm(pregunta: str, contexto: str) -> str:
+def _respuesta_local_rag(pregunta: str, destinos: list[dict]) -> str:
+    """
+    Genera una respuesta conversacional usando los destinos recuperados.
+    Es el modo local cuando no hay proveedor LLM configurado.
+    """
+    if not destinos:
+        return (
+            "No he encontrado coincidencias claras en los datos cargados. "
+            "Prueba con una consulta mas concreta, por ejemplo patrimonio UNESCO, "
+            "museos, castillos o una zona de Espana."
+        )
+
+    pregunta_lower = pregunta.lower()
+    if "museo" in pregunta_lower:
+        inicio = "Para museos, las mejores coincidencias que tengo ahora son:"
+    elif "unesco" in pregunta_lower or "patrimonio" in pregunta_lower:
+        inicio = "Sobre patrimonio cultural, destacaria estas opciones:"
+    elif "castillo" in pregunta_lower or "medieval" in pregunta_lower:
+        inicio = "Si buscas castillos o lugares con caracter historico, empezaria por:"
+    elif "recom" in pregunta_lower or "visitar" in pregunta_lower:
+        inicio = "Te recomendaria mirar primero estos destinos:"
+    else:
+        inicio = "Con los datos semanticos cargados, esto es lo mas relevante que he encontrado:"
+
+    lineas = [inicio]
+    for i, d in enumerate(destinos[:3], start=1):
+        nombre = d.get("nombre", "Destino sin nombre")
+        tipo = _tipo_destino(d)
+        desc = (d.get("descripcion") or "").strip()
+        if len(desc) > 180:
+            desc = desc[:177].rstrip() + "..."
+        detalle = f"{i}. {nombre} ({tipo})"
+        if desc:
+            detalle += f": {desc}"
+        lineas.append(detalle)
+
+    lineas.append(
+        "La lista sale de la busqueda semantica sobre Wikidata y OpenStreetMap, "
+        "asi que puedo afinarla por ciudad, tipo de destino o estilo de viaje."
+    )
+    return "\n".join(lineas)
+
+
+def _llamar_llm(pregunta: str, contexto: str, destinos: list[dict]) -> str:
     """
     Llama a la API de Anthropic (claude-haiku) con el contexto RAG.
-    Si no hay API key disponible, genera una respuesta de demostración.
+    Si no hay API key disponible, genera una respuesta local con el contexto recuperado.
     """
     import os
     api_key = os.environ.get("ANTHROPIC_API_KEY", "")
 
     if not api_key:
-        # Respuesta de demostración basada en el contexto
-        if contexto:
-            return (
-                f"[DEMO sin API key] Basándome en los datos semánticos disponibles, "
-                f"he encontrado estos destinos relevantes para tu consulta: "
-                f"{', '.join([d['nombre'] for d in buscar_semantico(pregunta, 3)])}. "
-                f"Para habilitar respuestas en lenguaje natural, configura ANTHROPIC_API_KEY."
-            )
-        return "[DEMO] No hay destinos indexados aún. Ejecuta primero la carga de datos."
+        return _respuesta_local_rag(pregunta, destinos)
 
     try:
         import anthropic
@@ -280,11 +319,12 @@ Pregunta del usuario: {pregunta}
 Respuesta:"""
 
         msg = client.messages.create(
-            model="claude-haiku-4-5-20251001",
+            model=os.environ.get("ANTHROPIC_MODEL", "claude-3-haiku-20240307"),
             max_tokens=512,
             messages=[{"role": "user", "content": prompt}],
         )
         return msg.content[0].text
 
     except Exception as e:
-        return f"[LLM Error] {e}. Configura ANTHROPIC_API_KEY correctamente."
+        print(f"[LLM] Error usando Anthropic: {e}. Respondiendo en modo local.")
+        return _respuesta_local_rag(pregunta, destinos)
