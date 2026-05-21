@@ -102,7 +102,7 @@ function cargarMarcadores(destinos) {
           <div class="popup-tipo">${tipo || ""}</div>
           ${d.descripcion ? `<p style="font-size:.8rem;margin-top:.4rem">${d.descripcion.substring(0,100)}…</p>` : ""}
           <button onclick="abrirDetalle('${encodeURIComponent(JSON.stringify(d))}')"
-            style="margin-top:.5rem;background:#1a5276;color:#fff;border:none;
+            style="margin-top:.5rem;background:var(--c-primary);color:#fff;border:none;
                    padding:.3rem .8rem;border-radius:6px;cursor:pointer;font-size:.78rem;">
             Ver detalle
           </button>
@@ -447,6 +447,7 @@ function renderGrafoD3(container, tripletas) {
   const nodos = Object.values(nodosMap);
 
   const detalleEl = document.getElementById("grafoDetalle");
+  const grafoLayout = detalleEl?.closest(".grafo-layout");
   const maxRels = 8;
   const tooltip = document.createElement("div");
   tooltip.className = "grafo-tooltip";
@@ -515,6 +516,7 @@ function renderGrafoD3(container, tripletas) {
 
   function resetDetalle() {
     if (!detalleEl) return;
+    grafoLayout?.classList.remove("nodo-seleccionado");
     detalleEl.innerHTML = "";
     const title = document.createElement("h4");
     title.textContent = "Detalle del nodo";
@@ -527,6 +529,7 @@ function renderGrafoD3(container, tripletas) {
 
   function renderDetalle(id) {
     if (!detalleEl) return;
+    grafoLayout?.classList.add("nodo-seleccionado");
     const rels = relMap.get(id) || [];
     detalleEl.innerHTML = "";
 
@@ -743,7 +746,7 @@ async function ejecutarSparql() {
 
   const cols = Object.keys(data.resultados[0]);
   cont.innerHTML = `
-    <p style="font-size:.8rem;color:#555;margin-bottom:.5rem">${data.total} resultados</p>
+    <p style="font-size:.8rem;color:var(--c-text-sec);margin-bottom:.5rem">${data.total} resultados</p>
     <table class="sparql-table">
       <thead><tr>${cols.map(c => `<th>${c}</th>`).join("")}</tr></thead>
       <tbody>

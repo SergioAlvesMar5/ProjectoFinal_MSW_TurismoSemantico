@@ -11,6 +11,8 @@ Tecnologías del curso:
 import json
 import math
 import os
+import re
+import unicodedata
 from pathlib import Path
 
 # Desactivar telemetria si el entorno lo permite
@@ -46,6 +48,45 @@ _destinos_cache: list[dict] = []
 
 def _tipo_destino(d: dict) -> str:
     return (d.get("tipo") or d.get("tipo_osm") or "destino").strip() or "destino"
+
+
+def normalizar_texto_busqueda(texto: str) -> str:
+    """Normaliza texto para busquedas: sin acentos, sin mayusculas y con espacios limpios."""
+    texto = unicodedata.normalize("NFKD", texto or "")
+    texto = "".join(ch for ch in texto if not unicodedata.combining(ch))
+    texto = texto.casefold()
+    texto = re.sub(r"[^a-z0-9]+", " ", texto)
+    return re.sub(r"\s+", " ", texto).strip()
+
+
+def _texto_base_destino(d: dict) -> str:
+    partes = [
+        d.get("texto_embedding", ""),
+        d.get("nombre", ""),
+        _tipo_destino(d),
+        d.get("ciudad", ""),
+        d.get("descripcion", ""),
+    ]
+    return " ".join(str(p).strip() for p in partes if str(p or "").strip())
+
+
+def _texto_indexable(d: dict) -> str:
+    base = _texto_base_destino(d)
+    normalizado = normalizar_texto_busqueda(base)
+    if normalizado and normalizado not in base.casefold():
+        return f"{base}\n{normalizado}"
+    return base
+
+
+def _texto_consulta(query: str) -> str:
+    normalizada = normalizar_texto_busqueda(query)
+    if normalizada and normalizada != (query or "").casefold():
+        return f"{query} {normalizada}"
+    return query
+
+
+def _tokens_busqueda(texto: str) -> set[str]:
+    return set(normalizar_texto_busqueda(texto).split())
 
 
 def _get_modelo():
@@ -101,7 +142,7 @@ def indexar_destinos(destinos: list[dict]) -> bool:
     global _collection
     _collection = col
 
-    textos = [d.get("texto_embedding") or d.get("descripcion") or d["nombre"] for d in destinos]
+    textos = [_texto_indexable(d) for d in destinos]
     ids    = [d.get("id", str(i)) for i, d in enumerate(destinos)]
 
     print(f"[Embeddings] Generando embeddings para {len(destinos)} destinos...")
@@ -142,7 +183,7 @@ def _buscar_con_embeddings(query: str, k: int) -> list[dict]:
     if col is None:
         return []
 
-    q_emb = modelo.encode([query]).tolist()
+    q_emb = modelo.encode([_texto_consulta(query)]).tolist()
     results = col.query(query_embeddings=q_emb, n_results=k)
 
     output = []
@@ -163,11 +204,10 @@ def _buscar_con_embeddings(query: str, k: int) -> list[dict]:
 
 def _buscar_tfidf(query: str, k: int) -> list[dict]:
     """Búsqueda TF-IDF simple como fallback (sin dependencias externas)."""
-    query_words = set(query.lower().split())
+    query_words = _tokens_busqueda(query)
     scored = []
     for d in _destinos_cache:
-        texto = (d.get("texto_embedding") or d.get("descripcion") or d["nombre"]).lower()
-        texto_words = set(texto.split())
+        texto_words = _tokens_busqueda(_texto_base_destino(d))
         # Jaccard simplificado
         intersect = len(query_words & texto_words)
         union     = len(query_words | texto_words)
@@ -260,14 +300,14 @@ def _respuesta_local_rag(pregunta: str, destinos: list[dict]) -> str:
             "museos, castillos o una zona de Espana."
         )
 
-    pregunta_lower = pregunta.lower()
-    if "museo" in pregunta_lower:
+    pregunta_norm = normalizar_texto_busqueda(pregunta)
+    if "museo" in pregunta_norm:
         inicio = "Para museos, las mejores coincidencias que tengo ahora son:"
-    elif "unesco" in pregunta_lower or "patrimonio" in pregunta_lower:
+    elif "unesco" in pregunta_norm or "patrimonio" in pregunta_norm:
         inicio = "Sobre patrimonio cultural, destacaria estas opciones:"
-    elif "castillo" in pregunta_lower or "medieval" in pregunta_lower:
+    elif "castillo" in pregunta_norm or "medieval" in pregunta_norm:
         inicio = "Si buscas castillos o lugares con caracter historico, empezaria por:"
-    elif "recom" in pregunta_lower or "visitar" in pregunta_lower:
+    elif "recom" in pregunta_norm or "visitar" in pregunta_norm:
         inicio = "Te recomendaria mirar primero estos destinos:"
     else:
         inicio = "Con los datos semanticos cargados, esto es lo mas relevante que he encontrado:"

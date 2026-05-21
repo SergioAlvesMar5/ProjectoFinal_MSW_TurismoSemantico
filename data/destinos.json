@@ -30,16 +30,6 @@
     "texto_embedding": "Mainake. Destino turístico en España: Mainake"
   },
   {
-    "id": "Q55684",
-    "nombre": "Palacio - Castillo de Alacuás",
-    "lat": 39.457825,
-    "lon": -0.45680278,
-    "descripcion": "monumento en Alaquàs, España",
-    "tipo": "atracción turística",
-    "wikidata_id": "Q55684",
-    "texto_embedding": "Palacio - Castillo de Alacuás. monumento en Alaquàs, España"
-  },
-  {
     "id": "Q580743",
     "nombre": "Maspalomas",
     "lat": 27.76057,
@@ -58,6 +48,16 @@
     "tipo": "ciudad",
     "wikidata_id": "Q622030",
     "texto_embedding": "Palos de la Frontera. municipio de la provincia de Huelva, España"
+  },
+  {
+    "id": "Q5710505",
+    "nombre": "Ategua",
+    "lat": 37.755321505,
+    "lon": -4.572888211,
+    "descripcion": "yacimiento arqueológico de Córdoba, España",
+    "tipo": "ciudad",
+    "wikidata_id": "Q5710505",
+    "texto_embedding": "Ategua. yacimiento arqueológico de Córdoba, España"
   },
   {
     "id": "Q77433",
@@ -110,6 +110,16 @@
     "texto_embedding": "San Juan Despí. municipio de España"
   },
   {
+    "id": "Q5763390",
+    "nombre": "Cerro de la Plaza de Armas de Puente Tablas",
+    "lat": 37.81277778,
+    "lon": -3.74861111,
+    "descripcion": "recinto ibero amurallado, con zona de viviendas, palacio del príncipe y santuario, ubicado al norte de Jaén capital, España. Declarado Bien de Interés Cultural",
+    "tipo": "ciudad",
+    "wikidata_id": "Q5763390",
+    "texto_embedding": "Cerro de la Plaza de Armas de Puente Tablas. recinto ibero amurallado, con zona de viviendas, palacio del príncipe y santuario, ubicado al norte de Jaén capital, España. Declarado Bien de Interés Cultural"
+  },
+  {
     "id": "Q15092",
     "nombre": "Castellón de la Plana",
     "lat": 39.985980555,
@@ -140,14 +150,14 @@
     "texto_embedding": "Olite. municipio de Navarra, España"
   },
   {
-    "id": "Q546180",
-    "nombre": "Mesa de los Tres Reyes",
-    "lat": 42.919411,
-    "lon": -0.7275039,
-    "descripcion": "Destino turístico en España: Mesa de los Tres Reyes",
-    "tipo": "atracción turística",
-    "wikidata_id": "Q546180",
-    "texto_embedding": "Mesa de los Tres Reyes. Destino turístico en España: Mesa de los Tres Reyes"
+    "id": "Q5039690",
+    "nombre": "Carissa Aurelia",
+    "lat": 36.870874863,
+    "lon": -5.728729834,
+    "descripcion": "bien de interés cultural",
+    "tipo": "ciudad",
+    "wikidata_id": "Q5039690",
+    "texto_embedding": "Carissa Aurelia. bien de interés cultural"
   },
   {
     "id": "Q487679",
@@ -168,6 +178,16 @@
     "tipo": "ciudad",
     "wikidata_id": "Q15684",
     "texto_embedding": "Segovia. municipio de la provincia de Segovia, Castilla y León, España"
+  },
+  {
+    "id": "Q5562219",
+    "nombre": "Obúlcula",
+    "lat": 37.515766,
+    "lon": -5.316314,
+    "descripcion": "bien de interés cultural",
+    "tipo": "ciudad",
+    "wikidata_id": "Q5562219",
+    "texto_embedding": "Obúlcula. bien de interés cultural"
   },
   {
     "id": "Q54898",
@@ -191,14 +211,24 @@
     "texto_embedding": "Teatro romano de Cádiz. Teatro romano en Andalucía (España)"
   },
   {
-    "id": "Q3867196",
-    "nombre": "Cerro de los Infantes",
-    "lat": 37.2672,
-    "lon": -3.767283,
-    "descripcion": "bien de interés cultural",
+    "id": "Q5840235",
+    "nombre": "Esperilla",
+    "lat": 36.887935337,
+    "lon": -5.809805277,
+    "descripcion": "patrimonio histórico de Andalucía de importancia arqueológica en Espera, España",
     "tipo": "ciudad",
-    "wikidata_id": "Q3867196",
-    "texto_embedding": "Cerro de los Infantes. bien de interés cultural"
+    "wikidata_id": "Q5840235",
+    "texto_embedding": "Esperilla. patrimonio histórico de Andalucía de importancia arqueológica en Espera, España"
+  },
+  {
+    "id": "Q5716299",
+    "nombre": "Baesippo",
+    "lat": 36.25,
+    "lon": -5.966667,
+    "descripcion": "Destino turístico en España: Baesippo",
+    "tipo": "ciudad",
+    "wikidata_id": "Q5716299",
+    "texto_embedding": "Baesippo. Destino turístico en España: Baesippo"
   },
   {
     "id": "Q494693",
@@ -229,6 +259,16 @@
     "tipo": "ciudad",
     "wikidata_id": "Q486792",
     "texto_embedding": "Aranjuez. municipio de la Comunidad de Madrid, España"
+  },
+  {
+    "id": "Q6129295",
+    "nombre": "Ciudad romana de Singilia Barba",
+    "lat": 37.032508333,
+    "lon": -4.630927777,
+    "descripcion": "bien de interés cultural",
+    "tipo": "ciudad",
+    "wikidata_id": "Q6129295",
+    "texto_embedding": "Ciudad romana de Singilia Barba. bien de interés cultural"
   },
   {
     "id": "Q584446",
@@ -311,14 +351,14 @@
     "texto_embedding": "Benidorm. municipio de la provincia de Alicante, Comunidad Valenciana, España"
   },
   {
-    "id": "Q239935",
-    "nombre": "Ciudad de las Artes y las Ciencias",
-    "lat": 39.454527777,
-    "lon": -0.350363888,
-    "descripcion": "complejo arquitectónico, cultural y de entretenimiento de Valencia, España",
-    "tipo": "atracción turística",
-    "wikidata_id": "Q239935",
-    "texto_embedding": "Ciudad de las Artes y las Ciencias. complejo arquitectónico, cultural y de entretenimiento de Valencia, España"
+    "id": "Q5719362",
+    "nombre": "Barbesula",
+    "lat": 36.2975,
+    "lon": -5.3,
+    "descripcion": "patrimonio histórico de Andalucía de importancia arqueológica en San Roque, España",
+    "tipo": "ciudad",
+    "wikidata_id": "Q5719362",
+    "texto_embedding": "Barbesula. patrimonio histórico de Andalucía de importancia arqueológica en San Roque, España"
   },
   {
     "id": "Q302099",
@@ -331,14 +371,14 @@
     "texto_embedding": "Requena. municipio de la provincia de Valencia, España"
   },
   {
-    "id": "Q160112",
-    "nombre": "Museo del Prado",
-    "lat": 40.413888888,
-    "lon": -3.692222222,
-    "descripcion": "museo de arte de Madrid, España",
-    "tipo": "atracción turística",
-    "wikidata_id": "Q160112",
-    "texto_embedding": "Museo del Prado. museo de arte de Madrid, España"
+    "id": "Q6169531",
+    "nombre": "Yacimiento arqueológico de Doña Blanca",
+    "lat": 36.627143,
+    "lon": -6.161248,
+    "descripcion": "bien de interés cultural",
+    "tipo": "ciudad",
+    "wikidata_id": "Q6169531",
+    "texto_embedding": "Yacimiento arqueológico de Doña Blanca. bien de interés cultural"
   },
   {
     "id": "Q164197",
@@ -402,34 +442,14 @@
     "texto_embedding": "Torrente. municipio de la provincia de Valencia, España"
   },
   {
-    "id": "Q29575107",
-    "nombre": "Segontia",
-    "lat": 41.066666666,
-    "lon": -2.65,
-    "descripcion": "mansio situada en el itinerario de Antonino XXV sidentificada habitualmente con Sigüenza",
+    "id": "Q6140279",
+    "nombre": "Tejada la Vieja",
+    "lat": 37.497219741,
+    "lon": -6.362057452,
+    "descripcion": "bien de interés cultural",
     "tipo": "ciudad",
-    "wikidata_id": "Q29575107",
-    "texto_embedding": "Segontia. mansio situada en el itinerario de Antonino XXV sidentificada habitualmente con Sigüenza"
-  },
-  {
-    "id": "Q171517",
-    "nombre": "Palacio Real de Madrid",
-    "lat": 40.417955,
-    "lon": -3.714312,
-    "descripcion": "residencia oficial del rey de España y bien de interés cultural",
-    "tipo": "atracción turística",
-    "wikidata_id": "Q171517",
-    "texto_embedding": "Palacio Real de Madrid. residencia oficial del rey de España y bien de interés cultural"
-  },
-  {
-    "id": "Q47476",
-    "nombre": "Alhambra",
-    "lat": 37.17634,
-    "lon": -3.58821,
-    "descripcion": "conjunto palaciego en Granada",
-    "tipo": "atracción turística",
-    "wikidata_id": "Q47476",
-    "texto_embedding": "Alhambra. conjunto palaciego en Granada"
+    "wikidata_id": "Q6140279",
+    "texto_embedding": "Tejada la Vieja. bien de interés cultural"
   },
   {
     "id": "Q965924",
@@ -452,6 +472,16 @@
     "texto_embedding": "Barcelona. capital de Cataluña, España"
   },
   {
+    "id": "Q5768702",
+    "nombre": "Ciavieja",
+    "lat": 36.776323,
+    "lon": -2.800981,
+    "descripcion": "yacimiento arqueológico en El Ejido, España",
+    "tipo": "ciudad",
+    "wikidata_id": "Q5768702",
+    "texto_embedding": "Ciavieja. yacimiento arqueológico en El Ejido, España"
+  },
+  {
     "id": "Q501090",
     "nombre": "Castro-Urdiales",
     "lat": 43.384444444,
@@ -462,6 +492,26 @@
     "texto_embedding": "Castro-Urdiales. municipio de España"
   },
   {
+    "id": "Q5789709",
+    "nombre": "Cortijo de Aparicio el Grande",
+    "lat": 37.242004,
+    "lon": -4.929135,
+    "descripcion": "bien de interés cultural",
+    "tipo": "ciudad",
+    "wikidata_id": "Q5789709",
+    "texto_embedding": "Cortijo de Aparicio el Grande. bien de interés cultural"
+  },
+  {
+    "id": "Q5920057",
+    "nombre": "Iptuci",
+    "lat": 36.737103132,
+    "lon": -5.556738943,
+    "descripcion": "antigua ciudad romana situada en el actual municipio de Prado del Rey, España",
+    "tipo": "ciudad",
+    "wikidata_id": "Q5920057",
+    "texto_embedding": "Iptuci. antigua ciudad romana situada en el actual municipio de Prado del Rey, España"
+  },
+  {
     "id": "Q13939",
     "nombre": "Tarrasa",
     "lat": 41.561111111,
@@ -470,6 +520,26 @@
     "tipo": "ciudad",
     "wikidata_id": "Q13939",
     "texto_embedding": "Tarrasa. municipio en la comarca del valles occidental, Cataluña, España"
+  },
+  {
+    "id": "Q5702349",
+    "nombre": "Ciudad romana de Aratispi",
+    "lat": 36.938477777,
+    "lon": -4.441230555,
+    "descripcion": "yacimiento arqueológico  patrimonio histórico de Andalucía  en Antequera, España",
+    "tipo": "ciudad",
+    "wikidata_id": "Q5702349",
+    "texto_embedding": "Ciudad romana de Aratispi. yacimiento arqueológico  patrimonio histórico de Andalucía  en Antequera, España"
+  },
+  {
+    "id": "Q4890124",
+    "nombre": "Virovesca",
+    "lat": 42.54166667,
+    "lon": -3.32527778,
+    "descripcion": "Destino turístico en España: Virovesca",
+    "tipo": "ciudad",
+    "wikidata_id": "Q4890124",
+    "texto_embedding": "Virovesca. Destino turístico en España: Virovesca"
   },
   {
     "id": "Q888390",
@@ -490,76 +560,6 @@
     "tipo": "ciudad",
     "wikidata_id": "Q8826",
     "texto_embedding": "Palma de Mallorca. capital de la Comunidad Autónoma de las Islas Baleares, España"
-  },
-  {
-    "id": "Q15679",
-    "nombre": "Badajoz",
-    "lat": 38.87789,
-    "lon": -6.970609,
-    "descripcion": "capital de la provincia de Badajoz, Extremadura, España",
-    "tipo": "ciudad",
-    "wikidata_id": "Q15679",
-    "texto_embedding": "Badajoz. capital de la provincia de Badajoz, Extremadura, España"
-  },
-  {
-    "id": "Q473914",
-    "nombre": "Ibiza",
-    "lat": 38.908888888,
-    "lon": 1.432777777,
-    "descripcion": "municipio de Baleares, España",
-    "tipo": "ciudad",
-    "wikidata_id": "Q473914",
-    "texto_embedding": "Ibiza. municipio de Baleares, España"
-  },
-  {
-    "id": "Q241767",
-    "nombre": "Plasencia",
-    "lat": 40.0275,
-    "lon": -6.090833333,
-    "descripcion": "municipio de la provincia de Cáceres, España",
-    "tipo": "ciudad",
-    "wikidata_id": "Q241767",
-    "texto_embedding": "Plasencia. municipio de la provincia de Cáceres, España"
-  },
-  {
-    "id": "Q1303386",
-    "nombre": "Jardín Botánico Viera y Clavijo",
-    "lat": 28.06361,
-    "lon": -15.46333,
-    "descripcion": "Destino turístico en España: Jardín Botánico Viera y Clavijo",
-    "tipo": "atracción turística",
-    "wikidata_id": "Q1303386",
-    "texto_embedding": "Jardín Botánico Viera y Clavijo. Destino turístico en España: Jardín Botánico Viera y Clavijo"
-  },
-  {
-    "id": "Q23984135",
-    "nombre": "Melilla",
-    "lat": 35.29369,
-    "lon": -2.93833,
-    "descripcion": "ciudad española del norte de África",
-    "tipo": "ciudad",
-    "wikidata_id": "Q23984135",
-    "texto_embedding": "Melilla. ciudad española del norte de África"
-  },
-  {
-    "id": "Q12833394",
-    "nombre": "Ciudad de Guadalajara",
-    "lat": 40.63435548,
-    "lon": -3.16210273,
-    "descripcion": "ciudad española, capital del municipio homónimo",
-    "tipo": "ciudad",
-    "wikidata_id": "Q12833394",
-    "texto_embedding": "Ciudad de Guadalajara. ciudad española, capital del municipio homónimo"
-  },
-  {
-    "id": "Q24013138",
-    "nombre": "Ponferrada",
-    "lat": 42.54664,
-    "lon": -6.59619,
-    "descripcion": "localidad de Ponferrada, España",
-    "tipo": "ciudad",
-    "wikidata_id": "Q24013138",
-    "texto_embedding": "Ponferrada. localidad de Ponferrada, España"
   },
   {
     "id": "Q899302",
@@ -771,6 +771,26 @@
     "wikidata_id": "Q2284354"
   },
   {
+    "id": "Q670077",
+    "nombre": "Real Academia de Bellas Artes de Santa Isabel de Hungría",
+    "lat": 37.3877,
+    "lon": -5.99106,
+    "imagen": "http://commons.wikimedia.org/wiki/Special:FilePath/Renacimiento%20en%20Sevilla%2C%20Casa%20de%20los%20Pinelo.jpg",
+    "ciudad": "Sevilla",
+    "tipo": "museo",
+    "wikidata_id": "Q670077"
+  },
+  {
+    "id": "Q7990668",
+    "nombre": "Muelle de las Carabelas",
+    "lat": 37.21148,
+    "lon": -6.92809,
+    "imagen": "http://commons.wikimedia.org/wiki/Special:FilePath/Pinta%2C%20Ni%C3%B1a%20y%20Santa%20Mar%C3%ADa%20en%20el%20Muelle%20de%20las%20Carabelas.jpg",
+    "ciudad": "Palos de la Frontera",
+    "tipo": "museo",
+    "wikidata_id": "Q7990668"
+  },
+  {
     "id": "Q876383",
     "nombre": "Museo de Historia de Madrid",
     "lat": 40.425833,
@@ -901,16 +921,6 @@
     "wikidata_id": "Q516917"
   },
   {
-    "id": "Q944049",
-    "nombre": "Castillo de Guardias Viejas",
-    "lat": 36.70040446,
-    "lon": -2.851461251,
-    "imagen": "http://commons.wikimedia.org/wiki/Special:FilePath/Guardias%20Viejas.jpg",
-    "ciudad": "El Ejido",
-    "tipo": "museo",
-    "wikidata_id": "Q944049"
-  },
-  {
     "id": "Q1368571",
     "nombre": "Palacio Real de El Pardo",
     "lat": 40.521288,
@@ -919,6 +929,16 @@
     "ciudad": "Madrid",
     "tipo": "museo",
     "wikidata_id": "Q1368571"
+  },
+  {
+    "id": "Q1630272",
+    "nombre": "Museo Frederic Marès",
+    "lat": 41.3844,
+    "lon": 2.17667,
+    "imagen": "http://commons.wikimedia.org/wiki/Special:FilePath/Entrada%20Museu%20Frederic%20Mar%C3%A8s.jpg",
+    "ciudad": "Barrio Gótico",
+    "tipo": "museo",
+    "wikidata_id": "Q1630272"
   },
   {
     "id": "Q1049274",
@@ -1049,25 +1069,5 @@
     "ciudad": "Sils",
     "tipo": "museo",
     "wikidata_id": "Q11914754"
-  },
-  {
-    "id": "Q4894418",
-    "nombre": "Filmoteca de Cataluña",
-    "lat": 41.378666666,
-    "lon": 2.170916666,
-    "imagen": "http://commons.wikimedia.org/wiki/Special:FilePath/Filmoteca%20de%20Catalunya-seu%20Raval.JPG",
-    "ciudad": "El Raval",
-    "tipo": "museo",
-    "wikidata_id": "Q4894418"
-  },
-  {
-    "id": "Q1592523",
-    "nombre": "Museo Sorolla",
-    "lat": 40.435404,
-    "lon": -3.692539,
-    "imagen": "http://commons.wikimedia.org/wiki/Special:FilePath/Museo%20Sorolla%20%28Madrid%29%2007.jpg",
-    "ciudad": "Madrid",
-    "tipo": "museo",
-    "wikidata_id": "Q1592523"
   }
 ]

@@ -9,6 +9,8 @@ geoespaciales en tiempo real de monumentos, museos y patrimonio de España.
 
 import requests
 import time
+import re
+import unicodedata
 
 OVERPASS_URLS = [
     "https://overpass-api.de/api/interpreter",
@@ -78,25 +80,59 @@ def _dedupe_elements(elements: list[dict]) -> list[dict]:
     return output
 
 
+def _normalizar_texto_busqueda(texto: str) -> str:
+    texto = unicodedata.normalize("NFKD", texto or "")
+    texto = "".join(ch for ch in texto if not unicodedata.combining(ch))
+    texto = texto.casefold()
+    texto = re.sub(r"[^a-z0-9]+", " ", texto)
+    return re.sub(r"\s+", " ", texto).strip()
+
+
+def _candidatas_ciudad(ciudad: str) -> list[str]:
+    limpia = re.sub(r"\s+", " ", (ciudad or "").strip())
+    normalizada = _normalizar_texto_busqueda(limpia)
+    opciones = [limpia, limpia.title(), normalizada, normalizada.title()]
+    candidatas = []
+    vistas = set()
+    for opcion in opciones:
+        key = opcion.casefold()
+        if opcion and key not in vistas:
+            vistas.add(key)
+            candidatas.append(opcion)
+    return candidatas
+
+
 def get_monumentos_ciudad(ciudad: str, radio_km: float = 10.0) -> list[dict]:
     """
     Busca monumentos y patrimonio histórico en una ciudad española.
     Usa geocodificación Nominatim para obtener las coordenadas de la ciudad.
     """
-    # Paso 1: geocodificar la ciudad
-    try:
-        geo = requests.get(
-            "https://nominatim.openstreetmap.org/search",
-            params={"q": f"{ciudad}, Spain", "format": "json", "limit": 1},
-            headers=HEADERS,
-            timeout=10,
-        ).json()
-        if not geo:
-            return []
-        lat, lon = float(geo[0]["lat"]), float(geo[0]["lon"])
-    except Exception as e:
-        print(f"[Nominatim] Error geocodificando '{ciudad}': {e}")
+    # Paso 1: geocodificar la ciudad. Se prueban variantes sin acentos y sin importar mayusculas.
+    geo = []
+    last_err = None
+    for candidata in _candidatas_ciudad(ciudad):
+        try:
+            geo = requests.get(
+                "https://nominatim.openstreetmap.org/search",
+                params={
+                    "q": candidata,
+                    "format": "json",
+                    "limit": 1,
+                    "countrycodes": "es",
+                    "accept-language": "es",
+                },
+                headers=HEADERS,
+                timeout=10,
+            ).json()
+            if geo:
+                break
+        except Exception as e:
+            last_err = e
+    if not geo:
+        if last_err:
+            print(f"[Nominatim] Error geocodificando '{ciudad}': {last_err}")
         return []
+    lat, lon = float(geo[0]["lat"]), float(geo[0]["lon"])
 
     radio_m = int(radio_km * 1000)
 
