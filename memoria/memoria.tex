@@ -12,6 +12,8 @@
 \usepackage{tabularx}
 \usepackage{array}
 \usepackage{multicol}
+\usepackage{float}
+\usepackage{needspace}
 \usepackage{enumitem}
 \usepackage{hyperref}
 \usepackage{tikz}
@@ -79,7 +81,7 @@
 
 La aplicación desarrollada no se queda en un diseño teórico: implementa una plataforma web funcional que integra datos abiertos, construye un grafo RDF/OWL, permite consultas SPARQL y añade recuperación semántica con embeddings y chatbot RAG. La siguiente tabla resume la correspondencia directa con la guía del trabajo.
 
-\begin{table}[h]
+\begin{table}[H]
 \centering
 \scriptsize
 \begin{tabularx}{\textwidth}{p{3.1cm}X}
@@ -105,7 +107,7 @@ El programa transforma esas fuentes en una experiencia única: un mapa interacti
 
 \section{Fuentes de datos abiertas utilizadas}
 
-\begin{table}[h]
+\begin{table}[H]
 \centering
 \small
 \begin{tabularx}{\textwidth}{p{2.8cm}p{2.6cm}X p{2.1cm}}
@@ -138,7 +140,7 @@ El proceso de datos está orquestado desde \texttt{app.py} y se divide en cinco 
 
 El código añade resiliencia práctica: reintentos y timeouts en APIs externas, varios endpoints Overpass alternativos, conversión de caché antigua a UTF-8, carga OSM en hilo de fondo para no bloquear la interfaz, y degradación controlada cuando faltan spaCy, ChromaDB o una clave LLM.
 
-\begin{figure}[h]
+\begin{figure}[H]
 \centering
 \resizebox{\textwidth}{!}{
 \begin{tikzpicture}[
@@ -166,9 +168,10 @@ El código añade resiliencia práctica: reintentos y timeouts en APIs externas,
 \caption{Pipeline de integración, preprocesado y persistencia.}
 \end{figure}
 
+\Needspace{9\baselineskip}
 \section{Tecnologías propuestas y justificación}
 
-\begin{table}[h]
+\begin{table}[H]
 \centering
 \small
 \begin{tabularx}{\textwidth}{p{3cm}p{3.1cm}X}
@@ -190,36 +193,37 @@ Datos & JSON, TTL y caché local & JSON agiliza la carga de la app; TTL represen
 
 La arquitectura es modular. El navegador consume una API REST Flask; el backend coordina fuentes externas, caché, grafo RDF y búsqueda vectorial. Los módulos de la carpeta \texttt{pipeline/} separan responsabilidades: \texttt{wikidata.py}, \texttt{overpass.py}, \texttt{weather.py}, \texttt{rdf\_model.py} y \texttt{embeddings.py}.
 
-\begin{figure}[h]
+\begin{figure}[H]
 \centering
 \resizebox{\textwidth}{!}{
 \begin{tikzpicture}[
-  node distance=1.4cm and 1.9cm,
-  box/.style={draw, rounded corners, fill=tslight, align=center, minimum width=2.7cm, minimum height=0.82cm},
-  store/.style={draw, cylinder, shape border rotate=90, aspect=0.25, fill=white, align=center, minimum width=2.2cm, minimum height=0.9cm},
-  arrow/.style={-{Latex[length=3.2mm,width=2.3mm]}, line width=1.15pt, draw=tsgreen!85!black}
+  node distance=1.05cm and 1.35cm,
+  box/.style={draw, rounded corners, fill=tslight, align=center, text width=2.45cm, minimum height=0.86cm},
+  source/.style={draw, rounded corners, fill=white, align=center, text width=2.25cm, minimum height=0.72cm},
+  store/.style={draw, cylinder, shape border rotate=90, aspect=0.25, fill=white, align=center, text width=2.1cm, minimum height=0.95cm},
+  arrow/.style={-{Latex[length=3.2mm,width=2.3mm]}, line width=1.15pt, draw=tsgreen!85!black},
+  returnarrow/.style={-{Latex[length=3.2mm,width=2.3mm]}, line width=1.05pt, draw=tsgreen!85!black, rounded corners=7pt}
 ]
 \node[box] (ui) {Frontend\\HTML/CSS/JS\\Leaflet + D3};
 \node[box, right=of ui] (api) {Flask API\\\texttt{app.py}};
-\node[box, above right=0.25cm and 1.7cm of api] (wiki) {Wikidata\\SPARQL};
 \node[box, right=of api] (pipe) {Pipeline\\limpieza + fusión};
-\node[box, below right=0.25cm and 1.7cm of api] (osm) {OSM +\\Open-Meteo};
+\node[source, above=0.78cm of pipe] (wiki) {Wikidata\\SPARQL};
+\node[source, below=0.78cm of pipe] (osm) {OSM +\\Open-Meteo};
 \node[store, right=of pipe] (json) {JSON\\caché};
-\node[store, above=of json] (ttl) {RDF/OWL\\Turtle};
-\node[store, below=of json] (chroma) {ChromaDB\\vectores};
-\node[box, right=of json] (features) {Mapa, búsqueda,\\RAG, SPARQL, grafo};
+\node[store, above=0.72cm of json] (ttl) {RDF/OWL\\Turtle};
+\node[store, below=0.72cm of json] (chroma) {ChromaDB\\vectores};
+\node[box, right=of json, text width=2.7cm] (features) {Mapa, búsqueda,\\RAG, SPARQL, grafo};
 \path[arrow] (ui.east) -- node[above]{REST} (api.west);
-\path[arrow] (api.north east) -- (wiki.west);
-\path[arrow] (api.south east) -- (osm.west);
-\path[arrow] (wiki.east) -- (pipe.north west);
-\path[arrow] (osm.east) -- (pipe.south west);
+\path[arrow] (api.east) -- (pipe.west);
+\path[arrow] (wiki.south) -- (pipe.north);
+\path[arrow] (osm.north) -- (pipe.south);
 \path[arrow] (pipe.east) -- (json.west);
-\path[arrow] (pipe.north east) -- (ttl.west);
-\path[arrow] (pipe.south east) -- (chroma.west);
+\path[arrow] (pipe.north east) to[out=25,in=180] (ttl.west);
+\path[arrow] (pipe.south east) to[out=-25,in=180] (chroma.west);
 \path[arrow] (json.east) -- (features.west);
-\path[arrow] (ttl.east) -- (features.north west);
-\path[arrow] (chroma.east) -- (features.south west);
-\path[arrow] (features.south) |- (ui.south);
+\path[arrow] (ttl.east) to[out=0,in=140] (features.north west);
+\path[arrow] (chroma.east) to[out=0,in=-140] (features.south west);
+\path[returnarrow] (features.south) -- ++(0,-1.05) -| node[pos=0.78, below, font=\scriptsize]{respuesta UI} (ui.south);
 \end{tikzpicture}}
 \caption{Arquitectura funcional de \proyecto{}.}
 \end{figure}
@@ -232,7 +236,7 @@ La ontología propia usa el espacio de nombres \texttt{http://turismo-semantico.
 
 El TTL local analizado contiene 105 bloques de destino, 105 individuos nombrados y 105 enlaces \texttt{owl:sameAs}. Las shapes SHACL incluidas validan que todo destino tenga nombre, latitud y longitud, y que un elemento UNESCO tenga año de declaración cuando se declara como \texttt{PatrimonioUNESCO}.
 
-\begin{figure}[h]
+\begin{figure}[H]
 \centering
 \resizebox{0.94\textwidth}{!}{
 \begin{tikzpicture}[
@@ -258,9 +262,10 @@ El TTL local analizado contiene 105 bloques de destino, 105 individuos nombrados
 \caption{Esquema de la ontología y validaciones principales.}
 \end{figure}
 
+\Needspace{12\baselineskip}
 \section{Funcionalidades de la aplicación}
 
-\begin{table}[h]
+\begin{table}[H]
 \centering
 \scriptsize
 \begin{tabularx}{\textwidth}{p{2.6cm}X X}
@@ -282,7 +287,7 @@ SPARQL local & Permitir explotación directa del grafo con consultas reproducibl
 
 La interfaz está organizada como una aplicación de una sola página. Tras la pantalla de carga, el usuario navega con una cabecera fija entre cinco vistas: Explorar, Buscar, Guía IA, Grafo RDF y SPARQL. El flujo de interacción principal es:
 
-\begin{figure}[h]
+\begin{figure}[H]
 \centering
 \resizebox{0.92\textwidth}{!}{
 \begin{tikzpicture}[
@@ -300,14 +305,14 @@ La interfaz está organizada como una aplicación de una sola página. Tras la p
 \path[arrow] (map.east) -- (detail.west);
 \path[arrow] (map.south) -- (search.north);
 \path[arrow] (search.east) -- (chat.west);
-\path[arrow] (map.south) |- (graph.east);
+\path[arrow] (search.south) -- (graph.north);
 \end{tikzpicture}}
 \caption{Flujo de uso principal de la interfaz.}
 \end{figure}
 
 El diseño prioriza claridad operativa: filtros en un panel lateral, tarjetas de resultados, indicadores de similitud, mensajes de carga, ejemplos predefinidos para búsqueda y SPARQL, y actualización periódica del estado cuando OSM termina en segundo plano. Además, incorpora criterios de accesibilidad: uso de \texttt{aria-label}, regiones \texttt{aria-live}, navegación por botones, foco visible, contraste alto, modo claro/oscuro, adaptación responsive y respeto de \texttt{prefers-reduced-motion}.
 
-\begin{table}[h]
+\begin{table}[H]
 \centering
 \scriptsize
 \begin{tabularx}{\textwidth}{p{2.5cm}X X}
@@ -322,7 +327,7 @@ Grafo/SPARQL & D3, tabla de tripletas, editor y resultados. & Aprendizaje guiado
 \end{tabularx}
 \end{table}
 
-\begin{figure}[h]
+\begin{figure}[H]
 \centering
 \resizebox{0.78\textwidth}{!}{
 \begin{tikzpicture}[
@@ -352,7 +357,7 @@ Grafo/SPARQL & D3, tabla de tripletas, editor y resultados. & Aprendizaje guiado
 
 La evaluación se centra en comprobar que cada requisito se traduce en una funcionalidad verificable. A nivel de datos, la caché incluida permite arrancar la aplicación con 105 destinos, reconstruir el grafo y generar el índice semántico sin depender de una extracción completa en cada ejecución.
 
-\begin{table}[h]
+\begin{table}[H]
 \centering
 \scriptsize
 \begin{tabularx}{\textwidth}{p{3.2cm}X p{2.5cm}}
