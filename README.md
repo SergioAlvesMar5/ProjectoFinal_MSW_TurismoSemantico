@@ -5,99 +5,245 @@ Trabajo Final — Modelado Semántico de la Web
 
 ---
 
-## 📦 Fuentes de datos (todas gratuitas, sin API key excepto ANTHROPIC)
+## Resumen
+TurismoSemántico es una aplicación web que integra datos abiertos (Wikidata, OpenStreetMap y Open‑Meteo) para construir un grafo RDF/OWL del patrimonio cultural español, ofrecer búsqueda semántica por similitud y un asistente conversacional RAG. El objetivo es demostrar la conexión entre modelado semántico, APIs abiertas y técnicas actuales de recuperación de información en un entorno web interactivo.
 
+---
+
+## Tabla de contenidos
+- [Objetivos](#objetivos)
+- [Funcionalidades](#funcionalidades)
+- [Tecnologías y fuentes de datos](#tecnologías-y-fuentes-de-datos)
+- [Arquitectura y flujo de datos](#arquitectura-y-flujo-de-datos)
+- [Requisitos](#requisitos)
+- [Instalación](#instalación)
+- [Configuración](#configuración)
+- [Ejecución y uso rápido](#ejecución-y-uso-rápido)
+- [API REST](#api-rest)
+- [Datos y caché](#datos-y-caché)
+- [Estructura del proyecto](#estructura-del-proyecto)
+- [Evaluación rápida](#evaluación-rápida)
+- [Notas y troubleshooting](#notas-y-troubleshooting)
+- [Conexión con las prácticas](#conexión-con-las-prácticas)
+
+---
+
+## Objetivos
+- Integrar fuentes abiertas para enriquecer el patrimonio cultural español.
+- Construir una ontología RDF/OWL y exponer una consola SPARQL local.
+- Ofrecer búsqueda semántica con embeddings y un chatbot RAG.
+- Proveer una experiencia visual completa: mapa, filtros, grafo y clima.
+
+---
+
+## Funcionalidades
+- **Explorador semántico**: mapa Leaflet con destinos de Wikidata y OpenStreetMap.
+- **Buscador semántico**: SentenceTransformers + ChromaDB (fallback TF‑IDF si falla el modelo).
+- **Chatbot RAG**: recuperación semántica + respuesta local o LLM (Anthropic opcional).
+- **Grafo RDF/OWL**: visualización D3.js de tripletas y descarga Turtle.
+- **Consola SPARQL local**: ejecución de consultas sobre el grafo en memoria.
+- **Clima en tiempo real**: Open‑Meteo para coordenadas de cualquier destino.
+- **POIs OSM por ciudad**: búsqueda por ciudad con Overpass + Nominatim.
+
+---
+
+## Tecnologías y fuentes de datos
+
+**Stack principal**
+- Backend: Flask, rdflib, SPARQLWrapper.
+- Semántica y RAG: SentenceTransformers, ChromaDB, spaCy (NER), Anthropic (opcional).
+- Frontend: HTML/CSS/JS, Leaflet, D3.js.
+
+**Fuentes abiertas**
 | Fuente | URL | Requiere key |
 |--------|-----|--------------|
 | Wikidata SPARQL | https://query.wikidata.org/sparql | ❌ No |
 | OpenStreetMap Overpass | https://overpass-api.de | ❌ No |
-| Open-Meteo (clima) | https://api.open-meteo.com | ❌ No |
+| OpenStreetMap Nominatim | https://nominatim.openstreetmap.org | ❌ No |
+| Open‑Meteo (clima) | https://api.open-meteo.com | ❌ No |
 | Anthropic API (chatbot) | https://api.anthropic.com | ✅ Opcional |
 
 ---
 
-## 🚀 Instalación y ejecución
-
-### 1. Crear entorno virtual
-```bash
-python -m venv venv
-# Windows:
-venv\Scripts\activate
-# Linux/Mac:
-source venv/bin/activate
+## Arquitectura y flujo de datos
+```mermaid
+flowchart LR
+	UI[Frontend HTML/CSS/JS] -->|REST| Flask
+	Flask --> Wikidata
+	Flask --> Overpass
+	Flask --> Nominatim
+	Flask --> OpenMeteo
+	Flask --> RDF[rdflib: RDF/OWL]
+	Flask --> Emb[Embeddings + ChromaDB]
+	Emb --> ST[SentenceTransformers]
+	Flask -->|opcional| Anthropic
+	RDF --> TTL[data/grafo.ttl]
+	Flask --> Cache[data/destinos.json]
+	Emb --> Chroma[chroma_db/]
 ```
 
-### 2. Instalar dependencias
+**Pipeline de carga**
+1. La UI dispara `/api/cargar` (datos frescos o caché).
+2. Se consulta Wikidata (UNESCO, museos, destinos generales).
+3. Se construye el grafo RDF y se serializa en `data/grafo.ttl`.
+4. Se generan embeddings y se indexan en `chroma_db/`.
+5. OpenStreetMap se completa en **segundo plano** si la caché es incompleta.
+
+Si existe `data/destinos.json`, la app puede arrancar desde caché y refrescar OSM en background.
+
+---
+
+## Requisitos
+- Python **3.11** (probado).
+- Conexión a Internet para cargar datos externos.
+
+---
+
+## Instalación
+
+### Opción A — venv (recomendado en Windows)
+```bash
+python -m venv .venv
+# Windows:
+.venv\Scripts\activate
+# Linux/Mac:
+source .venv/bin/activate
+```
+
+### Opción B — conda (usa environment.yml)
+```bash
+conda env create -f environment.yml
+conda activate turismo_semantico
+```
+
+### Instalar dependencias
 ```bash
 pip install -r requirements.txt
 ```
 
-Para NER con spaCy (opcional pero recomendado):
+---
+
+## Configuración
+
+### spaCy NER (opcional pero recomendado)
 ```bash
 python -m spacy download es_core_news_md
 ```
+Si no instalas el modelo, el NER se desactiva y el buscador sigue funcionando.
 
-### 3. (Opcional) Configurar API key de Anthropic para el chatbot
+### Variables de entorno (opcional)
 ```bash
 # Windows:
 set ANTHROPIC_API_KEY=tu_api_key_aqui
+set ANTHROPIC_MODEL=claude-3-haiku-20240307
+
 # Linux/Mac:
 export ANTHROPIC_API_KEY=tu_api_key_aqui
+export ANTHROPIC_MODEL=claude-3-haiku-20240307
 ```
-Sin API key, el chatbot funciona en modo demo mostrando los resultados de la búsqueda semántica.
-
-### 4. Ejecutar la aplicación
-```bash
-python app.py
-```
-
-Abre tu navegador en: **http://localhost:5000**
+Sin API key, el chatbot responde en modo local usando el contexto recuperado.
 
 ---
 
-## 🗂️ Estructura del proyecto
-
+## Ejecución y uso rápido
+```bash
+python app.py
 ```
-turismo_semantico/
+Abre tu navegador en **http://localhost:5000**.
+
+1. Pulsa **Cargar datos frescos (APIs)** o **Usar caché local**.
+2. Explora el mapa, el buscador semántico y el chatbot.
+3. Abre la sección **Grafo RDF** para ver tripletas.
+4. Ejecuta consultas en la **Consola SPARQL**.
+
+---
+
+## API REST
+
+| Método | Endpoint | Descripción |
+|--------|----------|-------------|
+| GET | `/` | Frontend principal |
+| GET | `/api/estado` | Estado de carga, OSM y embeddings |
+| POST | `/api/cargar` | Inicia carga (`{ forzar: true/false }`) |
+| GET | `/api/destinos` | Lista de destinos (`tipo`, `limite`) |
+| GET | `/api/buscar` | Búsqueda semántica (`q`, `k`) |
+| GET | `/api/clima` | Clima (`lat`, `lon`) |
+| GET | `/api/overpass` | POIs OSM por ciudad (`ciudad`, `radio`) |
+| POST | `/api/chat` | Chat RAG (`{ pregunta }`) |
+| GET | `/api/grafo` | Tripletas para visualización |
+| GET/POST | `/api/sparql` | SPARQL local (`q` o `{ query }`) |
+| GET | `/api/shacl` | Shapes SHACL de la ontología |
+| GET | `/api/ttl` | Descarga del grafo Turtle |
+
+---
+
+## Datos y caché
+- `data/destinos.json`: caché de destinos fusionados (Wikidata + OSM).
+- `data/grafo.ttl`: grafo RDF serializado en Turtle.
+- `chroma_db/`: persistencia de embeddings.
+
+Para forzar una regeneración completa:
+1. Pulsa **Cargar datos frescos**.
+2. (Opcional) elimina `data/` y `chroma_db/`.
+
+---
+
+## Estructura del proyecto
+```
+ProjectoFinal_MSW_TurismoSemantico/
 ├── app.py                    ← Servidor Flask (rutas y orquestación)
 ├── pipeline/
 │   ├── __init__.py
 │   ├── wikidata.py           ← Consultas SPARQL a Wikidata
-│   ├── overpass.py           ← OpenStreetMap Overpass API
-│   ├── weather.py            ← Open-Meteo (clima sin key)
-│   ├── rdf_model.py          ← Ontología RDF/OWL con rdflib
+│   ├── overpass.py           ← Overpass + Nominatim (OSM)
+│   ├── weather.py            ← Open‑Meteo (clima)
+│   ├── rdf_model.py          ← Ontología RDF/OWL + SHACL
 │   └── embeddings.py         ← ChromaDB + SentenceTransformers + RAG
 ├── templates/
 │   └── index.html            ← Frontend principal
 ├── static/
 │   ├── css/style.css
 │   └── js/app.js             ← Leaflet, D3.js, lógica frontend
-├── data/                     ← Caché de datos generada automáticamente
-└── requirements.txt
+├── data/
+│   ├── destinos.json         ← Caché de destinos fusionados
+│   └── grafo.ttl             ← Grafo RDF serializado
+├── chroma_db/                ← Persistencia de embeddings
+├── requirements.txt
+└── environment.yml
 ```
 
 ---
 
-## 🎯 Funcionalidades
-
-1. **Explorador Semántico** — Mapa Leaflet con destinos de Wikidata + OSM
-2. **Buscador Semántico** — SentenceTransformers + similitud del coseno
-3. **Chatbot RAG** — Pipeline: ChromaDB → contexto → LLM (Claude Haiku)
-4. **Grafo RDF** — Visualización D3.js de las tripletas + consola SPARQL local
-5. **Clima en tiempo real** — Open-Meteo para cualquier coordenada
-6. **POIs OSM** — Consulta Overpass en tiempo real por ciudad
+## Evaluación rápida
+1. Ejecuta `python app.py`.
+2. En la UI, pulsa **Cargar datos frescos (APIs)**.
+3. Verifica:
+	 - Mapa con destinos y filtros por tipo.
+	 - Búsqueda semántica con resultados y similitud.
+	 - Chatbot con respuesta basada en el contexto recuperado.
+	 - Grafo RDF con tripletas y descarga `.ttl`.
+	 - Consola SPARQL con consultas de ejemplo.
 
 ---
 
-## 🔗 Conexión con las prácticas del curso
+## Notas y troubleshooting
+- **Embeddings lentos**: la primera indexación puede tardar varios minutos en CPU.
+- **Sin spaCy**: el NER se desactiva, pero la búsqueda funciona igual.
+- **Sin Anthropic**: el chatbot responde en modo local con destinos recuperados.
+- **Sin datos**: si ves “Datos no cargados”, pulsa “Cargar datos frescos”.
+- **OSM lento**: Overpass puede responder lento; la carga OSM se completa en background.
+
+---
+
+## Conexión con las prácticas
 
 | Práctica | Tecnología usada en el proyecto |
 |----------|--------------------------------|
-| P1-P4    | XML/JSON en pipeline de ingesta |
-| P5       | Patrón API REST (3 APIs externas) |
+| P1-P4    | JSON en pipeline de ingesta y caché |
+| P5       | Patrón API REST (múltiples APIs externas) |
 | P6       | Ontología RDF/OWL en `rdf_model.py` |
-| P7       | SPARQL a Wikidata en `wikidata.py` + consola local |
-| P8       | Shapes SHACL definidas en `rdf_model.py` |
+| P7       | SPARQL a Wikidata + consola local |
+| P8       | Shapes SHACL en `rdf_model.py` |
 | P9       | NER con spaCy en `embeddings.py` |
 | P10      | Word Embeddings + similitud coseno |
-| P11      | RAG completo: ChromaDB + LLM |
+| P11      | RAG completo: ChromaDB + LLM opcional |
