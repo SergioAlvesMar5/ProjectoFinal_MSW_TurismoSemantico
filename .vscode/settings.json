@@ -1,0 +1,28 @@
+{
+  "latex-workshop.latex.tools": [
+    {
+      "name": "pdflatex-miktex",
+      "command": "C:/Users/Becario/AppData/Local/Programs/MiKTeX/miktex/bin/x64/pdflatex.exe",
+      "args": [
+        "-synctex=1",
+        "-interaction=nonstopmode",
+        "-file-line-error",
+        "-output-directory=%DIR%",
+        "%DOC%"
+      ]
+    }
+  ],
+  "latex-workshop.latex.recipes": [
+    {
+      "name": "pdflatex (MiKTeX) x2",
+      "tools": [
+        "pdflatex-miktex",
+        "pdflatex-miktex"
+      ]
+    }
+  ],
+  "latex-workshop.latex.recipe.default": "pdflatex (MiKTeX) x2",
+  "latex-workshop.view.pdf.viewer": "tab",
+  "latex-workshop.linting.chktex.enabled": true,
+  "latex-workshop.linting.chktex.exec.path": "C:/Users/Becario/AppData/Local/Programs/MiKTeX/miktex/bin/x64/chktex.exe"
+}

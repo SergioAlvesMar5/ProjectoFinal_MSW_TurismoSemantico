@@ -1,0 +1,11 @@
+\babel@toc {spanish}{}\relax 
+\contentsline {section}{Resumen ejecutivo y trazabilidad}{1}{section*.2}%
+\contentsline {section}{\numberline {1}Descripción del dominio elegido}{1}{section.1}%
+\contentsline {section}{\numberline {2}Fuentes de datos abiertas utilizadas}{1}{section.2}%
+\contentsline {section}{\numberline {3}Limpieza, integración y preprocesado}{2}{section.3}%
+\contentsline {section}{\numberline {4}Tecnologías propuestas y justificación}{2}{section.4}%
+\contentsline {section}{\numberline {5}Arquitectura del sistema}{2}{section.5}%
+\contentsline {section}{\numberline {6}Funcionalidades de la aplicación}{3}{section.6}%
+\contentsline {section}{\numberline {7}Diseño de la interfaz de usuario}{3}{section.7}%
+\contentsline {section}{\numberline {8}Evaluación y demostración}{4}{section.8}%
+\contentsline {section}{\numberline {9}Valoración técnica y conclusiones}{4}{section.9}%
