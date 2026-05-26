@@ -27,7 +27,7 @@ from pipeline import (
     get_destinos_patrimonio_unesco, get_museos_espana, get_destinos_para_embeddings,
     get_monumentos_ciudad, get_patrimonio_nacional,
     get_clima,
-    construir_ontologia, poblar_grafo, grafo_a_json, sparql_local, SHACL_SHAPES,
+    construir_ontologia, poblar_grafo, grafo_a_json, sparql_local, validar_shacl, SHACL_SHAPES,
     indexar_destinos, buscar_semantico, rag_pipeline, extraer_entidades,
 )
 
@@ -529,8 +529,16 @@ def api_sparql():
 
 @app.route("/api/shacl")
 def api_shacl():
-    """Devuelve las shapes SHACL definidas en la ontología."""
-    return jsonify({"shapes": SHACL_SHAPES})
+    """Devuelve las shapes SHACL y, opcionalmente, valida el grafo."""
+    payload = {"shapes": SHACL_SHAPES}
+    validar = request.args.get("validar", "").lower() in {"1", "true", "yes"}
+    if validar:
+        with data_lock:
+            g = grafo_global
+        if g is None:
+            return jsonify({"error": "Grafo no construido aún"}), 503
+        payload["validacion"] = validar_shacl(g)
+    return jsonify(payload)
 
 
 @app.route("/api/ttl")

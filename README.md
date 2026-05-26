@@ -138,13 +138,13 @@ Si no instalas el modelo, el NER se desactiva y el buscador sigue funcionando.
 ```bash
 # Windows:
 set ANTHROPIC_API_KEY=tu_api_key_aqui
-set ANTHROPIC_MODEL=claude-haiku-4-5-20251001
+set ANTHROPIC_MODEL=claude-3-5-haiku-20241022
 set FLASK_DEBUG=1
 set PORT=5000
 
 # Linux/Mac:
 export ANTHROPIC_API_KEY=tu_api_key_aqui
-export ANTHROPIC_MODEL=claude-haiku-4-5-20251001
+export ANTHROPIC_MODEL=claude-3-5-haiku-20241022
 export FLASK_DEBUG=1
 export PORT=5000
 ```
@@ -180,7 +180,7 @@ Abre tu navegador en **http://localhost:5000**.
 | POST | `/api/chat` | Chat RAG (`{ pregunta }`) |
 | GET | `/api/grafo` | Tripletas para visualización |
 | GET/POST | `/api/sparql` | SPARQL local (`q` o `{ query }`) |
-| GET | `/api/shacl` | Shapes SHACL de la ontología |
+| GET | `/api/shacl` | Shapes SHACL (`?validar=1` valida el grafo) |
 | GET | `/api/ttl` | Descarga del grafo Turtle |
 
 ---
@@ -239,6 +239,7 @@ ProjectoFinal_MSW_TurismoSemantico/
 - **Modelo de embeddings sin descargar o sin acceso a Hugging Face**: la app no se cae; activa búsqueda TF-IDF/Jaccard como fallback.
 - **Sin spaCy**: el NER se desactiva, pero la búsqueda funciona igual.
 - **Sin Anthropic**: el chatbot responde en modo local con destinos recuperados.
+- **Validación SHACL**: `/api/shacl?validar=1` usa pySHACL si está instalado y mantiene una comprobación local de fallback.
 - **Sin datos**: si ves “Datos no cargados”, pulsa “Cargar datos frescos”.
 - **OSM lento**: Overpass puede responder lento; la carga OSM se completa en background.
 - **Tras actualizar ChromaDB**: si el índice persistido no coincide con la versión instalada, elimina `chroma_db/` y vuelve a cargar datos para regenerarlo.

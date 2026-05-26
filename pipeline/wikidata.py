@@ -13,6 +13,13 @@ HEADERS = {
     "User-Agent": "TurismoSemantico/1.0 (universidad; proyecto academico)",
     "Accept": "application/sparql-results+json",
 }
+UNESCO_YEAR_FALLBACKS = {
+    # Wikidata marca estos recursos como UNESCO, pero no incluye fecha en la
+    # declaración directa. Se toma el año del bien UNESCO agregado.
+    "Q33200": "1984",
+    "Q98824936": "1993",
+    "Q131764534": "1998",
+}
 
 
 def _run_query(sparql: str, timeout: int = 20, max_retries: int = 1) -> tuple[list[dict], str | None]:
@@ -41,20 +48,45 @@ def _run_query(sparql: str, timeout: int = 20, max_retries: int = 1) -> tuple[li
     return [], last_err
 
 
+def _year_from_wikidata_value(value: str | None) -> str:
+    if not value:
+        return ""
+    value = str(value).strip()
+    if value.startswith("-"):
+        return ""
+    year = value[:4]
+    return year if year.isdigit() else ""
+
+
 def get_destinos_patrimonio_unesco(limit: int = 30) -> list[dict]:
     """
     Devuelve ciudades/sitios de España declarados Patrimonio UNESCO.
     Incluye: nombre, coordenadas, descripción corta, imagen, año de declaración.
     """
     query = f"""
-    SELECT DISTINCT ?lugar ?lugarLabel ?coord ?imagen ?descripcion ?anio WHERE {{
+    SELECT DISTINCT ?lugar ?lugarLabel ?coord ?imagen ?descripcion
+                    ?anioDirecto ?anioParte ?inicio WHERE {{
       ?lugar wdt:P17 wd:Q29 ;
              wdt:P1435 wd:Q9259 ;
              wdt:P625 ?coord .
       OPTIONAL {{ ?lugar wdt:P18 ?imagen . }}
       OPTIONAL {{ ?lugar schema:description ?descripcion .
                   FILTER(LANG(?descripcion) = "es") }}
-      OPTIONAL {{ ?lugar wdt:P571 ?anio . }}
+      OPTIONAL {{
+        ?lugar p:P1435 ?declaracion .
+        ?declaracion ps:P1435 wd:Q9259 .
+        OPTIONAL {{ ?declaracion pq:P580 ?anioDirecto . }}
+        OPTIONAL {{ ?declaracion pq:P585 ?anioDirecto . }}
+      }}
+      OPTIONAL {{
+        ?lugar (wdt:P361|wdt:P131)* ?bienAgregado .
+        FILTER(?bienAgregado != ?lugar)
+        ?bienAgregado p:P1435 ?declaracionAgregada .
+        ?declaracionAgregada ps:P1435 wd:Q9259 .
+        OPTIONAL {{ ?declaracionAgregada pq:P580 ?anioParte . }}
+        OPTIONAL {{ ?declaracionAgregada pq:P585 ?anioParte . }}
+      }}
+      OPTIONAL {{ ?lugar wdt:P571 ?inicio . }}
       SERVICE wikibase:label {{ bd:serviceParam wikibase:language "es,en". }}
     }}
     LIMIT {limit}
@@ -62,25 +94,35 @@ def get_destinos_patrimonio_unesco(limit: int = 30) -> list[dict]:
     rows, err = _run_query(query, timeout=25)
     if err:
         return []
-    results = []
+    results_by_id = {}
     for r in rows:
         try:
             coord_str = r["coord"]["value"]  # "Point(lon lat)"
             lon, lat = coord_str.replace("Point(", "").replace(")", "").split()
-            results.append({
-                "id": r["lugar"]["value"].split("/")[-1],
+            qid = r["lugar"]["value"].split("/")[-1]
+            year = (
+                _year_from_wikidata_value(r.get("anioDirecto", {}).get("value"))
+                or _year_from_wikidata_value(r.get("anioParte", {}).get("value"))
+                or UNESCO_YEAR_FALLBACKS.get(qid, "")
+                or _year_from_wikidata_value(r.get("inicio", {}).get("value"))
+            )
+            current = results_by_id.get(qid)
+            if current and current.get("anio_patrimonio"):
+                continue
+            results_by_id[qid] = {
+                "id": qid,
                 "nombre": r["lugarLabel"]["value"],
                 "lat": float(lat),
                 "lon": float(lon),
                 "imagen": r.get("imagen", {}).get("value", ""),
                 "descripcion": r.get("descripcion", {}).get("value", ""),
-                "anio_patrimonio": r.get("anio", {}).get("value", "")[:4] if r.get("anio") else "",
+                "anio_patrimonio": year,
                 "tipo": "patrimonio_unesco",
-                "wikidata_id": r["lugar"]["value"].split("/")[-1],
-            })
+                "wikidata_id": qid,
+            }
         except Exception:
             continue
-    return results
+    return list(results_by_id.values())
 
 
 def get_museos_espana(limit: int = 40) -> list[dict]:

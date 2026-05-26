@@ -478,6 +478,31 @@ async function cargarGrafo() {
   renderTripletasTabla(data.tripletas);
 }
 
+async function validarShacl() {
+  const cont = document.getElementById("shaclResultado");
+  cont.className = "shacl-result";
+  cont.textContent = "Validando SHACL…";
+
+  const data = await fetch("/api/shacl?validar=1").then(r => r.json()).catch(() => null);
+  if (!data) {
+    cont.className = "shacl-result error";
+    cont.textContent = "No se pudo validar el grafo.";
+    return;
+  }
+  if (data.error) {
+    cont.className = "shacl-result error";
+    cont.textContent = data.error;
+    return;
+  }
+
+  const val = data.validacion || {};
+  const total = val.violations?.length || 0;
+  cont.className = `shacl-result ${val.conforms ? "ok" : "error"}`;
+  cont.textContent = val.conforms
+    ? `SHACL correcto: el grafo cumple las shapes (${val.engine}).`
+    : `SHACL con ${total} incumplimiento(s). Revisa /api/shacl?validar=1 para el informe.`;
+}
+
 function renderGrafoD3(container, tripletas) {
   container.innerHTML = "";
   const W = container.clientWidth || 800;

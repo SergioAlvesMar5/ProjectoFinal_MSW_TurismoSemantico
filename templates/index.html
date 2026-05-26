@@ -225,11 +225,13 @@
            Ontología RDFS-Plus con clases, propiedades e inferencia.</p>
         <div class="grafo-controles">
           <button class="btn-sm" onclick="cargarGrafo()" aria-label="Cargar grafo RDF">↻ Cargar grafo</button>
+          <button class="btn-sm" onclick="validarShacl()" aria-label="Validar grafo con SHACL">✓ Validar SHACL</button>
           <a href="/api/ttl" class="btn-sm" download="grafo.ttl" aria-label="Descargar Turtle">⬇️ Descargar .ttl</a>
         </div>
       </div>
 
       <div class="grafo-stats" id="grafoStats" aria-live="polite"></div>
+      <div id="shaclResultado" class="shacl-result" aria-live="polite"></div>
 
       <!-- Leyenda de tipos -->
       <div class="leyenda-grafo">

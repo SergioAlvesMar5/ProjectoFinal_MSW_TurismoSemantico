@@ -6,3 +6,4 @@ sentence-transformers==5.5.1
 chromadb==1.5.9
 anthropic==0.104.1
 spacy==3.8.14
+pyshacl==0.31.0

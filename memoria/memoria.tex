@@ -232,7 +232,7 @@ La arquitectura es modular. El navegador consume una API REST Flask; el backend 
 \caption{Arquitectura funcional de \proyecto{}.}
 \end{figure}
 
-La API expone los endpoints principales: \texttt{/api/cargar}, \texttt{/api/estado}, \texttt{/api/destinos}, \texttt{/api/buscar}, \texttt{/api/chat}, \texttt{/api/grafo}, \texttt{/api/sparql}, \texttt{/api/shacl}, \texttt{/api/ttl}, \texttt{/api/clima} y \texttt{/api/overpass}. Esta separación permite que cada pantalla consuma solo los datos necesarios.
+La API expone los endpoints principales: \texttt{/api/cargar}, \texttt{/api/estado}, \texttt{/api/destinos}, \texttt{/api/buscar}, \texttt{/api/chat}, \texttt{/api/grafo}, \texttt{/api/sparql}, \texttt{/api/shacl}, \texttt{/api/ttl}, \texttt{/api/clima} y \texttt{/api/overpass}. \texttt{/api/shacl?validar=1} permite comprobar el grafo frente a las shapes. Esta separación permite que cada pantalla consuma solo los datos necesarios.
 
 \subsection*{Modelo semántico}
 

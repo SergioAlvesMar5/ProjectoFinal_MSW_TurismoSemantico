@@ -397,7 +397,7 @@ def _respuesta_local_rag(pregunta: str, destinos: list[dict]) -> str:
 
 def _llamar_llm(pregunta: str, contexto: str, destinos: list[dict]) -> str:
     """
-    Llama a la API de Anthropic (claude-haiku) con el contexto RAG.
+    Llama a la API de Anthropic con el contexto RAG.
     Si no hay API key disponible, genera una respuesta local con el contexto recuperado.
     """
     import os
@@ -423,7 +423,7 @@ Pregunta del usuario: {pregunta}
 Respuesta:"""
 
         msg = client.messages.create(
-            model=os.environ.get("ANTHROPIC_MODEL", "claude-haiku-4-5-20251001"),
+            model=os.environ.get("ANTHROPIC_MODEL", "claude-3-5-haiku-20241022"),
             max_tokens=512,
             messages=[{"role": "user", "content": prompt}],
         )

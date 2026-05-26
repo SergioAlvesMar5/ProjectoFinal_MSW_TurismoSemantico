@@ -41,7 +41,7 @@
 
 <http://turismo-semantico.es/destino/Q110524059> a ts:PatrimonioUNESCO,
         owl:NamedIndividual ;
-    ts:anioPatrimonio "1543"^^xsd:gYear ;
+    ts:anioPatrimonio "1998"^^xsd:gYear ;
     ts:descripcion "fachada de la Universidad de Alcalá (España)"@es ;
     ts:latitud 40.482921154 ;
     ts:longitud -3.363101495 ;
@@ -97,6 +97,7 @@
 
 <http://turismo-semantico.es/destino/Q11918155> a ts:PatrimonioUNESCO,
         owl:NamedIndividual ;
+    ts:anioPatrimonio "1999"^^xsd:gYear ;
     ts:descripcion "Patrimonio de la Humanidad de España"@es ;
     ts:latitud 38.91113889 ;
     ts:longitud 1.435194444 ;
@@ -143,6 +144,7 @@
 
 <http://turismo-semantico.es/destino/Q12386144> a ts:PatrimonioUNESCO,
         owl:NamedIndividual ;
+    ts:anioPatrimonio "1985"^^xsd:gYear ;
     ts:descripcion "Patrimonio de la Humanidad de España"@es ;
     ts:latitud 42.88076 ;
     ts:longitud -8.54468 ;
@@ -162,6 +164,7 @@
 
 <http://turismo-semantico.es/destino/Q131764534> a ts:PatrimonioUNESCO,
         owl:NamedIndividual ;
+    ts:anioPatrimonio "1998"^^xsd:gYear ;
     ts:latitud 40.394722222 ;
     ts:longitud -1.400555555 ;
     ts:nombre "Abrigo de Los Toros del Prado del Navazo"@es ;
@@ -171,7 +174,7 @@
 
 <http://turismo-semantico.es/destino/Q133575> a ts:PatrimonioUNESCO,
         owl:NamedIndividual ;
-    ts:anioPatrimonio "-130" ;
+    ts:anioPatrimonio "1985"^^xsd:gYear ;
     ts:descripcion "Cueva con pinturas rupestres en Santillana del Mar"@es ;
     ts:latitud 43.38333 ;
     ts:longitud -4.11667 ;
@@ -343,6 +346,7 @@
 
 <http://turismo-semantico.es/destino/Q1975533> a ts:PatrimonioUNESCO,
         owl:NamedIndividual ;
+    ts:anioPatrimonio "1998"^^xsd:gYear ;
     ts:latitud 39.79 ;
     ts:longitud -1.033333333 ;
     ts:nombre "Arte rupestre del arco mediterráneo de la Península Ibérica"@es ;
@@ -352,7 +356,7 @@
 
 <http://turismo-semantico.es/destino/Q211252> a ts:PatrimonioUNESCO,
         owl:NamedIndividual ;
-    ts:anioPatrimonio "1000"^^xsd:gYear ;
+    ts:anioPatrimonio "2018"^^xsd:gYear ;
     ts:descripcion "antigua ciudad palatina en Córdoba, España"@es ;
     ts:latitud 37.886080468 ;
     ts:longitud -4.867785472 ;
@@ -372,6 +376,7 @@
 
 <http://turismo-semantico.es/destino/Q2284354> a ts:PatrimonioUNESCO,
         owl:NamedIndividual ;
+    ts:anioPatrimonio "1997"^^xsd:gYear ;
     ts:descripcion "institución religiosa en España"@es ;
     ts:latitud 42.325833333 ;
     ts:longitud -2.86505 ;
@@ -400,6 +405,7 @@
 
 <http://turismo-semantico.es/destino/Q2733427> a ts:PatrimonioUNESCO,
         owl:NamedIndividual ;
+    ts:anioPatrimonio "2000"^^xsd:gYear ;
     ts:descripcion "muralla en Lugo, España"@es ;
     ts:latitud 43.014194444 ;
     ts:longitud -7.559888888 ;
@@ -427,7 +433,7 @@
 
 <http://turismo-semantico.es/destino/Q33200> a ts:PatrimonioUNESCO,
         owl:NamedIndividual ;
-    ts:anioPatrimonio "0786"^^xsd:gYear ;
+    ts:anioPatrimonio "1984"^^xsd:gYear ;
     ts:descripcion "edificio religioso, declarado Patrimonio Cultural de la Humanidad"@es ;
     ts:latitud 37.879194444 ;
     ts:longitud -4.779722222 ;
@@ -492,7 +498,7 @@
 
 <http://turismo-semantico.es/destino/Q463141> a ts:PatrimonioUNESCO,
         owl:NamedIndividual ;
-    ts:anioPatrimonio "1969"^^xsd:gYear ;
+    ts:anioPatrimonio "1994"^^xsd:gYear ;
     ts:descripcion "parque nacional de España"@es ;
     ts:latitud 37.02 ;
     ts:longitud -6.44 ;
@@ -602,7 +608,7 @@
 
 <http://turismo-semantico.es/destino/Q513893> a ts:PatrimonioUNESCO,
         owl:NamedIndividual ;
-    ts:anioPatrimonio "1171"^^xsd:gYear ;
+    ts:anioPatrimonio "1986"^^xsd:gYear ;
     ts:descripcion "templo católico de Aragón, (España)"@es ;
     ts:latitud 40.3439 ;
     ts:longitud -1.10722 ;
@@ -631,7 +637,7 @@
 
 <http://turismo-semantico.es/destino/Q54898> a ts:PatrimonioUNESCO,
         owl:NamedIndividual ;
-    ts:anioPatrimonio "1496"^^xsd:gYear ;
+    ts:anioPatrimonio "1999"^^xsd:gYear ;
     ts:descripcion "municipio situado en la provincia de Santa Cruz de Tenerife, en la isla de Tenerife del archipiélago de las Canarias, España"@es ;
     ts:latitud 28.485277777 ;
     ts:longitud -16.316666666 ;
@@ -714,6 +720,7 @@
 
 <http://turismo-semantico.es/destino/Q5769353> a ts:PatrimonioUNESCO,
         owl:NamedIndividual ;
+    ts:anioPatrimonio "1986"^^xsd:gYear ;
     ts:descripcion "Patrimonio de la humanidad"@es ;
     ts:latitud 41.654838 ;
     ts:longitud -0.875498 ;
@@ -787,7 +794,7 @@
 
 <http://turismo-semantico.es/destino/Q645157> a ts:PatrimonioUNESCO,
         owl:NamedIndividual ;
-    ts:anioPatrimonio "1150"^^xsd:gYear ;
+    ts:anioPatrimonio "1991"^^xsd:gYear ;
     ts:descripcion "bien de interés cultural en Tarragona, Cataluña, España"@es ;
     ts:latitud 41.380833333 ;
     ts:longitud 1.0825 ;
@@ -807,6 +814,7 @@
 
 <http://turismo-semantico.es/destino/Q64955212> a ts:PatrimonioUNESCO,
         owl:NamedIndividual ;
+    ts:anioPatrimonio "1997"^^xsd:gYear ;
     ts:descripcion "Patrimonio de la Humanidad de Barcelona, España"@es ;
     ts:latitud 41.38778 ;
     ts:longitud 2.175 ;
@@ -826,6 +834,7 @@
 
 <http://turismo-semantico.es/destino/Q696803> a ts:PatrimonioUNESCO,
         owl:NamedIndividual ;
+    ts:anioPatrimonio "1997"^^xsd:gYear ;
     ts:descripcion "yacimiento arqueológico en Borrenes y Carucedo, España"@es ;
     ts:latitud 42.458699 ;
     ts:longitud -6.759002 ;
@@ -919,6 +928,7 @@
 
 <http://turismo-semantico.es/destino/Q921745> a ts:PatrimonioUNESCO,
         owl:NamedIndividual ;
+    ts:anioPatrimonio "1984"^^xsd:gYear ;
     ts:descripcion "patrimonio de la Humanidad"@es ;
     ts:latitud 41.4 ;
     ts:longitud 2.15 ;
@@ -929,6 +939,7 @@
 
 <http://turismo-semantico.es/destino/Q930784> a ts:PatrimonioUNESCO,
         owl:NamedIndividual ;
+    ts:anioPatrimonio "2000"^^xsd:gYear ;
     ts:descripcion "palmeral histórico en Elche (España), inscrito en el Patrimonio Mundial de la UNESCO en 2000"@es ;
     ts:latitud 38.264444444 ;
     ts:longitud -0.690833333 ;
@@ -957,6 +968,7 @@
 
 <http://turismo-semantico.es/destino/Q98824936> a ts:PatrimonioUNESCO,
         owl:NamedIndividual ;
+    ts:anioPatrimonio "1993"^^xsd:gYear ;
     ts:descripcion "antigua basílica en Mérida (España)"@es ;
     ts:latitud 38.920352777 ;
     ts:longitud -6.341761111 ;
