@@ -4,69 +4,41 @@
 @prefix wd: <http://www.wikidata.org/entity/> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
-<http://turismo-semantico.es/destino/Q1031852> a ts:Museo,
+<http://turismo-semantico.es/destino/Q1026041> a ts:Museo,
         owl:NamedIndividual ;
-    ts:latitud 39.7679727 ;
-    ts:longitud 2.7181 ;
-    ts:nombre "Can Prunera"@es ;
-    ts:urlImagen "http://commons.wikimedia.org/wiki/Special:FilePath/080%20Can%20Prunera%2C%20c.%20Lluna%2090%20%28S%C3%B3ller%29.jpg"^^xsd:anyURI ;
-    ts:wikidataId "Q1031852" ;
-    owl:sameAs wd:Q1031852 .
+    ts:latitud 40.410905 ;
+    ts:longitud -3.692897 ;
+    ts:nombre "CaixaForum Madrid"@es ;
+    ts:urlImagen "http://commons.wikimedia.org/wiki/Special:FilePath/Caixaforum%20Madrid%202024.jpg"^^xsd:anyURI ;
+    ts:wikidataId "Q1026041" ;
+    owl:sameAs wd:Q1026041 .
 
-<http://turismo-semantico.es/destino/Q1049197> a ts:Museo,
+<http://turismo-semantico.es/destino/Q10588848> a ts:PatrimonioUNESCO,
         owl:NamedIndividual ;
-    ts:latitud 36.723222594 ;
-    ts:longitud -4.411637 ;
-    ts:nombre "Castillo de Gibralfaro"@es ;
-    ts:urlImagen "http://commons.wikimedia.org/wiki/Special:FilePath/M%C3%A1laga%20Gibralfaro%2002.jpg"^^xsd:anyURI ;
-    ts:wikidataId "Q1049197" ;
-    owl:sameAs wd:Q1049197 .
+    ts:anioPatrimonio "1985"^^xsd:gYear ;
+    ts:latitud 43.37888889 ;
+    ts:longitud -5.86583333 ;
+    ts:nombre "Monumentos de Oviedo y del Reino de Asturias"@es ;
+    ts:urlImagen "http://commons.wikimedia.org/wiki/Special:FilePath/Oviedo%20Iglesia%20de%20Santa%20Mar%C3%ADa%20del%20Naranco%20%2853035776074%29.jpg"^^xsd:anyURI ;
+    ts:wikidataId "Q10588848" ;
+    owl:sameAs wd:Q10588848 .
 
-<http://turismo-semantico.es/destino/Q1049274> a ts:Museo,
+<http://turismo-semantico.es/destino/Q10940111> a ts:Museo,
         owl:NamedIndividual ;
-    ts:latitud 28.14861111 ;
-    ts:longitud -15.42486111 ;
-    ts:nombre "Castillo de la Luz"@es ;
-    ts:urlImagen "http://commons.wikimedia.org/wiki/Special:FilePath/Castillo%20de%20la%20Luz%20D81%206161%20%2832252019751%29.jpg"^^xsd:anyURI ;
-    ts:wikidataId "Q1049274" ;
-    owl:sameAs wd:Q1049274 .
+    ts:latitud 42.140561111 ;
+    ts:longitud -0.408330555 ;
+    ts:nombre "Museo Diocesano de Huesca"@es ;
+    ts:urlImagen "http://commons.wikimedia.org/wiki/Special:FilePath/Catedral%20de%20Huesca%2C%20Museo%20Diocesano.JPG"^^xsd:anyURI ;
+    ts:wikidataId "Q10940111" ;
+    owl:sameAs wd:Q10940111 .
 
-<http://turismo-semantico.es/destino/Q107456458> a ts:Museo,
+<http://turismo-semantico.es/destino/Q113368084> a ts:Museo,
         owl:NamedIndividual ;
-    ts:latitud 38.2723 ;
-    ts:longitud -5.2088165 ;
-    ts:nombre "Museo Histórico de Belmez y del Territorio Minero"@es ;
-    ts:wikidataId "Q107456458" ;
-    owl:sameAs wd:Q107456458 .
-
-<http://turismo-semantico.es/destino/Q110524059> a ts:PatrimonioUNESCO,
-        owl:NamedIndividual ;
-    ts:anioPatrimonio "1998"^^xsd:gYear ;
-    ts:descripcion "fachada de la Universidad de Alcalá (España)"@es ;
-    ts:latitud 40.482921154 ;
-    ts:longitud -3.363101495 ;
-    ts:nombre "Fachada renacentista del Colegio Mayor San Ildefonso"@es ;
-    ts:urlImagen "http://commons.wikimedia.org/wiki/Special:FilePath/Alcal%C3%A1%20de%20Henares%20%28RPS%2008-08-2015%29%20Colegio%20Mayor%20de%20San%20Ildefonso%2C%20fachada.png"^^xsd:anyURI ;
-    ts:wikidataId "Q110524059" ;
-    owl:sameAs wd:Q110524059 .
-
-<http://turismo-semantico.es/destino/Q110656878> a ts:Museo,
-        owl:NamedIndividual ;
-    ts:latitud 40.96452298 ;
-    ts:longitud -5.661498039 ;
-    ts:nombre "Filmoteca de Castilla y León"@es ;
-    ts:urlImagen "http://commons.wikimedia.org/wiki/Special:FilePath/Filmoteca%20de%20Castilla%20y%20Le%C3%B3n%20%2830898362003%29%20v2.jpg"^^xsd:anyURI ;
-    ts:wikidataId "Q110656878" ;
-    owl:sameAs wd:Q110656878 .
-
-<http://turismo-semantico.es/destino/Q1126981> a ts:Museo,
-        owl:NamedIndividual ;
-    ts:latitud 41.41833333 ;
-    ts:longitud -2.79027778 ;
-    ts:nombre "Ermita de San Baudelio de Berlanga"@es ;
-    ts:urlImagen "http://commons.wikimedia.org/wiki/Special:FilePath/San%20Baudelio%20Frontal.jpg"^^xsd:anyURI ;
-    ts:wikidataId "Q1126981" ;
-    owl:sameAs wd:Q1126981 .
+    ts:latitud 41.90279731 ;
+    ts:longitud -1.725123111 ;
+    ts:nombre "Museo catedralicio de Tarazona"@es ;
+    ts:wikidataId "Q113368084" ;
+    owl:sameAs wd:Q113368084 .
 
 <http://turismo-semantico.es/destino/Q1148574> a ts:Destino,
         owl:NamedIndividual ;
@@ -77,34 +49,26 @@
     ts:wikidataId "Q1148574" ;
     owl:sameAs wd:Q1148574 .
 
-<http://turismo-semantico.es/destino/Q116059349> a ts:Museo,
+<http://turismo-semantico.es/destino/Q116442617> a ts:PatrimonioUNESCO,
         owl:NamedIndividual ;
-    ts:latitud 39.721044923 ;
-    ts:longitud 2.904558319 ;
-    ts:nombre "Museo de la Educación de las Islas Baleares"@es ;
-    ts:urlImagen "http://commons.wikimedia.org/wiki/Special:FilePath/Museu%20de%20l%27Educaci%C3%B3%20de%20les%20Balears.jpg"^^xsd:anyURI ;
-    ts:wikidataId "Q116059349" ;
-    owl:sameAs wd:Q116059349 .
+    ts:descripcion "ciudad española, capital del municipio homónimo"@es ;
+    ts:latitud 40.96882 ;
+    ts:longitud -5.66388 ;
+    ts:nombre "Salamanca"@es ;
+    ts:urlImagen "http://commons.wikimedia.org/wiki/Special:FilePath/68435-Salamanca%20%2849093003248%29.jpg"^^xsd:anyURI ;
+    ts:wikidataId "Q116442617" ;
+    owl:sameAs wd:Q116442617 .
 
-<http://turismo-semantico.es/destino/Q11914754> a ts:Museo,
+<http://turismo-semantico.es/destino/Q118371878> a ts:PatrimonioUNESCO,
         owl:NamedIndividual ;
-    ts:latitud 41.83381111 ;
-    ts:longitud 2.75703056 ;
-    ts:nombre "Col·lecció d'Automòbils Salvador Claret"@es ;
-    ts:urlImagen "http://commons.wikimedia.org/wiki/Special:FilePath/Spanien%20Sils%20Museumsgeb%C3%A4ude.JPG"^^xsd:anyURI ;
-    ts:wikidataId "Q11914754" ;
-    owl:sameAs wd:Q11914754 .
-
-<http://turismo-semantico.es/destino/Q11918155> a ts:PatrimonioUNESCO,
-        owl:NamedIndividual ;
-    ts:anioPatrimonio "1999"^^xsd:gYear ;
-    ts:descripcion "Patrimonio de la Humanidad de España"@es ;
-    ts:latitud 38.91113889 ;
-    ts:longitud 1.435194444 ;
-    ts:nombre "Ibiza"@es ;
-    ts:urlImagen "http://commons.wikimedia.org/wiki/Special:FilePath/ForbysIbizaTown%2002.jpg"^^xsd:anyURI ;
-    ts:wikidataId "Q11918155" ;
-    owl:sameAs wd:Q11918155 .
+    ts:anioPatrimonio "1998"^^xsd:gYear ;
+    ts:descripcion "patio principal de la Universidad de Alcalá"@es ;
+    ts:latitud 40.482617 ;
+    ts:longitud -3.362955 ;
+    ts:nombre "Patio de Santo Tomás de Villanueva del Colegio Mayor de San Ildefonso"@es ;
+    ts:urlImagen "http://commons.wikimedia.org/wiki/Special:FilePath/Alcal%C3%A1%20de%20Henares%20%28C%C3%A1novas%20ca.%201905%29%20patio%20de%20Santo%20Tom%C3%A1s%20de%20Villanueva%20de%20la%20Universidad.png"^^xsd:anyURI ;
+    ts:wikidataId "Q118371878" ;
+    owl:sameAs wd:Q118371878 .
 
 <http://turismo-semantico.es/destino/Q11959> a ts:Destino,
         owl:NamedIndividual ;
@@ -124,15 +88,6 @@
     ts:wikidataId "Q11994" ;
     owl:sameAs wd:Q11994 .
 
-<http://turismo-semantico.es/destino/Q12257480> a ts:Museo,
-        owl:NamedIndividual ;
-    ts:latitud 43.311435 ;
-    ts:longitud -3.07006 ;
-    ts:nombre "Museo de la Minería del País Vasco"@es ;
-    ts:urlImagen "http://commons.wikimedia.org/wiki/Special:FilePath/Abanto%20Zierbena%20-%20Museo%20de%20la%20Miner%C3%ADa%20del%20Pa%C3%ADs%20Vasco%2001.jpg"^^xsd:anyURI ;
-    ts:wikidataId "Q12257480" ;
-    owl:sameAs wd:Q12257480 .
-
 <http://turismo-semantico.es/destino/Q12292> a ts:Destino,
         owl:NamedIndividual ;
     ts:descripcion "municipio de la provincia de Castellón, España"@es ;
@@ -149,18 +104,36 @@
     ts:latitud 42.88076 ;
     ts:longitud -8.54468 ;
     ts:nombre "casco viejo de Santiago de Compostela"@es ;
-    ts:urlImagen "http://commons.wikimedia.org/wiki/Special:FilePath/Catedral%20de%20Santiago%20de%20Compostela%20agosto%202018%20%28cropped%29.jpg"^^xsd:anyURI ;
+    ts:urlImagen "http://commons.wikimedia.org/wiki/Special:FilePath/Bas%C3%ADlica%20de%20Santiago%2002.JPG"^^xsd:anyURI ;
     ts:wikidataId "Q12386144" ;
     owl:sameAs wd:Q12386144 .
 
-<http://turismo-semantico.es/destino/Q12393758> a ts:Museo,
+<http://turismo-semantico.es/destino/Q125887226> a ts:Museo,
         owl:NamedIndividual ;
-    ts:latitud 43.0092 ;
-    ts:longitud -7.5583 ;
-    ts:nombre "Museo Diocesano Catedralicio de Lugo"@es ;
-    ts:urlImagen "http://commons.wikimedia.org/wiki/Special:FilePath/Catedral%20de%20Lugo..JPG"^^xsd:anyURI ;
-    ts:wikidataId "Q12393758" ;
-    owl:sameAs wd:Q12393758 .
+    ts:latitud 43.428222 ;
+    ts:longitud -7.363111 ;
+    ts:nombre "Museo Diocesano e Catedralicio de Mondoñedo"@es ;
+    ts:wikidataId "Q125887226" ;
+    owl:sameAs wd:Q125887226 .
+
+<http://turismo-semantico.es/destino/Q127413732> a ts:PatrimonioUNESCO,
+        owl:NamedIndividual ;
+    ts:anioPatrimonio "1998"^^xsd:gYear ;
+    ts:descripcion "conjunto de edificios universitarios en la ciudad de Alcalá de Henares"@es ;
+    ts:latitud 40.482902981 ;
+    ts:longitud -3.363085438 ;
+    ts:nombre "Campus de Alcalá de Henares, Universidad de Alcalá"@es ;
+    ts:urlImagen "http://commons.wikimedia.org/wiki/Special:FilePath/Alcal%C3%A1%20de%20Henares%20%28RPS%2008-08-2015%29%20Colegio%20Mayor%20de%20San%20Ildefonso%2C%20fachada.png"^^xsd:anyURI ;
+    ts:wikidataId "Q127413732" ;
+    owl:sameAs wd:Q127413732 .
+
+<http://turismo-semantico.es/destino/Q13147185> a ts:Museo,
+        owl:NamedIndividual ;
+    ts:latitud 43.359680555 ;
+    ts:longitud -5.846888888 ;
+    ts:nombre "Filmoteca de Asturias"@es ;
+    ts:wikidataId "Q13147185" ;
+    owl:sameAs wd:Q13147185 .
 
 <http://turismo-semantico.es/destino/Q131764534> a ts:PatrimonioUNESCO,
         owl:NamedIndividual ;
@@ -176,12 +149,21 @@
         owl:NamedIndividual ;
     ts:anioPatrimonio "1985"^^xsd:gYear ;
     ts:descripcion "Cueva con pinturas rupestres en Santillana del Mar"@es ;
-    ts:latitud 43.38333 ;
-    ts:longitud -4.11667 ;
+    ts:latitud 43.376944444 ;
+    ts:longitud -4.11975 ;
     ts:nombre "Cueva de Altamira"@es ;
     ts:urlImagen "http://commons.wikimedia.org/wiki/Special:FilePath/Techo%20de%20Altamira%20%28replica%29-Museo%20Arqueol%C3%B3gico%20Nacional.jpg"^^xsd:anyURI ;
     ts:wikidataId "Q133575" ;
     owl:sameAs wd:Q133575 .
+
+<http://turismo-semantico.es/destino/Q137211109> a ts:Museo,
+        owl:NamedIndividual ;
+    ts:latitud 42.341062156 ;
+    ts:longitud -3.703852774 ;
+    ts:nombre "Museo de la catedral de Burgos"@es ;
+    ts:urlImagen "http://commons.wikimedia.org/wiki/Special:FilePath/Retablo%20mayor%20de%20Santiago%2C%20Fernando%20Gonz%C3%A1lez%20de%20Lara.jpg"^^xsd:anyURI ;
+    ts:wikidataId "Q137211109" ;
+    owl:sameAs wd:Q137211109 .
 
 <http://turismo-semantico.es/destino/Q13939> a ts:Destino,
         owl:NamedIndividual ;
@@ -210,14 +192,16 @@
     ts:wikidataId "Q15092" ;
     owl:sameAs wd:Q15092 .
 
-<http://turismo-semantico.es/destino/Q15121263> a ts:Museo,
+<http://turismo-semantico.es/destino/Q15126978> a ts:PatrimonioUNESCO,
         owl:NamedIndividual ;
-    ts:latitud 40.42444444 ;
-    ts:longitud -3.69138889 ;
-    ts:nombre "Museo de Cera de Madrid"@es ;
-    ts:urlImagen "http://commons.wikimedia.org/wiki/Special:FilePath/Entrada%20al%20Museo%20de%20Cera%20%284300311860%29%20%28cropped%29.jpg"^^xsd:anyURI ;
-    ts:wikidataId "Q15121263" ;
-    owl:sameAs wd:Q15121263 .
+    ts:anioPatrimonio "1993"^^xsd:gYear ;
+    ts:descripcion "Iglesia en Alastuey, España"@es ;
+    ts:latitud 42.521027777 ;
+    ts:longitud -0.759666666 ;
+    ts:nombre "Iglesia de San Miguel de Alastuey"@es ;
+    ts:urlImagen "http://commons.wikimedia.org/wiki/Special:FilePath/Alastuey%20iglesia.jpg"^^xsd:anyURI ;
+    ts:wikidataId "Q15126978" ;
+    owl:sameAs wd:Q15126978 .
 
 <http://turismo-semantico.es/destino/Q1526659> a ts:Destino,
         owl:NamedIndividual ;
@@ -246,15 +230,6 @@
     ts:wikidataId "Q15640" ;
     owl:sameAs wd:Q15640 .
 
-<http://turismo-semantico.es/destino/Q15679> a ts:Destino,
-        owl:NamedIndividual ;
-    ts:descripcion "capital de la provincia de Badajoz, Extremadura, España"@es ;
-    ts:latitud 38.87789 ;
-    ts:longitud -6.970609 ;
-    ts:nombre "Badajoz"@es ;
-    ts:wikidataId "Q15679" ;
-    owl:sameAs wd:Q15679 .
-
 <http://turismo-semantico.es/destino/Q15684> a ts:Destino,
         owl:NamedIndividual ;
     ts:descripcion "municipio de la provincia de Segovia, Castilla y León, España"@es ;
@@ -273,14 +248,16 @@
     ts:wikidataId "Q15688" ;
     owl:sameAs wd:Q15688 .
 
-<http://turismo-semantico.es/destino/Q1583169> a ts:Museo,
+<http://turismo-semantico.es/destino/Q15728389> a ts:PatrimonioUNESCO,
         owl:NamedIndividual ;
-    ts:latitud 40.460111111 ;
-    ts:longitud -3.60605 ;
-    ts:nombre "Parque Juan Carlos I"@es ;
-    ts:urlImagen "http://commons.wikimedia.org/wiki/Special:FilePath/Parque%20Juan%20Carlos%20I%20view03.jpg"^^xsd:anyURI ;
-    ts:wikidataId "Q1583169" ;
-    owl:sameAs wd:Q1583169 .
+    ts:anioPatrimonio "1985"^^xsd:gYear ;
+    ts:descripcion "El acueducto romano de Segovia se conserva excepcionalmente intacto se inserta en el marco de la ciudad histórica, donde se pueden admirar otros soberbios monumentos como el Alcázar, cuya construcción se inició en el siglo XI, y la catedral gótica."@es ;
+    ts:latitud 40.94847222 ;
+    ts:longitud -4.11675 ;
+    ts:nombre "Ciudad vieja y acueducto de Segovia"@es ;
+    ts:urlImagen "http://commons.wikimedia.org/wiki/Special:FilePath/Aqueduct%20of%20Segovia%2008.jpg"^^xsd:anyURI ;
+    ts:wikidataId "Q15728389" ;
+    owl:sameAs wd:Q15728389 .
 
 <http://turismo-semantico.es/destino/Q161945> a ts:Destino,
         owl:NamedIndividual ;
@@ -309,81 +286,69 @@
     ts:wikidataId "Q164197" ;
     owl:sameAs wd:Q164197 .
 
-<http://turismo-semantico.es/destino/Q1658710> a ts:Museo,
+<http://turismo-semantico.es/destino/Q16481802> a ts:Museo,
         owl:NamedIndividual ;
-    ts:latitud 42.44 ;
-    ts:longitud -8.633889 ;
-    ts:nombre "Isla de las Esculturas"@es ;
-    ts:urlImagen "http://commons.wikimedia.org/wiki/Special:FilePath/Pontevedra%20capital%20Parque%20de%20la%20Isla%20de%20las%20Esculturas%2C%20entrada%20principal.jpg"^^xsd:anyURI ;
-    ts:wikidataId "Q1658710" ;
-    owl:sameAs wd:Q1658710 .
+    ts:latitud 42.571066 ;
+    ts:longitud -0.549041 ;
+    ts:nombre "Museo Diocesano de Jaca"@es ;
+    ts:urlImagen "http://commons.wikimedia.org/wiki/Special:FilePath/Jaca%20-%20Catedral%2C%20claustro%20y%20Museo%20Diocesano%2003.jpg"^^xsd:anyURI ;
+    ts:wikidataId "Q16481802" ;
+    owl:sameAs wd:Q16481802 .
 
-<http://turismo-semantico.es/destino/Q17043323> a ts:Museo,
+<http://turismo-semantico.es/destino/Q16545882> a ts:Museo,
         owl:NamedIndividual ;
-    ts:latitud 39.7977 ;
-    ts:longitud 2.69145 ;
-    ts:nombre "Museo del Mar"@es ;
-    ts:urlImagen "http://commons.wikimedia.org/wiki/Special:FilePath/MuseudelaMar.jpg"^^xsd:anyURI ;
-    ts:wikidataId "Q17043323" ;
-    owl:sameAs wd:Q17043323 .
+    ts:latitud 43.420693 ;
+    ts:longitud -6.822784 ;
+    ts:nombre "Centro de Interpretación de la Emigración e Instrucción Pública"@es ;
+    ts:wikidataId "Q16545882" ;
+    owl:sameAs wd:Q16545882 .
 
-<http://turismo-semantico.es/destino/Q17578641> a ts:Museo,
+<http://turismo-semantico.es/destino/Q16609717> a ts:Museo,
         owl:NamedIndividual ;
-    ts:latitud 39.568042 ;
-    ts:longitud 2.64814 ;
-    ts:nombre "Q17578641"@es ;
-    ts:wikidataId "Q17578641" ;
-    owl:sameAs wd:Q17578641 .
+    ts:latitud 41.65552 ;
+    ts:longitud -0.87556 ;
+    ts:nombre "Alma Mater Museum"@es ;
+    ts:urlImagen "http://commons.wikimedia.org/wiki/Special:FilePath/Elisabeth%2C%20mother%20of%20John%20the%20Baptist%20-%20Master%20from%20Villalcazar%20de%20Sirga.JPG"^^xsd:anyURI ;
+    ts:wikidataId "Q16609717" ;
+    owl:sameAs wd:Q16609717 .
 
-<http://turismo-semantico.es/destino/Q18810179> a ts:Museo,
+<http://turismo-semantico.es/destino/Q16647402> a ts:Destino,
         owl:NamedIndividual ;
-    ts:latitud 42.237861111 ;
-    ts:longitud -8.726027777 ;
-    ts:nombre "Pinacoteca Francisco Fernández del Riego"@es ;
-    ts:urlImagen "http://commons.wikimedia.org/wiki/Special:FilePath/Pinacoteca%20Francisco%20Fern%C3%A1ndez%20del%20Riego.jpg"^^xsd:anyURI ;
-    ts:wikidataId "Q18810179" ;
-    owl:sameAs wd:Q18810179 .
+    ts:descripcion "via del portico  en Sagunt"@es ;
+    ts:latitud 39.679770469 ;
+    ts:longitud -0.272713641 ;
+    ts:nombre "Vía del Pòrtic"@es ;
+    ts:wikidataId "Q16647402" ;
+    owl:sameAs wd:Q16647402 .
 
-<http://turismo-semantico.es/destino/Q1975533> a ts:PatrimonioUNESCO,
+<http://turismo-semantico.es/destino/Q17255635> a ts:PatrimonioUNESCO,
         owl:NamedIndividual ;
-    ts:anioPatrimonio "1998"^^xsd:gYear ;
-    ts:latitud 39.79 ;
-    ts:longitud -1.033333333 ;
-    ts:nombre "Arte rupestre del arco mediterráneo de la Península Ibérica"@es ;
-    ts:urlImagen "http://commons.wikimedia.org/wiki/Special:FilePath/Arte%20rupestre%20arco%20mediterraneo.png"^^xsd:anyURI ;
-    ts:wikidataId "Q1975533" ;
-    owl:sameAs wd:Q1975533 .
+    ts:anioPatrimonio "1986"^^xsd:gYear ;
+    ts:descripcion "zona descrita como Patrimonio de la Humanidad"@es ;
+    ts:latitud 39.856901 ;
+    ts:longitud -4.024613 ;
+    ts:nombre "Ciudad Histórica de Toledo"@es ;
+    ts:urlImagen "http://commons.wikimedia.org/wiki/Special:FilePath/Toledo%20-%2002.jpg"^^xsd:anyURI ;
+    ts:wikidataId "Q17255635" ;
+    owl:sameAs wd:Q17255635 .
 
-<http://turismo-semantico.es/destino/Q211252> a ts:PatrimonioUNESCO,
+<http://turismo-semantico.es/destino/Q17279793> a ts:Museo,
         owl:NamedIndividual ;
-    ts:anioPatrimonio "2018"^^xsd:gYear ;
+    ts:latitud 43.388555555 ;
+    ts:longitud -4.108916666 ;
+    ts:nombre "Museo Diocesano Regina Coeli (Cantabria)"@es ;
+    ts:urlImagen "http://commons.wikimedia.org/wiki/Special:FilePath/Museo%20Diocesano%20Regina%20Coeli%20-%20Santillana%20del%20Mar%20-%20panoramio.jpg"^^xsd:anyURI ;
+    ts:wikidataId "Q17279793" ;
+    owl:sameAs wd:Q17279793 .
+
+<http://turismo-semantico.es/destino/Q211252> a ts:Destino,
+        owl:NamedIndividual ;
     ts:descripcion "antigua ciudad palatina en Córdoba, España"@es ;
     ts:latitud 37.886080468 ;
     ts:longitud -4.867785472 ;
     ts:nombre "Madinat Al-Zahra"@es ;
-    ts:urlImagen "http://commons.wikimedia.org/wiki/Special:FilePath/Madinat%20al-Zahra%20%2852019329474%29.jpg"^^xsd:anyURI ;
     ts:wikidataId "Q211252" ;
     owl:sameAs wd:Q211252 .
-
-<http://turismo-semantico.es/destino/Q212867> a ts:Museo,
-        owl:NamedIndividual ;
-    ts:latitud 41.413611111 ;
-    ts:longitud 2.152777777 ;
-    ts:nombre "Park Güell"@es ;
-    ts:urlImagen "http://commons.wikimedia.org/wiki/Special:FilePath/Outdoor-architecture-structure-palace-europe-museum-829420.jpg"^^xsd:anyURI ;
-    ts:wikidataId "Q212867" ;
-    owl:sameAs wd:Q212867 .
-
-<http://turismo-semantico.es/destino/Q2284354> a ts:PatrimonioUNESCO,
-        owl:NamedIndividual ;
-    ts:anioPatrimonio "1997"^^xsd:gYear ;
-    ts:descripcion "institución religiosa en España"@es ;
-    ts:latitud 42.325833333 ;
-    ts:longitud -2.86505 ;
-    ts:nombre "Monasterio de San Millán de la Cogolla"@es ;
-    ts:urlImagen "http://commons.wikimedia.org/wiki/Special:FilePath/Monasterio%20de%20Suso%20%282%29.jpg"^^xsd:anyURI ;
-    ts:wikidataId "Q2284354" ;
-    owl:sameAs wd:Q2284354 .
 
 <http://turismo-semantico.es/destino/Q244747> a ts:Destino,
         owl:NamedIndividual ;
@@ -403,24 +368,23 @@
     ts:wikidataId "Q249941" ;
     owl:sameAs wd:Q249941 .
 
-<http://turismo-semantico.es/destino/Q2733427> a ts:PatrimonioUNESCO,
+<http://turismo-semantico.es/destino/Q27309108> a ts:Museo,
         owl:NamedIndividual ;
-    ts:anioPatrimonio "2000"^^xsd:gYear ;
-    ts:descripcion "muralla en Lugo, España"@es ;
-    ts:latitud 43.014194444 ;
-    ts:longitud -7.559888888 ;
-    ts:nombre "Muralla romana de Lugo"@es ;
-    ts:urlImagen "http://commons.wikimedia.org/wiki/Special:FilePath/Lugo%202023%20-%20Roman%20Walls.jpg"^^xsd:anyURI ;
-    ts:wikidataId "Q2733427" ;
-    owl:sameAs wd:Q2733427 .
+    ts:latitud 37.17579255 ;
+    ts:longitud -3.598674227 ;
+    ts:nombre "Centro José Guerrero"@es ;
+    ts:urlImagen "http://commons.wikimedia.org/wiki/Special:FilePath/Centro%20Jos%C3%A9%20Guerrero%20-%20IMG%2020250918%20200008.jpg"^^xsd:anyURI ;
+    ts:wikidataId "Q27309108" ;
+    owl:sameAs wd:Q27309108 .
 
-<http://turismo-semantico.es/destino/Q284916> a ts:Museo,
+<http://turismo-semantico.es/destino/Q29961308> a ts:Museo,
         owl:NamedIndividual ;
-    ts:latitud 41.388388888 ;
-    ts:longitud 2.117027777 ;
-    ts:nombre "Gabinete de las Artes Gráficas"@es ;
-    ts:wikidataId "Q284916" ;
-    owl:sameAs wd:Q284916 .
+    ts:latitud 42.599444444 ;
+    ts:longitud -5.566666666 ;
+    ts:nombre "Museo Catedralicio Diocesano de León"@es ;
+    ts:urlImagen "http://commons.wikimedia.org/wiki/Special:FilePath/Museo%20catedralicio-diocesano.jpg"^^xsd:anyURI ;
+    ts:wikidataId "Q29961308" ;
+    owl:sameAs wd:Q29961308 .
 
 <http://turismo-semantico.es/destino/Q302099> a ts:Destino,
         owl:NamedIndividual ;
@@ -430,26 +394,6 @@
     ts:nombre "Requena"@es ;
     ts:wikidataId "Q302099" ;
     owl:sameAs wd:Q302099 .
-
-<http://turismo-semantico.es/destino/Q33200> a ts:PatrimonioUNESCO,
-        owl:NamedIndividual ;
-    ts:anioPatrimonio "1984"^^xsd:gYear ;
-    ts:descripcion "edificio religioso, declarado Patrimonio Cultural de la Humanidad"@es ;
-    ts:latitud 37.879194444 ;
-    ts:longitud -4.779722222 ;
-    ts:nombre "Mezquita-catedral de Córdoba"@es ;
-    ts:urlImagen "http://commons.wikimedia.org/wiki/Special:FilePath/Mezquita%20de%20C%C3%B3rdoba%20desde%20el%20aire%20%28C%C3%B3rdoba%2C%20Espa%C3%B1a%29.jpg"^^xsd:anyURI ;
-    ts:wikidataId "Q33200" ;
-    owl:sameAs wd:Q33200 .
-
-<http://turismo-semantico.es/destino/Q3329927> a ts:Museo,
-        owl:NamedIndividual ;
-    ts:latitud 40.3573 ;
-    ts:longitud 0.408195 ;
-    ts:nombre "Museo del Mar (Peñíscola)"@es ;
-    ts:urlImagen "http://commons.wikimedia.org/wiki/Special:FilePath/Museu%20de%20la%20Mar%2C%20Peniscola%2009.JPG"^^xsd:anyURI ;
-    ts:wikidataId "Q3329927" ;
-    owl:sameAs wd:Q3329927 .
 
 <http://turismo-semantico.es/destino/Q3552479> a ts:Destino,
         owl:NamedIndividual ;
@@ -469,15 +413,6 @@
     ts:wikidataId "Q373865" ;
     owl:sameAs wd:Q373865 .
 
-<http://turismo-semantico.es/destino/Q386570> a ts:Museo,
-        owl:NamedIndividual ;
-    ts:latitud 40.436911 ;
-    ts:longitud -3.685848 ;
-    ts:nombre "Museo Lázaro Galdiano"@es ;
-    ts:urlImagen "http://commons.wikimedia.org/wiki/Special:FilePath/Museo%20L%C3%A1zaro%20Galdiano%20%28Madrid%29%2005.jpg"^^xsd:anyURI ;
-    ts:wikidataId "Q386570" ;
-    owl:sameAs wd:Q386570 .
-
 <http://turismo-semantico.es/destino/Q3867196> a ts:Destino,
         owl:NamedIndividual ;
     ts:descripcion "bien de interés cultural"@es ;
@@ -487,25 +422,35 @@
     ts:wikidataId "Q3867196" ;
     owl:sameAs wd:Q3867196 .
 
-<http://turismo-semantico.es/destino/Q429192> a ts:Museo,
+<http://turismo-semantico.es/destino/Q39081159> a ts:PatrimonioUNESCO,
         owl:NamedIndividual ;
-    ts:latitud 37.175986111 ;
-    ts:longitud -3.599036111 ;
-    ts:nombre "Capilla Real de Granada"@es ;
-    ts:urlImagen "http://commons.wikimedia.org/wiki/Special:FilePath/Royal%20Chapel%20of%20Granada%20%28Spain%29.jpg"^^xsd:anyURI ;
-    ts:wikidataId "Q429192" ;
-    owl:sameAs wd:Q429192 .
+    ts:anioPatrimonio "1993"^^xsd:gYear ;
+    ts:latitud 43.335 ;
+    ts:longitud -6.414722 ;
+    ts:nombre "Caminos de Santiago de Compostela: Camino francés y Caminos del Norte de España"@es ;
+    ts:urlImagen "http://commons.wikimedia.org/wiki/Special:FilePath/Camino%20Primitivo%20%281433111595%29.jpg"^^xsd:anyURI ;
+    ts:wikidataId "Q39081159" ;
+    owl:sameAs wd:Q39081159 .
 
-<http://turismo-semantico.es/destino/Q463141> a ts:PatrimonioUNESCO,
+<http://turismo-semantico.es/destino/Q464942> a ts:PatrimonioUNESCO,
         owl:NamedIndividual ;
-    ts:anioPatrimonio "1994"^^xsd:gYear ;
-    ts:descripcion "parque nacional de España"@es ;
-    ts:latitud 37.02 ;
-    ts:longitud -6.44 ;
-    ts:nombre "Parque Nacional de Doñana"@es ;
-    ts:urlImagen "http://commons.wikimedia.org/wiki/Special:FilePath/Vista%20de%20las%20marismas%20del%20Parque%20Do%C3%B1ana.jpg"^^xsd:anyURI ;
-    ts:wikidataId "Q463141" ;
-    owl:sameAs wd:Q463141 .
+    ts:anioPatrimonio "1986"^^xsd:gYear ;
+    ts:descripcion "parque nacional en España"@es ;
+    ts:latitud 28.12625 ;
+    ts:longitud -17.23722222 ;
+    ts:nombre "Parque nacional de Garajonay"@es ;
+    ts:urlImagen "http://commons.wikimedia.org/wiki/Special:FilePath/Bosque%20Encantado%2C%20Parque%20nacional%20de%20Garajonay%2C%20La%20Gomera%2C%20Espa%C3%B1a%2C%202012-12-14%2C%20DD%2019.jpg"^^xsd:anyURI ;
+    ts:wikidataId "Q464942" ;
+    owl:sameAs wd:Q464942 .
+
+<http://turismo-semantico.es/destino/Q4745109> a ts:Destino,
+        owl:NamedIndividual ;
+    ts:descripcion "bien de interés cultural"@es ;
+    ts:latitud 37.754514248 ;
+    ts:longitud -4.377538357 ;
+    ts:nombre "Torreparedones"@es ;
+    ts:wikidataId "Q4745109" ;
+    owl:sameAs wd:Q4745109 .
 
 <http://turismo-semantico.es/destino/Q486792> a ts:Destino,
         owl:NamedIndividual ;
@@ -543,15 +488,6 @@
     ts:wikidataId "Q487981" ;
     owl:sameAs wd:Q487981 .
 
-<http://turismo-semantico.es/destino/Q4890124> a ts:Destino,
-        owl:NamedIndividual ;
-    ts:descripcion "Destino turístico en España: Virovesca"@es ;
-    ts:latitud 42.54166667 ;
-    ts:longitud -3.32527778 ;
-    ts:nombre "Virovesca"@es ;
-    ts:wikidataId "Q4890124" ;
-    owl:sameAs wd:Q4890124 .
-
 <http://turismo-semantico.es/destino/Q4894418> a ts:Museo,
         owl:NamedIndividual ;
     ts:latitud 41.378666666 ;
@@ -560,15 +496,6 @@
     ts:urlImagen "http://commons.wikimedia.org/wiki/Special:FilePath/Filmoteca%20de%20Catalunya-seu%20Raval.JPG"^^xsd:anyURI ;
     ts:wikidataId "Q4894418" ;
     owl:sameAs wd:Q4894418 .
-
-<http://turismo-semantico.es/destino/Q4897297> a ts:Museo,
-        owl:NamedIndividual ;
-    ts:latitud 42.357222222 ;
-    ts:longitud 1.461944444 ;
-    ts:nombre "Museo Diocesano de Urgel"@es ;
-    ts:urlImagen "http://commons.wikimedia.org/wiki/Special:FilePath/Catedral%20de%20La%20Seu%20d%C2%B4Urgell.jpg"^^xsd:anyURI ;
-    ts:wikidataId "Q4897297" ;
-    owl:sameAs wd:Q4897297 .
 
 <http://turismo-semantico.es/destino/Q494693> a ts:Destino,
         owl:NamedIndividual ;
@@ -606,25 +533,14 @@
     ts:wikidataId "Q5039690" ;
     owl:sameAs wd:Q5039690 .
 
-<http://turismo-semantico.es/destino/Q513893> a ts:PatrimonioUNESCO,
+<http://turismo-semantico.es/destino/Q5062834> a ts:Museo,
         owl:NamedIndividual ;
-    ts:anioPatrimonio "1986"^^xsd:gYear ;
-    ts:descripcion "templo católico de Aragón, (España)"@es ;
-    ts:latitud 40.3439 ;
-    ts:longitud -1.10722 ;
-    ts:nombre "Catedral de Santa María de Teruel"@es ;
-    ts:urlImagen "http://commons.wikimedia.org/wiki/Special:FilePath/Teruel%20Cathedral%202024%20-%20South%20fa%C3%A7ade.jpg"^^xsd:anyURI ;
-    ts:wikidataId "Q513893" ;
-    owl:sameAs wd:Q513893 .
-
-<http://turismo-semantico.es/destino/Q5449162> a ts:Museo,
-        owl:NamedIndividual ;
-    ts:latitud 40.41250763 ;
-    ts:longitud -3.702092085 ;
-    ts:nombre "Filmoteca Española"@es ;
-    ts:urlImagen "http://commons.wikimedia.org/wiki/Special:FilePath/Cine%20Dor%C3%A9.jpg"^^xsd:anyURI ;
-    ts:wikidataId "Q5449162" ;
-    owl:sameAs wd:Q5449162 .
+    ts:latitud 43.36772222 ;
+    ts:longitud -8.40477778 ;
+    ts:nombre "Centro Gallego de Artes de la Imagen"@es ;
+    ts:urlImagen "http://commons.wikimedia.org/wiki/Special:FilePath/Casa%20da%20Cultura%20Salvador%20de%20Madariaga.JPG"^^xsd:anyURI ;
+    ts:wikidataId "Q5062834" ;
+    owl:sameAs wd:Q5062834 .
 
 <http://turismo-semantico.es/destino/Q548441> a ts:Destino,
         owl:NamedIndividual ;
@@ -635,14 +551,12 @@
     ts:wikidataId "Q548441" ;
     owl:sameAs wd:Q548441 .
 
-<http://turismo-semantico.es/destino/Q54898> a ts:PatrimonioUNESCO,
+<http://turismo-semantico.es/destino/Q54898> a ts:Destino,
         owl:NamedIndividual ;
-    ts:anioPatrimonio "1999"^^xsd:gYear ;
     ts:descripcion "municipio situado en la provincia de Santa Cruz de Tenerife, en la isla de Tenerife del archipiélago de las Canarias, España"@es ;
     ts:latitud 28.485277777 ;
     ts:longitud -16.316666666 ;
     ts:nombre "San Cristóbal de La Laguna"@es ;
-    ts:urlImagen "http://commons.wikimedia.org/wiki/Special:FilePath/San%20Crist%C3%B3bal%20de%20La%20Laguna%2C%20en%20Santa%20Cruz%20de%20Tenerife%20%28Espa%C3%B1a%29.jpg"^^xsd:anyURI ;
     ts:wikidataId "Q54898" ;
     owl:sameAs wd:Q54898 .
 
@@ -655,14 +569,24 @@
     ts:wikidataId "Q5562219" ;
     owl:sameAs wd:Q5562219 .
 
-<http://turismo-semantico.es/destino/Q5702349> a ts:Destino,
+<http://turismo-semantico.es/destino/Q557337> a ts:PatrimonioUNESCO,
         owl:NamedIndividual ;
-    ts:descripcion "yacimiento arqueológico  patrimonio histórico de Andalucía  en Antequera, España"@es ;
-    ts:latitud 36.938477777 ;
-    ts:longitud -4.441230555 ;
-    ts:nombre "Ciudad romana de Aratispi"@es ;
-    ts:wikidataId "Q5702349" ;
-    owl:sameAs wd:Q5702349 .
+    ts:anioPatrimonio "1985"^^xsd:gYear ;
+    ts:descripcion "castillo de Segovia (España), que fue residencia de los reyes de Castilla"@es ;
+    ts:latitud 40.9525 ;
+    ts:longitud -4.1325 ;
+    ts:nombre "Real Alcázar de Segovia"@es ;
+    ts:urlImagen "http://commons.wikimedia.org/wiki/Special:FilePath/Panor%C3%A1mica%20Oto%C3%B1o%20Alc%C3%A1zar%20de%20Segovia.jpg"^^xsd:anyURI ;
+    ts:wikidataId "Q557337" ;
+    owl:sameAs wd:Q557337 .
+
+<http://turismo-semantico.es/destino/Q5643717> a ts:Museo,
+        owl:NamedIndividual ;
+    ts:latitud 38.995033333 ;
+    ts:longitud -1.854783333 ;
+    ts:nombre "Filmoteca de Albacete"@es ;
+    ts:wikidataId "Q5643717" ;
+    owl:sameAs wd:Q5643717 .
 
 <http://turismo-semantico.es/destino/Q5710505> a ts:Destino,
         owl:NamedIndividual ;
@@ -718,17 +642,6 @@
     ts:wikidataId "Q5768702" ;
     owl:sameAs wd:Q5768702 .
 
-<http://turismo-semantico.es/destino/Q5769353> a ts:PatrimonioUNESCO,
-        owl:NamedIndividual ;
-    ts:anioPatrimonio "1986"^^xsd:gYear ;
-    ts:descripcion "Patrimonio de la humanidad"@es ;
-    ts:latitud 41.654838 ;
-    ts:longitud -0.875498 ;
-    ts:nombre "Cimborrio de la Seo"@es ;
-    ts:urlImagen "http://commons.wikimedia.org/wiki/Special:FilePath/Zaragoza%20-%20Cimborrio%20de%20la%20Seo.jpg"^^xsd:anyURI ;
-    ts:wikidataId "Q5769353" ;
-    owl:sameAs wd:Q5769353 .
-
 <http://turismo-semantico.es/destino/Q5789709> a ts:Destino,
         owl:NamedIndividual ;
     ts:descripcion "bien de interés cultural"@es ;
@@ -765,6 +678,14 @@
     ts:wikidataId "Q584446" ;
     owl:sameAs wd:Q584446 .
 
+<http://turismo-semantico.es/destino/Q5861983> a ts:Museo,
+        owl:NamedIndividual ;
+    ts:latitud 28.464506863 ;
+    ts:longitud -16.266287479 ;
+    ts:nombre "Filmoteca Canaria"@es ;
+    ts:wikidataId "Q5861983" ;
+    owl:sameAs wd:Q5861983 .
+
 <http://turismo-semantico.es/destino/Q5920057> a ts:Destino,
         owl:NamedIndividual ;
     ts:descripcion "antigua ciudad romana situada en el actual municipio de Prado del Rey, España"@es ;
@@ -774,14 +695,86 @@
     ts:wikidataId "Q5920057" ;
     owl:sameAs wd:Q5920057 .
 
-<http://turismo-semantico.es/destino/Q6034305> a ts:Museo,
+<http://turismo-semantico.es/destino/Q6033273> a ts:Museo,
         owl:NamedIndividual ;
-    ts:latitud 42.83825 ;
-    ts:longitud -5.153638888 ;
-    ts:nombre "Museo de la Siderurgia y la Minería de Castilla y León"@es ;
-    ts:urlImagen "http://commons.wikimedia.org/wiki/Special:FilePath/Sabero%2001%20plaza%20cerrada%20by-dpc.jpg"^^xsd:anyURI ;
-    ts:wikidataId "Q6034305" ;
-    owl:sameAs wd:Q6034305 .
+    ts:latitud 40.406277777 ;
+    ts:longitud -1.445083333 ;
+    ts:nombre "Museo Diocesano de Albarracín"@es ;
+    ts:urlImagen "http://commons.wikimedia.org/wiki/Special:FilePath/Museu%20Dioces%C3%A0%20d%27Albarras%C3%AD%2C%20sala%20d%27orfebreria.JPG"^^xsd:anyURI ;
+    ts:wikidataId "Q6033273" ;
+    owl:sameAs wd:Q6033273 .
+
+<http://turismo-semantico.es/destino/Q6033277> a ts:Museo,
+        owl:NamedIndividual ;
+    ts:latitud 41.068027777 ;
+    ts:longitud -2.641611111 ;
+    ts:nombre "Museo Diocesano de Arte Antiguo (Sigüenza)"@es ;
+    ts:urlImagen "http://commons.wikimedia.org/wiki/Special:FilePath/007095%20-%20Sig%C3%BCenza%20%288371806561%29.jpg"^^xsd:anyURI ;
+    ts:wikidataId "Q6033277" ;
+    owl:sameAs wd:Q6033277 .
+
+<http://turismo-semantico.es/destino/Q6033280> a ts:Museo,
+        owl:NamedIndividual ;
+    ts:latitud 38.0855 ;
+    ts:longitud -0.946305555 ;
+    ts:nombre "Museo Diocesano de Arte Sacro (Orihuela)"@es ;
+    ts:urlImagen "http://commons.wikimedia.org/wiki/Special:FilePath/Fa%C3%A7ana%20del%20palau%20episcopal%20d%27Oriola.JPG"^^xsd:anyURI ;
+    ts:wikidataId "Q6033280" ;
+    owl:sameAs wd:Q6033280 .
+
+<http://turismo-semantico.es/destino/Q6033283> a ts:Museo,
+        owl:NamedIndividual ;
+    ts:latitud 28.10046834 ;
+    ts:longitud -15.41461329 ;
+    ts:nombre "Museo Diocesano de Arte Sacro de Las Palmas de Gran Canaria"@es ;
+    ts:urlImagen "http://commons.wikimedia.org/wiki/Special:FilePath/Entrada%20Principal%20al%20Museo%20Diocesano%20de%20Arte%20Sacro%20-%20Las%20Palmas%20de%20Gran%20Canaria.JPG"^^xsd:anyURI ;
+    ts:wikidataId "Q6033283" ;
+    owl:sameAs wd:Q6033283 .
+
+<http://turismo-semantico.es/destino/Q6033291> a ts:Museo,
+        owl:NamedIndividual ;
+    ts:latitud 42.0129 ;
+    ts:longitud -4.539502777 ;
+    ts:nombre "Museo Diocesano de Palencia"@es ;
+    ts:urlImagen "http://commons.wikimedia.org/wiki/Special:FilePath/MuseodiocesanoPalencia1.JPG"^^xsd:anyURI ;
+    ts:wikidataId "Q6033291" ;
+    owl:sameAs wd:Q6033291 .
+
+<http://turismo-semantico.es/destino/Q6076055> a ts:Museo,
+        owl:NamedIndividual ;
+    ts:latitud 36.685611111 ;
+    ts:longitud -6.146111111 ;
+    ts:nombre "Pinacoteca Rivero"@es ;
+    ts:urlImagen "http://commons.wikimedia.org/wiki/Special:FilePath/PinacotecaRivero-Jerez%20MIN-DSC05271.JPG"^^xsd:anyURI ;
+    ts:wikidataId "Q6076055" ;
+    owl:sameAs wd:Q6076055 .
+
+<http://turismo-semantico.es/destino/Q6129295> a ts:Destino,
+        owl:NamedIndividual ;
+    ts:descripcion "bien de interés cultural"@es ;
+    ts:latitud 37.032508333 ;
+    ts:longitud -4.630927777 ;
+    ts:nombre "Ciudad romana de Singilia Barba"@es ;
+    ts:wikidataId "Q6129295" ;
+    owl:sameAs wd:Q6129295 .
+
+<http://turismo-semantico.es/destino/Q6140279> a ts:Destino,
+        owl:NamedIndividual ;
+    ts:descripcion "bien de interés cultural"@es ;
+    ts:latitud 37.497219741 ;
+    ts:longitud -6.362057452 ;
+    ts:nombre "Tejada la Vieja"@es ;
+    ts:wikidataId "Q6140279" ;
+    owl:sameAs wd:Q6140279 .
+
+<http://turismo-semantico.es/destino/Q6169531> a ts:Destino,
+        owl:NamedIndividual ;
+    ts:descripcion "bien de interés cultural"@es ;
+    ts:latitud 36.627143 ;
+    ts:longitud -6.161248 ;
+    ts:nombre "Yacimiento arqueológico de Doña Blanca"@es ;
+    ts:wikidataId "Q6169531" ;
+    owl:sameAs wd:Q6169531 .
 
 <http://turismo-semantico.es/destino/Q622030> a ts:Destino,
         owl:NamedIndividual ;
@@ -812,6 +805,17 @@
     ts:wikidataId "Q647543" ;
     owl:sameAs wd:Q647543 .
 
+<http://turismo-semantico.es/destino/Q64860434> a ts:PatrimonioUNESCO,
+        owl:NamedIndividual ;
+    ts:anioPatrimonio "2011"^^xsd:gYear ;
+    ts:descripcion "Patrimonio de la Humanidad de España"@es ;
+    ts:latitud 39.73083 ;
+    ts:longitud 2.69472 ;
+    ts:nombre "Paisaje Cultural de la Sierra de la Tramontana"@es ;
+    ts:urlImagen "http://commons.wikimedia.org/wiki/Special:FilePath/Runes%20del%20refugi%20de%20l%27Arxiduc.jpg"^^xsd:anyURI ;
+    ts:wikidataId "Q64860434" ;
+    owl:sameAs wd:Q64860434 .
+
 <http://turismo-semantico.es/destino/Q64955212> a ts:PatrimonioUNESCO,
         owl:NamedIndividual ;
     ts:anioPatrimonio "1997"^^xsd:gYear ;
@@ -819,7 +823,7 @@
     ts:latitud 41.38778 ;
     ts:longitud 2.175 ;
     ts:nombre "Palau de la Música y Hospital de San Pau"@es ;
-    ts:urlImagen "http://commons.wikimedia.org/wiki/Special:FilePath/Portada%20interior%20Hospital%20Sant%20Pau.jpg"^^xsd:anyURI ;
+    ts:urlImagen "http://commons.wikimedia.org/wiki/Special:FilePath/Barcelona-%20Hospital%20de%20la%20Santa%20Creu%20i%20Sant%20Pau.jpg"^^xsd:anyURI ;
     ts:wikidataId "Q64955212" ;
     owl:sameAs wd:Q64955212 .
 
@@ -832,16 +836,25 @@
     ts:wikidataId "Q681893" ;
     owl:sameAs wd:Q681893 .
 
-<http://turismo-semantico.es/destino/Q696803> a ts:PatrimonioUNESCO,
+<http://turismo-semantico.es/destino/Q7194792> a ts:Museo,
         owl:NamedIndividual ;
-    ts:anioPatrimonio "1997"^^xsd:gYear ;
-    ts:descripcion "yacimiento arqueológico en Borrenes y Carucedo, España"@es ;
-    ts:latitud 42.458699 ;
-    ts:longitud -6.759002 ;
-    ts:nombre "Las Médulas"@es ;
-    ts:urlImagen "http://commons.wikimedia.org/wiki/Special:FilePath/Las%20Medulas%20%2817504738221%29.jpg"^^xsd:anyURI ;
-    ts:wikidataId "Q696803" ;
-    owl:sameAs wd:Q696803 .
+    ts:latitud 43.300743 ;
+    ts:longitud -5.686654 ;
+    ts:nombre "Pinacoteca Municipal de Langreo - Eduardo Úrculo"@es ;
+    ts:urlImagen "http://commons.wikimedia.org/wiki/Special:FilePath/Pinacoteca.jpg"^^xsd:anyURI ;
+    ts:wikidataId "Q7194792" ;
+    owl:sameAs wd:Q7194792 .
+
+<http://turismo-semantico.es/destino/Q750248> a ts:PatrimonioUNESCO,
+        owl:NamedIndividual ;
+    ts:anioPatrimonio "1993"^^xsd:gYear ;
+    ts:descripcion "monasterio en Guadalupe, provincia de Cáceres, España, Patrimonio de la Humanidad y Bien de Interés Cultural"@es ;
+    ts:latitud 39.452777777 ;
+    ts:longitud -5.3275 ;
+    ts:nombre "Real Monasterio de Santa María de Guadalupe"@es ;
+    ts:urlImagen "http://commons.wikimedia.org/wiki/Special:FilePath/Royal%20Monastery%20of%20Santa%20Maria%20de%20Guadalupe.jpg"^^xsd:anyURI ;
+    ts:wikidataId "Q750248" ;
+    owl:sameAs wd:Q750248 .
 
 <http://turismo-semantico.es/destino/Q77433> a ts:Destino,
         owl:NamedIndividual ;
@@ -851,15 +864,6 @@
     ts:nombre "Leganés"@es ;
     ts:wikidataId "Q77433" ;
     owl:sameAs wd:Q77433 .
-
-<http://turismo-semantico.es/destino/Q7990668> a ts:Museo,
-        owl:NamedIndividual ;
-    ts:latitud 37.21148 ;
-    ts:longitud -6.92809 ;
-    ts:nombre "Muelle de las Carabelas"@es ;
-    ts:urlImagen "http://commons.wikimedia.org/wiki/Special:FilePath/Pinta%2C%20Ni%C3%B1a%20y%20Santa%20Mar%C3%ADa%20en%20el%20Muelle%20de%20las%20Carabelas.jpg"^^xsd:anyURI ;
-    ts:wikidataId "Q7990668" ;
-    owl:sameAs wd:Q7990668 .
 
 <http://turismo-semantico.es/destino/Q837062> a ts:Destino,
         owl:NamedIndividual ;
@@ -888,32 +892,14 @@
     ts:wikidataId "Q867072" ;
     owl:sameAs wd:Q867072 .
 
-<http://turismo-semantico.es/destino/Q876383> a ts:Museo,
+<http://turismo-semantico.es/destino/Q876794> a ts:Museo,
         owl:NamedIndividual ;
-    ts:latitud 40.425833 ;
-    ts:longitud -3.700833 ;
-    ts:nombre "Museo de Historia de Madrid"@es ;
-    ts:urlImagen "http://commons.wikimedia.org/wiki/Special:FilePath/Museo%20de%20Historia%20de%20Madrid%20%28Espa%C3%B1a%29%2003.jpg"^^xsd:anyURI ;
-    ts:wikidataId "Q876383" ;
-    owl:sameAs wd:Q876383 .
-
-<http://turismo-semantico.es/destino/Q8826> a ts:Destino,
-        owl:NamedIndividual ;
-    ts:descripcion "capital de la Comunidad Autónoma de las Islas Baleares, España"@es ;
-    ts:latitud 39.566666666 ;
-    ts:longitud 2.649722222 ;
-    ts:nombre "Palma de Mallorca"@es ;
-    ts:wikidataId "Q8826" ;
-    owl:sameAs wd:Q8826 .
-
-<http://turismo-semantico.es/destino/Q888390> a ts:Destino,
-        owl:NamedIndividual ;
-    ts:descripcion "antiguo poblado de España, Bien de Interés Cultural"@es ;
-    ts:latitud 36.90232715 ;
-    ts:longitud -4.781369997 ;
-    ts:nombre "Bobastro"@es ;
-    ts:wikidataId "Q888390" ;
-    owl:sameAs wd:Q888390 .
+    ts:latitud 41.377381 ;
+    ts:longitud 2.177259 ;
+    ts:nombre "Museo de Cera de Barcelona"@es ;
+    ts:urlImagen "http://commons.wikimedia.org/wiki/Special:FilePath/Museu%20de%20Cera%20de%20Barcelona%20%28Catal%C3%A0%29.jpg"^^xsd:anyURI ;
+    ts:wikidataId "Q876794" ;
+    owl:sameAs wd:Q876794 .
 
 <http://turismo-semantico.es/destino/Q899302> a ts:PatrimonioUNESCO,
         owl:NamedIndividual ;
@@ -925,6 +911,15 @@
     ts:urlImagen "http://commons.wikimedia.org/wiki/Special:FilePath/Techo%20de%20Altamira%20%28replica%29-Museo%20Arqueol%C3%B3gico%20Nacional.jpg"^^xsd:anyURI ;
     ts:wikidataId "Q899302" ;
     owl:sameAs wd:Q899302 .
+
+<http://turismo-semantico.es/destino/Q9046810> a ts:Museo,
+        owl:NamedIndividual ;
+    ts:latitud 41.994167 ;
+    ts:longitud 1.518889 ;
+    ts:nombre "Museo Diocesano y Comarcal de Solsona"@es ;
+    ts:urlImagen "http://commons.wikimedia.org/wiki/Special:FilePath/Palau%20Episcopal%20Solsona.jpg"^^xsd:anyURI ;
+    ts:wikidataId "Q9046810" ;
+    owl:sameAs wd:Q9046810 .
 
 <http://turismo-semantico.es/destino/Q921745> a ts:PatrimonioUNESCO,
         owl:NamedIndividual ;
@@ -941,21 +936,30 @@
         owl:NamedIndividual ;
     ts:anioPatrimonio "2000"^^xsd:gYear ;
     ts:descripcion "palmeral histórico en Elche (España), inscrito en el Patrimonio Mundial de la UNESCO en 2000"@es ;
-    ts:latitud 38.264444444 ;
-    ts:longitud -0.690833333 ;
+    ts:latitud 38.269444444 ;
+    ts:longitud -0.698333333 ;
     ts:nombre "Palmeral de Elche"@es ;
     ts:urlImagen "http://commons.wikimedia.org/wiki/Special:FilePath/Arcoiris%20en%20el%20Palmeral%20de%20Elche.jpg"^^xsd:anyURI ;
     ts:wikidataId "Q930784" ;
     owl:sameAs wd:Q930784 .
 
-<http://turismo-semantico.es/destino/Q944049> a ts:Museo,
+<http://turismo-semantico.es/destino/Q942216> a ts:Museo,
         owl:NamedIndividual ;
-    ts:latitud 36.70040446 ;
-    ts:longitud -2.851461251 ;
-    ts:nombre "Castillo de Guardias Viejas"@es ;
-    ts:urlImagen "http://commons.wikimedia.org/wiki/Special:FilePath/Guardias%20Viejas.jpg"^^xsd:anyURI ;
-    ts:wikidataId "Q944049" ;
-    owl:sameAs wd:Q944049 .
+    ts:latitud 41.528611111 ;
+    ts:longitud 1.684166666 ;
+    ts:nombre "Museo del Molino Papelero de Capellades"@es ;
+    ts:urlImagen "http://commons.wikimedia.org/wiki/Special:FilePath/Bassa%20de%20Capellades%201.jpg"^^xsd:anyURI ;
+    ts:wikidataId "Q942216" ;
+    owl:sameAs wd:Q942216 .
+
+<http://turismo-semantico.es/destino/Q944404> a ts:Museo,
+        owl:NamedIndividual ;
+    ts:latitud 41.610275 ;
+    ts:longitud 1.142588888 ;
+    ts:nombre "Museo de Juguetes y Autómatas"@es ;
+    ts:urlImagen "http://commons.wikimedia.org/wiki/Special:FilePath/Museu%20de%20joguets%20de%20Verd%C3%BA.JPG"^^xsd:anyURI ;
+    ts:wikidataId "Q944404" ;
+    owl:sameAs wd:Q944404 .
 
 <http://turismo-semantico.es/destino/Q965924> a ts:Destino,
         owl:NamedIndividual ;
@@ -966,25 +970,33 @@
     ts:wikidataId "Q965924" ;
     owl:sameAs wd:Q965924 .
 
-<http://turismo-semantico.es/destino/Q98824936> a ts:PatrimonioUNESCO,
+<http://turismo-semantico.es/destino/Q969308> a ts:Museo,
         owl:NamedIndividual ;
-    ts:anioPatrimonio "1993"^^xsd:gYear ;
-    ts:descripcion "antigua basílica en Mérida (España)"@es ;
-    ts:latitud 38.920352777 ;
-    ts:longitud -6.341761111 ;
-    ts:nombre "basílica romana de Santa Eulalia"@es ;
-    ts:urlImagen "http://commons.wikimedia.org/wiki/Special:FilePath/Bas%C3%ADlica%20Romano%20Cristiana%20de%20M%C3%A9rida%2002.jpg"^^xsd:anyURI ;
-    ts:wikidataId "Q98824936" ;
-    owl:sameAs wd:Q98824936 .
+    ts:latitud 36.721619444 ;
+    ts:longitud -4.418330555 ;
+    ts:nombre "Palacio de los Condes de Buenavista"@es ;
+    ts:urlImagen "http://commons.wikimedia.org/wiki/Special:FilePath/MPM%202.jpg"^^xsd:anyURI ;
+    ts:wikidataId "Q969308" ;
+    owl:sameAs wd:Q969308 .
 
-<http://turismo-semantico.es/destino/Q99435527> a ts:Museo,
+<http://turismo-semantico.es/destino/Q974750> a ts:Museo,
         owl:NamedIndividual ;
-    ts:latitud 41.4145 ;
-    ts:longitud 2.13209 ;
-    ts:nombre "El submarí Barcelona"@es ;
-    ts:urlImagen "http://commons.wikimedia.org/wiki/Special:FilePath/Submar%C3%AD%20Barcelona%20P1180787.JPG"^^xsd:anyURI ;
-    ts:wikidataId "Q99435527" ;
-    owl:sameAs wd:Q99435527 .
+    ts:latitud 40.426998722 ;
+    ts:longitud -3.70640869 ;
+    ts:nombre "Museo Pedagógico Nacional"@es ;
+    ts:wikidataId "Q974750" ;
+    owl:sameAs wd:Q974750 .
+
+<http://turismo-semantico.es/destino/Q97633694> a ts:PatrimonioUNESCO,
+        owl:NamedIndividual ;
+    ts:anioPatrimonio "2016"^^xsd:gYear ;
+    ts:descripcion "patrimonio histórico de Andalucía de importancia arqueológica en Antequera, España"@es ;
+    ts:latitud 37.023333333 ;
+    ts:longitud -4.548055555 ;
+    ts:nombre "Conjunto dolménico de Antequera"@es ;
+    ts:urlImagen "http://commons.wikimedia.org/wiki/Special:FilePath/Viera%20and%20Menga%20Dolmens%2C%20Antequera%2C%20Spain%3B%20July%202008.JPG"^^xsd:anyURI ;
+    ts:wikidataId "Q97633694" ;
+    owl:sameAs wd:Q97633694 .
 
 <http://turismo-semantico.es/ontologia> a owl:Ontology ;
     rdfs:label "TurismoSemántico Ontología"@es ;
