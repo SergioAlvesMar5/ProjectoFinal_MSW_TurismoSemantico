@@ -20,14 +20,11 @@ os.environ.setdefault("ANONYMIZED_TELEMETRY", "False")
 os.environ.setdefault("CHROMA_TELEMETRY", "FALSE")
 os.environ.setdefault("POSTHOG_DISABLED", "true")
 
-# Importaciones opcionales con fallback
-try:
-    from sentence_transformers import SentenceTransformer
-    import chromadb
-    EMBEDDINGS_OK = True
-except Exception as e:
-    EMBEDDINGS_OK = False
-    print(f"[Embeddings] Embeddings no disponibles ({e}). Usando búsqueda TF-IDF.")
+# Importaciones opcionales con fallback. Se cargan bajo demanda para que Flask
+# arranque rapido y sin tocar el indice persistido hasta que haga falta.
+SentenceTransformer = None
+chromadb = None
+EMBEDDINGS_OK = True
 
 try:
     import spacy
@@ -44,6 +41,40 @@ _modelo = None
 _chroma_client = None
 _collection = None
 _destinos_cache: list[dict] = []
+
+
+def _desactivar_embeddings(reason: str) -> None:
+    """Activa el modo TF-IDF cuando el stack vectorial falla en runtime."""
+    global EMBEDDINGS_OK, _modelo, _chroma_client, _collection
+    EMBEDDINGS_OK = False
+    _modelo = None
+    _chroma_client = None
+    _collection = None
+    print(f"[Embeddings] {reason}. Usando busqueda TF-IDF.")
+
+
+def _import_sentence_transformer():
+    global SentenceTransformer
+    if SentenceTransformer is None and EMBEDDINGS_OK:
+        try:
+            from sentence_transformers import SentenceTransformer as _SentenceTransformer
+            SentenceTransformer = _SentenceTransformer
+        except Exception as e:
+            _desactivar_embeddings(f"sentence-transformers no disponible ({e})")
+            return None
+    return SentenceTransformer
+
+
+def _import_chromadb():
+    global chromadb
+    if chromadb is None and EMBEDDINGS_OK:
+        try:
+            import chromadb as _chromadb
+            chromadb = _chromadb
+        except Exception as e:
+            _desactivar_embeddings(f"ChromaDB no disponible ({e})")
+            return None
+    return chromadb
 
 
 def _tipo_destino(d: dict) -> str:
@@ -92,27 +123,41 @@ def _tokens_busqueda(texto: str) -> set[str]:
 def _get_modelo():
     global _modelo
     if _modelo is None and EMBEDDINGS_OK:
-        print("[Embeddings] Cargando modelo SentenceTransformer...")
-        _modelo = SentenceTransformer(MODELO_NOMBRE)
+        try:
+            sentence_transformer = _import_sentence_transformer()
+            if sentence_transformer is None:
+                return None
+            print("[Embeddings] Cargando modelo SentenceTransformer...")
+            _modelo = sentence_transformer(MODELO_NOMBRE)
+        except Exception as e:
+            _desactivar_embeddings(f"No se pudo cargar el modelo '{MODELO_NOMBRE}' ({e})")
+            return None
     return _modelo
 
 
 def _get_collection():
     global _chroma_client, _collection
     if _collection is None and EMBEDDINGS_OK:
-        if _chroma_client is None:
-            try:
-                from chromadb.config import Settings
-                _chroma_client = chromadb.PersistentClient(
-                    path="./chroma_db",
-                    settings=Settings(anonymized_telemetry=False),
-                )
-            except Exception:
-                _chroma_client = chromadb.PersistentClient(path="./chroma_db")
         try:
-            _collection = _chroma_client.get_collection("destinos")
-        except Exception:
-            _collection = _chroma_client.create_collection("destinos")
+            chroma_mod = _import_chromadb()
+            if chroma_mod is None:
+                return None
+            if _chroma_client is None:
+                try:
+                    from chromadb.config import Settings
+                    _chroma_client = chroma_mod.PersistentClient(
+                        path="./chroma_db",
+                        settings=Settings(anonymized_telemetry=False),
+                    )
+                except Exception:
+                    _chroma_client = chroma_mod.PersistentClient(path="./chroma_db")
+            try:
+                _collection = _chroma_client.get_collection("destinos")
+            except Exception:
+                _collection = _chroma_client.create_collection("destinos")
+        except Exception as e:
+            _desactivar_embeddings(f"No se pudo inicializar ChromaDB ({e})")
+            return None
     return _collection
 
 
@@ -132,21 +177,31 @@ def indexar_destinos(destinos: list[dict]) -> bool:
 
     modelo = _get_modelo()
     col    = _get_collection()
+    if modelo is None or col is None:
+        return False
 
     # Limpiar colección previa
     try:
         _chroma_client.delete_collection("destinos")
     except Exception:
         pass
-    col = _chroma_client.create_collection("destinos")
+    try:
+        col = _chroma_client.create_collection("destinos")
+    except Exception as e:
+        _desactivar_embeddings(f"No se pudo crear la coleccion de ChromaDB ({e})")
+        return False
     global _collection
     _collection = col
 
     textos = [_texto_indexable(d) for d in destinos]
     ids    = [d.get("id", str(i)) for i, d in enumerate(destinos)]
 
-    print(f"[Embeddings] Generando embeddings para {len(destinos)} destinos...")
-    embs = modelo.encode(textos, show_progress_bar=True).tolist()
+    try:
+        print(f"[Embeddings] Generando embeddings para {len(destinos)} destinos...")
+        embs = modelo.encode(textos, show_progress_bar=True).tolist()
+    except Exception as e:
+        _desactivar_embeddings(f"No se pudieron generar embeddings ({e})")
+        return False
 
     # Metadatos para filtrado posterior
     metas = [
@@ -160,7 +215,12 @@ def indexar_destinos(destinos: list[dict]) -> bool:
         for d in destinos
     ]
 
-    col.add(ids=ids, documents=textos, embeddings=embs, metadatas=metas)
+    try:
+        col.add(ids=ids, documents=textos, embeddings=embs, metadatas=metas)
+    except Exception as e:
+        _desactivar_embeddings(f"No se pudieron guardar embeddings en ChromaDB ({e})")
+        return False
+
     print(f"[Embeddings] {len(destinos)} destinos indexados en ChromaDB.")
     return True
 
@@ -180,11 +240,15 @@ def buscar_semantico(query: str, k: int = 5) -> list[dict]:
 def _buscar_con_embeddings(query: str, k: int) -> list[dict]:
     modelo = _get_modelo()
     col    = _get_collection()
-    if col is None:
-        return []
+    if modelo is None or col is None:
+        return _buscar_tfidf(query, k)
 
-    q_emb = modelo.encode([_texto_consulta(query)]).tolist()
-    results = col.query(query_embeddings=q_emb, n_results=k)
+    try:
+        q_emb = modelo.encode([_texto_consulta(query)]).tolist()
+        results = col.query(query_embeddings=q_emb, n_results=k)
+    except Exception as e:
+        _desactivar_embeddings(f"No se pudo consultar el indice vectorial ({e})")
+        return _buscar_tfidf(query, k)
 
     output = []
     for i, doc in enumerate(results["documents"][0]):
@@ -359,7 +423,7 @@ Pregunta del usuario: {pregunta}
 Respuesta:"""
 
         msg = client.messages.create(
-            model=os.environ.get("ANTHROPIC_MODEL", "claude-3-haiku-20240307"),
+            model=os.environ.get("ANTHROPIC_MODEL", "claude-haiku-4-5-20251001"),
             max_tokens=512,
             messages=[{"role": "user", "content": prompt}],
         )

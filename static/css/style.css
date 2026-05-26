@@ -267,6 +267,7 @@ select:focus, input:focus, textarea:focus { border-color:var(--c-primary-ink); o
 .leaflet-popup-content-wrapper { border-radius:10px; }
 .popup-nombre { font-weight:700; font-size:.95rem; color:#0f172a; }
 .popup-tipo   { font-size:.75rem; color:#334155; }
+.popup-detalle-btn { margin-top:.5rem; }
 
 /* ── BUSCADOR ────────────────────────────────────────────────────────────── */
 .buscar-layout { padding:1.5rem 2rem; max-width:900px; margin:0 auto; }
@@ -300,6 +301,7 @@ select:focus, input:focus, textarea:focus { border-color:var(--c-primary-ink); o
   cursor:pointer;
 }
 .resultado-card:hover { box-shadow:var(--shadow-md); border-color:var(--c-primary-ink); }
+.resultado-card:focus-visible { box-shadow:var(--shadow-md); border-color:var(--c-primary-ink); }
 .res-nombre   { font-weight:700; font-size:.95rem; margin-bottom:.3rem; }
 .res-tipo     { font-size:.72rem; color:var(--c-text-sec); margin-bottom:.4rem; }
 .res-desc     { font-size:.8rem; color:var(--c-text-sec); line-height:1.4; margin-bottom:.5rem; }

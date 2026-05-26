@@ -96,6 +96,7 @@ Si existe `data/destinos.json`, la app puede arrancar desde caché y refrescar O
 ## Requisitos
 - Python **3.11** (probado).
 - Conexión a Internet para cargar datos externos.
+- Dependencias Python actualizadas en `requirements.txt` y `environment.yml` el **26/05/2026**.
 
 ---
 
@@ -118,6 +119,7 @@ conda activate turismo_semantico
 
 ### Instalar dependencias
 ```bash
+python -m pip install --upgrade pip
 pip install -r requirements.txt
 ```
 
@@ -128,6 +130,7 @@ pip install -r requirements.txt
 ### spaCy NER (opcional pero recomendado)
 ```bash
 python -m spacy download es_core_news_md
+python -m spacy validate
 ```
 Si no instalas el modelo, el NER se desactiva y el buscador sigue funcionando.
 
@@ -135,13 +138,18 @@ Si no instalas el modelo, el NER se desactiva y el buscador sigue funcionando.
 ```bash
 # Windows:
 set ANTHROPIC_API_KEY=tu_api_key_aqui
-set ANTHROPIC_MODEL=claude-3-haiku-20240307
+set ANTHROPIC_MODEL=claude-haiku-4-5-20251001
+set FLASK_DEBUG=1
+set PORT=5000
 
 # Linux/Mac:
 export ANTHROPIC_API_KEY=tu_api_key_aqui
-export ANTHROPIC_MODEL=claude-3-haiku-20240307
+export ANTHROPIC_MODEL=claude-haiku-4-5-20251001
+export FLASK_DEBUG=1
+export PORT=5000
 ```
 Sin API key, el chatbot responde en modo local usando el contexto recuperado.
+`FLASK_DEBUG` es opcional; por defecto la app arranca sin modo debug.
 
 ---
 
@@ -228,10 +236,12 @@ ProjectoFinal_MSW_TurismoSemantico/
 
 ## Notas y troubleshooting
 - **Embeddings lentos**: la primera indexación puede tardar varios minutos en CPU.
+- **Modelo de embeddings sin descargar o sin acceso a Hugging Face**: la app no se cae; activa búsqueda TF-IDF/Jaccard como fallback.
 - **Sin spaCy**: el NER se desactiva, pero la búsqueda funciona igual.
 - **Sin Anthropic**: el chatbot responde en modo local con destinos recuperados.
 - **Sin datos**: si ves “Datos no cargados”, pulsa “Cargar datos frescos”.
 - **OSM lento**: Overpass puede responder lento; la carga OSM se completa en background.
+- **Tras actualizar ChromaDB**: si el índice persistido no coincide con la versión instalada, elimina `chroma_db/` y vuelve a cargar datos para regenerarlo.
 
 ---
 

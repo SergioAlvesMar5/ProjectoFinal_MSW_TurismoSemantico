@@ -84,6 +84,37 @@ function crearIcono(tipo) {
   });
 }
 
+function crearPopupDestino(d) {
+  const cont = document.createElement("div");
+
+  const nombre = document.createElement("div");
+  nombre.className = "popup-nombre";
+  nombre.textContent = d.nombre || "Destino sin nombre";
+  cont.appendChild(nombre);
+
+  const tipo = document.createElement("div");
+  tipo.className = "popup-tipo";
+  tipo.textContent = d.tipo || d.tipo_osm || "";
+  cont.appendChild(tipo);
+
+  if (d.descripcion) {
+    const desc = document.createElement("p");
+    desc.style.fontSize = ".8rem";
+    desc.style.marginTop = ".4rem";
+    desc.textContent = `${String(d.descripcion).substring(0, 100)}...`;
+    cont.appendChild(desc);
+  }
+
+  const btn = document.createElement("button");
+  btn.type = "button";
+  btn.className = "btn-sm popup-detalle-btn";
+  btn.textContent = "Ver detalle";
+  btn.addEventListener("click", () => abrirDetalle(encodeURIComponent(JSON.stringify(d))));
+  cont.appendChild(btn);
+
+  return cont;
+}
+
 function iconoTipo(tipo) {
   return ICONOS[normalizarTipoMapa(tipo)] || ICONOS.default;
 }
@@ -94,20 +125,10 @@ function cargarMarcadores(destinos) {
   destinos.forEach(d => {
     if (!d.lat || !d.lon) return;
     const tipo = d.tipo || d.tipo_osm || "";
-    const m = L.marker([d.lat, d.lon], { icon: crearIcono(tipo) })
+    const m = L.marker([d.lat, d.lon], { icon: crearIcono(tipo), title: d.nombre || "" })
       .addTo(mapa)
-      .bindPopup(`
-        <div>
-          <div class="popup-nombre">${d.nombre}</div>
-          <div class="popup-tipo">${tipo || ""}</div>
-          ${d.descripcion ? `<p style="font-size:.8rem;margin-top:.4rem">${d.descripcion.substring(0,100)}…</p>` : ""}
-          <button onclick="abrirDetalle('${encodeURIComponent(JSON.stringify(d))}')"
-            style="margin-top:.5rem;background:var(--c-primary);color:#fff;border:none;
-                   padding:.3rem .8rem;border-radius:6px;cursor:pointer;font-size:.78rem;">
-            Ver detalle
-          </button>
-        </div>
-      `);
+      .bindPopup(crearPopupDestino(d));
+    m.destinoNombre = d.nombre || "";
     marcadores.push(m);
   });
   document.getElementById("statDestinos").textContent = destinos.length;
@@ -133,13 +154,18 @@ async function abrirDetalle(enc) {
   const d = JSON.parse(decodeURIComponent(enc));
   const panel = document.getElementById("panelDetalle");
   const cont  = document.getElementById("detalleContenido");
+  const nombre = escaparHtml(d.nombre || "Destino sin nombre");
+  const tipo = escaparHtml(d.tipo || "destino");
+  const descripcion = escaparHtml(d.descripcion || "Sin descripcion.");
+  const imagen = urlSegura(d.imagen);
+  const imagenHtml = escaparHtml(imagen);
 
   cont.innerHTML = `
-    <div class="detalle-nombre">${d.nombre}</div>
-    <span class="detalle-tipo">${d.tipo || "destino"}</span>
-    <div class="detalle-desc">${d.descripcion || "Sin descripción."}</div>
+    <div class="detalle-nombre">${nombre}</div>
+    <span class="detalle-tipo">${tipo}</span>
+    <div class="detalle-desc">${descripcion}</div>
     <div class="clima-mini" id="climaDetalle">🌤️ Cargando clima…</div>
-    ${d.imagen ? `<img src="${d.imagen}" alt="${d.nombre}" style="width:100%;border-radius:8px;margin-top:.6rem;max-height:140px;object-fit:cover" loading="lazy"/>` : ""}
+    ${imagen ? `<img src="${imagenHtml}" alt="${nombre}" style="width:100%;border-radius:8px;margin-top:.6rem;max-height:140px;object-fit:cover" loading="lazy"/>` : ""}
   `;
   panel.style.display = "block";
 
@@ -147,9 +173,11 @@ async function abrirDetalle(enc) {
   const clima = await fetch(`/api/clima?lat=${d.lat}&lon=${d.lon}`)
     .then(r => r.json()).catch(() => null);
   if (clima?.temperatura !== null && clima?.temperatura !== undefined) {
+    const temperatura = Number(clima.temperatura);
+    const viento = Number(clima.viento_kmh);
     document.getElementById("climaDetalle").innerHTML = `
-      ${clima.emoji} <span class="clima-temp">${clima.temperatura}°C</span>
-      &nbsp;${clima.descripcion} · 💨 ${clima.viento_kmh} km/h
+      ${escaparHtml(clima.emoji)} <span class="clima-temp">${Number.isFinite(temperatura) ? temperatura : ""}°C</span>
+      &nbsp;${escaparHtml(clima.descripcion || "")} · 💨 ${Number.isFinite(viento) ? viento : ""} km/h
     `;
   }
 }
@@ -309,7 +337,7 @@ async function ejecutarBusqueda() {
   const nerTags = document.getElementById("nerTags");
   if (data.ner?.entidades?.length) {
     nerTags.innerHTML = data.ner.entidades
-      .map(e => `<span class="ner-tag">${e.texto} <small>${e.tipo}</small></span>`)
+      .map(e => `<span class="ner-tag">${escaparHtml(e.texto)} <small>${escaparHtml(e.tipo)}</small></span>`)
       .join("");
     nerEl.style.display = "block";
   } else {
@@ -317,20 +345,31 @@ async function ejecutarBusqueda() {
   }
 
   if (!data.resultados?.length) {
-    resCont.innerHTML = `<p class="msg-loading">Sin resultados para "${q}".</p>`;
+    resCont.innerHTML = `<p class="msg-loading">Sin resultados para "${escaparHtml(q)}".</p>`;
     return;
   }
 
-  resCont.innerHTML = data.resultados.map(r => `
-    <div class="resultado-card" onclick="irADestino(${r.lat},${r.lon},'${r.nombre}')"
-         role="listitem" tabindex="0" aria-label="${r.nombre}">
-      <div class="res-nombre">${r.nombre}</div>
-      <div class="res-tipo">${iconoTipo(r.tipo)} ${r.tipo || "destino"}</div>
-      <div class="res-desc">${r.descripcion || "Sin descripción."}</div>
+  resCont.innerHTML = data.resultados.map((r, idx) => `
+    <div class="resultado-card" data-idx="${idx}"
+         role="listitem" tabindex="0" aria-label="${escaparHtml(r.nombre || "Destino")}">
+      <div class="res-nombre">${escaparHtml(r.nombre || "Destino sin nombre")}</div>
+      <div class="res-tipo">${iconoTipo(r.tipo)} ${escaparHtml(r.tipo || "destino")}</div>
+      <div class="res-desc">${escaparHtml(r.descripcion || "Sin descripcion.")}</div>
       <div class="res-sim">Similitud: ${Math.round((r.similitud||0)*100)}%</div>
       <div class="sim-bar"><div class="sim-fill" style="width:${Math.round((r.similitud||0)*100)}%"></div></div>
     </div>
   `).join("");
+  resCont.querySelectorAll(".resultado-card").forEach(card => {
+    const r = data.resultados[Number(card.dataset.idx)];
+    const abrir = () => irADestino(Number(r.lat) || 0, Number(r.lon) || 0, r.nombre || "");
+    card.addEventListener("click", abrir);
+    card.addEventListener("keydown", event => {
+      if (event.key === "Enter" || event.key === " ") {
+        event.preventDefault();
+        abrir();
+      }
+    });
+  });
 }
 
 function buscarEjemplo(q) {
@@ -343,7 +382,7 @@ function irADestino(lat, lon, nombre) {
   setTimeout(() => {
     mapa.setView([lat, lon], 12);
     marcadores.forEach(m => {
-      if (m.getPopup()?.getContent()?.includes(nombre)) m.openPopup();
+      if (m.destinoNombre === nombre) m.openPopup();
     });
   }, 150);
 }
@@ -370,19 +409,21 @@ async function enviarChat() {
 
   if (!data) { agregarMensaje("bot", "❌ Error de conexión."); return; }
 
-  let contenido = data.respuesta || "No tengo respuesta.";
+  let contenido = escaparHtml(data.respuesta || "No tengo respuesta.").replace(/\n/g, "<br>");
   if (data.destinos?.length) {
-    contenido += `<div class="msg-fuentes">📍 Fuentes: ${data.destinos.map(d => d.nombre).join(", ")}</div>`;
+    const fuentes = data.destinos.map(d => escaparHtml(d.nombre || "Destino")).join(", ");
+    contenido += `<div class="msg-fuentes">📍 Fuentes: ${fuentes}</div>`;
   }
-  agregarMensaje("bot", contenido);
+  agregarMensaje("bot", contenido, "", true);
 }
 
-function agregarMensaje(tipo, texto, cls = "") {
+function agregarMensaje(tipo, texto, cls = "", html = false) {
   const cont = document.getElementById("chatContenedor");
   const id   = `msg_${Date.now()}_${++mensajeSeq}`;
   const div  = document.createElement("div");
-  const cuerpo = (tipo === "bot" ? String(texto) : escaparHtml(String(texto)))
-    .replace(/\n/g, "<br>");
+  const cuerpo = html
+    ? String(texto)
+    : escaparHtml(String(texto)).replace(/\n/g, "<br>");
   div.id = id;
   div.className = tipo === "bot" ? "msg-bot" : "msg-user";
   div.innerHTML = `
@@ -395,12 +436,23 @@ function agregarMensaje(tipo, texto, cls = "") {
 }
 
 function escaparHtml(texto) {
-  return texto
+  return String(texto ?? "")
     .replaceAll("&", "&amp;")
     .replaceAll("<", "&lt;")
     .replaceAll(">", "&gt;")
     .replaceAll('"', "&quot;")
     .replaceAll("'", "&#039;");
+}
+
+function urlSegura(url) {
+  const value = String(url || "").trim();
+  if (!value) return "";
+  try {
+    const parsed = new URL(value, window.location.origin);
+    return ["http:", "https:"].includes(parsed.protocol) ? parsed.href : "";
+  } catch {
+    return "";
+  }
 }
 
 function preguntarChat(q) {
@@ -488,8 +540,8 @@ function renderGrafoD3(container, tripletas) {
     const ejemplos = rels.slice(0, 3);
 
     tooltip.innerHTML = `
-      <div class="grafo-tooltip-title">${id}</div>
-      <div class="grafo-tooltip-meta">${tipo}${total ? " · " + total + " relaciones" : ""}</div>
+      <div class="grafo-tooltip-title">${escaparHtml(id)}</div>
+      <div class="grafo-tooltip-meta">${escaparHtml(tipo)}${total ? " · " + total + " relaciones" : ""}</div>
       ${total ? `
         <div class="gt-row">
           <span class="gt-label">Salientes:</span> ${outgoing}
@@ -500,13 +552,13 @@ function renderGrafoD3(container, tripletas) {
       ${topPreds.length ? `
         <div class="gt-subtitle">Predicados frecuentes</div>
         <div class="gt-chips">
-          ${topPreds.map(([p, c]) => `<span class="gt-chip">${p} (${c})</span>`).join("")}
+          ${topPreds.map(([p, c]) => `<span class="gt-chip">${escaparHtml(p)} (${c})</span>`).join("")}
         </div>
       ` : ""}
       ${ejemplos.length ? `
         <div class="gt-subtitle">Ejemplos</div>
         <div class="gt-list">
-          ${ejemplos.map(r => `<div>${r.dir} ${r.other}</div>`).join("")}
+          ${ejemplos.map(r => `<div>${escaparHtml(r.dir)} ${escaparHtml(r.other)}</div>`).join("")}
         </div>
       ` : ""}
     `;
@@ -669,9 +721,9 @@ function renderTripletasTabla(tripletas) {
       <tbody>
         ${tripletas.slice(0, 100).map(t => `
           <tr>
-            <td class="t-s">${t.s}</td>
-            <td class="t-p">${t.p}</td>
-            <td class="t-o">${t.o}</td>
+            <td class="t-s">${escaparHtml(t.s)}</td>
+            <td class="t-p">${escaparHtml(t.p)}</td>
+            <td class="t-o">${escaparHtml(t.o)}</td>
           </tr>`).join("")}
       </tbody>
     </table>
@@ -741,17 +793,17 @@ async function ejecutarSparql() {
   }).then(r => r.json()).catch(() => null);
 
   if (!data) { cont.innerHTML = `<p class="msg-error">Error de conexión.</p>`; return; }
-  if (data.error) { cont.innerHTML = `<p class="msg-error">${data.error}</p>`; return; }
+  if (data.error) { cont.innerHTML = `<p class="msg-error">${escaparHtml(data.error)}</p>`; return; }
   if (!data.resultados?.length) { cont.innerHTML = `<p class="msg-loading">Sin resultados.</p>`; return; }
 
   const cols = Object.keys(data.resultados[0]);
   cont.innerHTML = `
     <p style="font-size:.8rem;color:var(--c-text-sec);margin-bottom:.5rem">${data.total} resultados</p>
     <table class="sparql-table">
-      <thead><tr>${cols.map(c => `<th>${c}</th>`).join("")}</tr></thead>
+      <thead><tr>${cols.map(c => `<th>${escaparHtml(c)}</th>`).join("")}</tr></thead>
       <tbody>
         ${data.resultados.map(r =>
-          `<tr>${cols.map(c => `<td>${r[c] || ""}</td>`).join("")}</tr>`
+          `<tr>${cols.map(c => `<td>${escaparHtml(r[c] || "")}</td>`).join("")}</tr>`
         ).join("")}
       </tbody>
     </table>`;

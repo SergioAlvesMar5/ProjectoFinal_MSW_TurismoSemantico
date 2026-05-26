@@ -17,6 +17,7 @@ Rutas principales:
 """
 
 import json
+import os
 import time
 import threading
 from pathlib import Path
@@ -54,6 +55,46 @@ osm_thread_lock = threading.Lock()
 DATA_FILE = Path("data/destinos.json")
 DATA_FILE.parent.mkdir(exist_ok=True)
 OSM_CACHE_MIN_ITEMS = 120
+
+
+def _json_body() -> dict:
+    return request.get_json(silent=True) or {}
+
+
+def _int_arg(
+    name: str,
+    default: int,
+    min_value: int | None = None,
+    max_value: int | None = None,
+) -> tuple[int | None, str | None]:
+    raw = request.args.get(name, default)
+    try:
+        value = int(raw)
+    except (TypeError, ValueError):
+        return None, f"Parametro {name} debe ser un entero"
+    if min_value is not None:
+        value = max(min_value, value)
+    if max_value is not None:
+        value = min(max_value, value)
+    return value, None
+
+
+def _float_arg(
+    name: str,
+    default: float,
+    min_value: float | None = None,
+    max_value: float | None = None,
+) -> tuple[float | None, str | None]:
+    raw = request.args.get(name, default)
+    try:
+        value = float(raw)
+    except (TypeError, ValueError):
+        return None, f"Parametro {name} debe ser numerico"
+    if min_value is not None:
+        value = max(min_value, value)
+    if max_value is not None:
+        value = min(max_value, value)
+    return value, None
 
 
 def log(msg: str):
@@ -326,7 +367,8 @@ def api_cargar():
         return jsonify({"ok": False, "msg": "Ya hay una carga en progreso."})
 
     # Intentar cargar desde caché primero
-    forzar = request.json.get("forzar", False) if request.json else False
+    body = _json_body()
+    forzar = bool(body.get("forzar", False))
     if DATA_FILE.exists() and not forzar:
         global destinos_global, grafo_global
         cache_data = _load_cache_json(DATA_FILE)
@@ -368,7 +410,9 @@ def api_cargar():
 @app.route("/api/destinos")
 def api_destinos():
     tipo   = request.args.get("tipo", "")
-    limite = int(request.args.get("limite", 1000))
+    limite, err = _int_arg("limite", 1000, min_value=0, max_value=5000)
+    if err:
+        return jsonify({"error": err}), 400
     with data_lock:
         datos = list(destinos_global)
     if tipo:
@@ -402,7 +446,9 @@ def api_destinos():
 @app.route("/api/buscar")
 def api_buscar():
     query = request.args.get("q", "").strip()
-    k     = int(request.args.get("k", 8))
+    k, err = _int_arg("k", 8, min_value=1, max_value=50)
+    if err:
+        return jsonify({"error": err}), 400
     if not query:
         return jsonify({"error": "Parámetro q requerido"}), 400
 
@@ -429,8 +475,9 @@ def api_clima():
 @app.route("/api/overpass")
 def api_overpass():
     ciudad = request.args.get("ciudad", "").strip()
-    radio  = float(request.args.get("radio", 5))
-    radio = max(1.0, min(radio, 20.0))
+    radio, err = _float_arg("radio", 5.0, min_value=1.0, max_value=20.0)
+    if err:
+        return jsonify({"error": err}), 400
     if not ciudad:
         return jsonify({"error": "Parámetro ciudad requerido"}), 400
     pois = get_monumentos_ciudad(ciudad, radio_km=radio)
@@ -439,7 +486,7 @@ def api_overpass():
 
 @app.route("/api/chat", methods=["POST"])
 def api_chat():
-    body     = request.json or {}
+    body     = _json_body()
     pregunta = body.get("pregunta", "").strip()
     if not pregunta:
         return jsonify({"error": "Campo pregunta requerido"}), 400
@@ -462,7 +509,7 @@ def api_grafo():
 @app.route("/api/sparql", methods=["GET", "POST"])
 def api_sparql():
     if request.method == "POST":
-        q = (request.json or {}).get("query", "")
+        q = _json_body().get("query", "")
     else:
         q = request.args.get("q", "")
 
@@ -501,4 +548,6 @@ if __name__ == "__main__":
     print("  TurismoSemántico — Plataforma de Turismo Inteligente")
     print("  http://localhost:5000")
     print("=" * 60)
-    app.run(debug=True, port=5000)
+    debug = os.environ.get("FLASK_DEBUG", "").lower() in {"1", "true", "yes"}
+    port = int(os.environ.get("PORT", "5000"))
+    app.run(debug=debug, port=port)

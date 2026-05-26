@@ -138,10 +138,10 @@ El proceso de datos está orquestado desde \texttt{app.py} y se divide en cinco 
   \item \textbf{Normalización}: las coordenadas de Wikidata se convierten desde \texttt{Point(lon lat)} a campos numéricos \texttt{lat} y \texttt{lon}; los tipos se homogeneizan en \texttt{tipo} o \texttt{tipo\_osm}; los textos de búsqueda se normalizan eliminando acentos, pasando a minúsculas y reduciendo caracteres no alfanuméricos.
   \item \textbf{Deduplicación}: la función \texttt{\_merge\_destinos} prioriza claves estables: \texttt{wikidata\_id}, \texttt{id} y, como último recurso, el nombre normalizado. Así evita duplicados entre consultas de Wikidata y entre Wikidata/OSM.
   \item \textbf{Persistencia y caché}: los destinos se guardan en \texttt{data/destinos.json}; el grafo se serializa en \texttt{data/grafo.ttl}; los vectores se almacenan en \texttt{chroma\_db/}. Si la caché existe, la aplicación puede arrancar sin repetir todas las consultas externas.
-  \item \textbf{Indexación semántica}: se construye un texto indexable con nombre, tipo, ciudad y descripción. Se generan embeddings con \texttt{paraphrase-multilingual-MiniLM-L12-v2}; si el entorno no dispone de \texttt{sentence-transformers}, se activa un fallback TF-IDF/Jaccard.
+  \item \textbf{Indexación semántica}: se construye un texto indexable con nombre, tipo, ciudad y descripción. Se generan embeddings con \texttt{paraphrase-multilingual-MiniLM-L12-v2}; si el entorno no dispone de \texttt{sentence-transformers}, ChromaDB o del modelo descargado, se activa un fallback TF-IDF/Jaccard.
 \end{enumerate}
 
-El código añade resiliencia práctica: reintentos y timeouts en APIs externas, varios endpoints Overpass alternativos, conversión de caché antigua a UTF-8, carga OSM en hilo de fondo para no bloquear la interfaz, y degradación controlada cuando faltan spaCy, ChromaDB o una clave LLM.
+El código añade resiliencia práctica: reintentos y timeouts en APIs externas, varios endpoints Overpass alternativos, conversión de caché antigua a UTF-8, carga OSM en hilo de fondo para no bloquear la interfaz, y degradación controlada cuando faltan spaCy, ChromaDB, el modelo de embeddings o una clave LLM.
 
 \begin{figure}[H]
 \centering
