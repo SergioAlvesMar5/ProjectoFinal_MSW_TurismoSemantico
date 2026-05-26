@@ -25,6 +25,14 @@
   "latex-workshop.view.pdf.viewer": "tab",
   "latex-workshop.linting.chktex.enabled": true,
   "latex-workshop.linting.chktex.exec.path": "C:/Users/Becario/AppData/Local/Programs/MiKTeX/miktex/bin/x64/chktex.exe",
+  "latex-workshop.linting.chktex.args": [
+    "-wall",
+    "-n13",
+    "-n21",
+    "-n31",
+    "-n36",
+    "-q"
+  ],
   "python-envs.defaultEnvManager": "ms-python.python:conda",
   "python-envs.defaultPackageManager": "ms-python.python:conda"
 }

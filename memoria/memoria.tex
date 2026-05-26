@@ -35,7 +35,7 @@
   colorlinks=true,
   linkcolor=tsgreen,
   urlcolor=tsgreen,
-  pdftitle={Memoria TurismoSemantico},
+  pdftitle={Memoria TurismoSemántico},
   pdfauthor={Sergio Alves Martín}
 }
 
@@ -90,17 +90,17 @@ La aplicación desarrollada no se queda en un diseño teórico: implementa una p
 \textbf{Indicación de la guía} & \textbf{Respuesta en \proyecto{}}\\
 \midrule
 Dominio elegido & Turismo cultural y patrimonio español, con destinos, museos, sitios UNESCO, POIs históricos y clima.\\
-Al menos 2 fuentes abiertas & Wikidata, OpenStreetMap/Nominatim/Overpass y Open-Meteo; Anthropic es opcional y no sustituye a las fuentes abiertas.\\
+Dos fuentes abiertas & Wikidata, OpenStreetMap/Nominatim/Overpass y Open-Meteo; Anthropic es opcional y no sustituye a las fuentes abiertas.\\
 Limpieza y preprocesado & Normalización de coordenadas, tipos y textos; deduplicación por identificador/nombre; caché JSON; serialización TTL; embeddings.\\
 Arquitectura tecnológica & Frontend web, backend Flask, módulos de ingesta, RDFLib, ChromaDB, APIs externas y persistencia local.\\
-4 funcionalidades o más & Mapa, POIs por ciudad, búsqueda semántica, chatbot RAG, grafo RDF, SPARQL y descarga Turtle.\\
+Cuatro funcionalidades o más & Mapa, POIs por ciudad, búsqueda semántica, chatbot RAG, grafo RDF, SPARQL y descarga Turtle.\\
 Interfaz y flujo & Pantalla de carga, navegación por secciones, mapa con panel lateral, buscador, chat, grafo y consola SPARQL.\\
 Elementos valorables & Recomendación semántica, chatbot, accesibilidad, SHACL, integración REST y exportación de conocimiento.\\
 \bottomrule
 \end{tabularx}
 \end{table}
 
-\separaseccion
+\separaseccion{}
 \section{Descripción del dominio elegido}
 
 \proyecto{} es una aplicación web orientada al \textbf{turismo cultural y patrimonial en España}. El dominio elegido combina información geográfica, descripciones culturales, bienes declarados Patrimonio de la Humanidad, museos, monumentos y datos meteorológicos de apoyo a la visita. La motivación principal es que la información turística pública existe, pero está repartida entre fuentes heterogéneas: Wikidata publica entidades semánticas consultables con SPARQL, OpenStreetMap contiene puntos de interés geoespaciales mantenidos por la comunidad y Open-Meteo ofrece meteorología en tiempo real.
@@ -116,8 +116,8 @@ El programa transforma esas fuentes en una experiencia única: un mapa interacti
 \toprule
 \textbf{Fuente} & \textbf{Formato} & \textbf{Datos obtenidos} & \textbf{Uso en la app}\\
 \midrule
-Wikidata Query Service & SPARQL\slash JSON & Sitios UNESCO de España, museos, ciudades y destinos con coordenadas, etiquetas, descripciones, imágenes e identificadores Q. & Fuente semántica principal, grafo RDF, embeddings y consultas.\\
-OpenStreetMap Overpass y Nominatim & JSON\slash Overpass QL & Monumentos, castillos, ruinas, lugares de culto, museos y POIs por ciudad o por caja geográfica nacional. & Enriquecimiento geográfico, búsqueda de POIs y carga en segundo plano.\\
+Wikidata Query Service & SPARQL\slash{}JSON & Sitios UNESCO de España, museos, ciudades y destinos con coordenadas, etiquetas, descripciones, imágenes e identificadores Q. & Fuente semántica principal, grafo RDF, embeddings y consultas.\\
+OpenStreetMap Overpass y Nominatim & JSON\slash{}Overpass QL & Monumentos, castillos, ruinas, lugares de culto, museos y POIs por ciudad o por caja geográfica nacional. & Enriquecimiento geográfico, búsqueda de POIs y carga en segundo plano.\\
 Open-Meteo & JSON REST & Tiempo actual, viento y previsión de varios días a partir de latitud y longitud. & Panel de detalle del destino.\\
 Anthropic API (opcional) & JSON REST & Generación de respuestas en lenguaje natural a partir del contexto recuperado. & Chatbot RAG; si no hay clave, se usa respuesta local.\\
 \bottomrule
@@ -128,7 +128,7 @@ En la caché local analizada (\texttt{data/destinos.json}) hay \textbf{105 desti
 
 La selección de fuentes busca complementar tres dimensiones: \textbf{semántica} (Wikidata aporta identificadores, tipos y descripciones enlazables), \textbf{geoespacial} (OSM aporta puntos de interés actualizados por la comunidad) y \textbf{contextual} (Open-Meteo añade utilidad inmediata para planificar visitas). Esta combinación hace que los datos sean reutilizables, explicables y adecuados para funciones de exploración y recomendación.
 
-\separaseccion
+\separaseccion{}
 \section{Limpieza, integración y preprocesado}
 
 El proceso de datos está orquestado desde \texttt{app.py} y se divide en cinco fases:
@@ -192,7 +192,7 @@ Datos & JSON, TTL y caché local & JSON agiliza la carga de la app; TTL represen
 \end{tabularx}
 \end{table}
 
-\separaseccion
+\separaseccion{}
 \section{Arquitectura del sistema}
 
 La arquitectura es modular. El navegador consume una API REST Flask; el backend coordina fuentes externas, caché, grafo RDF y búsqueda vectorial. Los módulos de la carpeta \texttt{pipeline/} separan responsabilidades: \texttt{wikidata.py}, \texttt{overpass.py}, \texttt{weather.py}, \texttt{rdf\_model.py} y \texttt{embeddings.py}.
@@ -287,7 +287,7 @@ SPARQL local & Permitir explotación directa del grafo con consultas reproducibl
 \end{tabularx}
 \end{table}
 
-\separaseccion
+\separaseccion{}
 \section{Diseño de la interfaz de usuario}
 
 La interfaz está organizada como una aplicación de una sola página. Tras la pantalla de carga, el usuario navega con una cabecera fija entre cinco vistas: Explorar, Buscar, Guía IA, Grafo RDF y SPARQL. El flujo de interacción principal es:
@@ -353,14 +353,14 @@ Grafo/SPARQL & D3, tabla de tripletas, editor y resultados. & Aprendizaje guiado
 \node[label] at ($(side.south)+(0,0.45)$) {POIs OSM\\por ciudad};
 \node[panel, minimum width=7.65cm, minimum height=4.65cm, anchor=north west] (mapa) at ($(screen.north west)+(3.05,-1.1)$) {};
 \node[label] at (mapa.center) {Mapa Leaflet\\marcadores por tipo\\popup y clima};
-\foreach \x/\y in {-1.8/0.6, -0.7/-0.45, 1.1/0.25, 2.0/-0.8} {
+\foreach \x/\y in {-2.35/1.0, -2.05/-1.05, 1.85/0.95, 2.75/-1.25} {
   \fill[tsgreen] ($(mapa.center)+(\x,\y)$) circle (0.08cm);
 }
 \end{tikzpicture}}
 \caption{Boceto de la pantalla principal de exploración.}
 \end{figure}
 
-\separaseccion
+\separaseccion{}
 \section{Evaluación y demostración}
 
 La evaluación se centra en comprobar que cada requisito se traduce en una funcionalidad verificable. A nivel de datos, la caché incluida permite arrancar la aplicación con 105 destinos, reconstruir el grafo y generar el índice semántico sin depender de una extracción completa en cada ejecución.
