@@ -250,11 +250,12 @@ ProjectoFinal_MSW_TurismoSemantico/
 
 | Práctica | Tecnología usada en el proyecto |
 |----------|--------------------------------|
-| P1-P4    | JSON en pipeline de ingesta y caché |
-| P5       | Patrón API REST (múltiples APIs externas) |
-| P6       | Ontología RDF/OWL en `rdf_model.py` |
-| P7       | SPARQL a Wikidata + consola local |
-| P8       | Shapes SHACL en `rdf_model.py` |
-| P9       | NER con spaCy en `embeddings.py` |
-| P10      | Word Embeddings + similitud coseno |
-| P11      | RAG completo: ChromaDB + LLM opcional |
+| P1-P2    | Datos estructurados y validación: el proyecto usa JSON de APIs y RDF/Turtle; la validación formal se cubre con SHACL en lugar de DTD/XSD porque el dominio final es RDF. |
+| P3-P4    | Consulta y transformación declarativa: filtros REST, serialización JSON/Turtle y SPARQL local cumplen el papel de selección/transformación que en XML se practicó con XPath, XSLT y XQuery. |
+| P5       | Consumo de APIs externas con `requests`: Wikidata, OpenStreetMap/Nominatim/Overpass y Open-Meteo. |
+| P6       | Ontología RDF/OWL en `rdf_model.py`, clases, propiedades, subclases y `owl:sameAs`. |
+| P7       | SPARQL a Wikidata y consola SPARQL local sobre el grafo propio. |
+| P8       | Shapes SHACL y validación con `pyshacl` mediante `/api/shacl?validar=1`. |
+| P9       | NER con spaCy en `embeddings.py`. |
+| P10      | Word Embeddings, similitud semántica y ChromaDB. |
+| P11      | RAG completo: recuperación semántica + respuesta local o LLM opcional. |
