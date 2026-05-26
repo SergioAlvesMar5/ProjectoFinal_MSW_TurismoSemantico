@@ -24,5 +24,7 @@
   "latex-workshop.latex.recipe.default": "pdflatex (MiKTeX) x2",
   "latex-workshop.view.pdf.viewer": "tab",
   "latex-workshop.linting.chktex.enabled": true,
-  "latex-workshop.linting.chktex.exec.path": "C:/Users/Becario/AppData/Local/Programs/MiKTeX/miktex/bin/x64/chktex.exe"
+  "latex-workshop.linting.chktex.exec.path": "C:/Users/Becario/AppData/Local/Programs/MiKTeX/miktex/bin/x64/chktex.exe",
+  "python-envs.defaultEnvManager": "ms-python.python:conda",
+  "python-envs.defaultPackageManager": "ms-python.python:conda"
 }

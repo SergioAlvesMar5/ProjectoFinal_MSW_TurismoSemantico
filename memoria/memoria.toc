@@ -8,4 +8,4 @@
 \contentsline {section}{\numberline {6}Funcionalidades de la aplicación}{4}{section.6}%
 \contentsline {section}{\numberline {7}Diseño de la interfaz de usuario}{4}{section.7}%
 \contentsline {section}{\numberline {8}Evaluación y demostración}{5}{section.8}%
-\contentsline {section}{\numberline {9}Valoración técnica y conclusiones}{5}{section.9}%
+\contentsline {section}{\numberline {9}Valoración técnica y conclusiones}{6}{section.9}%

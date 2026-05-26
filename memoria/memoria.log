@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.29 (MiKTeX 26.5) (preloaded format=pdflatex 2026.5.22)  22 MAY 2026 11:46
+This is pdfTeX, Version 3.141592653-2.6-1.40.29 (MiKTeX 26.5) (preloaded format=pdflatex 2026.5.22)  26 MAY 2026 12:38
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -820,7 +820,7 @@ ikz/libraries\tikzlibrarycalc.code.tex
 File: tikzlibrarycalc.code.tex 2025-08-29 v3.1.11a (3.1.11a)
 )
 Package hyperref Info: Option `colorlinks' set `true' on input line 40.
-LaTeX Font Info:    Trying to load font information for T1+lmr on input line 47
+LaTeX Font Info:    Trying to load font information for T1+lmr on input line 48
 .
 
 (C:\Users\Becario\AppData\Local\Programs\MiKTeX\tex/latex/lm\t1lmr.fd
@@ -840,33 +840,33 @@ Package babel Info: 'spanish' activates 'spanish' shorthands.
 )
 \openout1 = `memoria.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 47.
-LaTeX Font Info:    ... okay on input line 47.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 47.
-LaTeX Font Info:    ... okay on input line 47.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 47.
-LaTeX Font Info:    ... okay on input line 47.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 47.
-LaTeX Font Info:    ... okay on input line 47.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 47.
-LaTeX Font Info:    ... okay on input line 47.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 47.
-LaTeX Font Info:    ... okay on input line 47.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 47.
-LaTeX Font Info:    ... okay on input line 47.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 47.
-LaTeX Font Info:    ... okay on input line 47.
-LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 47.
-LaTeX Font Info:    ... okay on input line 47.
-LaTeX Info: Redefining \. on input line 47.
-LaTeX Info: Redefining \% on input line 47.
-LaTeX Info: Redefining \microtypecontext on input line 47.
-Package microtype Info: Applying patch `item' on input line 47.
-Package microtype Info: Applying patch `toc' on input line 47.
-Package microtype Info: Applying patch `eqnum' on input line 47.
-Package microtype Info: Applying patch `footnote' on input line 47.
-Package microtype Info: Applying patch `verbatim' on input line 47.
-LaTeX Info: Redefining \microtypesetup on input line 47.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 48.
+LaTeX Font Info:    ... okay on input line 48.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 48.
+LaTeX Font Info:    ... okay on input line 48.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 48.
+LaTeX Font Info:    ... okay on input line 48.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 48.
+LaTeX Font Info:    ... okay on input line 48.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 48.
+LaTeX Font Info:    ... okay on input line 48.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 48.
+LaTeX Font Info:    ... okay on input line 48.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 48.
+LaTeX Font Info:    ... okay on input line 48.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 48.
+LaTeX Font Info:    ... okay on input line 48.
+LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 48.
+LaTeX Font Info:    ... okay on input line 48.
+LaTeX Info: Redefining \. on input line 48.
+LaTeX Info: Redefining \% on input line 48.
+LaTeX Info: Redefining \microtypecontext on input line 48.
+Package microtype Info: Applying patch `item' on input line 48.
+Package microtype Info: Applying patch `toc' on input line 48.
+Package microtype Info: Applying patch `eqnum' on input line 48.
+Package microtype Info: Applying patch `footnote' on input line 48.
+Package microtype Info: Applying patch `verbatim' on input line 48.
+LaTeX Info: Redefining \microtypesetup on input line 48.
 Package microtype Info: Generating PDF output.
 Package microtype Info: Character protrusion enabled (level 2).
 Package microtype Info: Using default protrusion set `alltext'.
@@ -942,7 +942,7 @@ Package epstopdf-base Info: Redefining graphics rule for `.eps' on input line 4
 .cfg
 File: epstopdf-sys.cfg 2021/03/18 v2.0 Configuration of epstopdf for MiKTeX
 ))
-Package hyperref Info: Link coloring ON on input line 47.
+Package hyperref Info: Link coloring ON on input line 48.
 
 (c:\Users\Becario\Documents\UNI\ProjectoFinal_MSW_TurismoSemantico\memoria\memo
 ria.out)
@@ -952,35 +952,35 @@ ria.out)
 \openout4 = `memoria.out'.
 
 LaTeX Font Info:    Trying to load font information for OT1+lmr on input line 6
-7.
+8.
  (C:\Users\Becario\AppData\Local\Programs\MiKTeX\tex/latex/lm\ot1lmr.fd
 File: ot1lmr.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 )
 LaTeX Font Info:    Trying to load font information for OML+lmm on input line 6
-7.
+8.
  (C:\Users\Becario\AppData\Local\Programs\MiKTeX\tex/latex/lm\omllmm.fd
 File: omllmm.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 )
 LaTeX Font Info:    Trying to load font information for OMS+lmsy on input line 
-67.
+68.
 
 (C:\Users\Becario\AppData\Local\Programs\MiKTeX\tex/latex/lm\omslmsy.fd
 File: omslmsy.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 )
 LaTeX Font Info:    Trying to load font information for OMX+lmex on input line 
-67.
+68.
 
 (C:\Users\Becario\AppData\Local\Programs\MiKTeX\tex/latex/lm\omxlmex.fd
 File: omxlmex.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 )
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <10> on input line 67.
+(Font)              <10> on input line 68.
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <7> on input line 67.
+(Font)              <7> on input line 68.
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <5> on input line 67.
-LaTeX Font Info:    Trying to load font information for T1+lmtt on input line 6
-9.
+(Font)              <5> on input line 68.
+LaTeX Font Info:    Trying to load font information for T1+lmtt on input line 7
+0.
 
 (C:\Users\Becario\AppData\Local\Programs\MiKTeX\tex/latex/lm\t1lmtt.fd
 File: t1lmtt.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
@@ -1002,32 +1002,11 @@ LaTeX Info: Redefining \% on input line 1.
 \tf@toc=\write5
 \openout5 = `memoria.toc'.
 
+ [1] [2] [3] [4] [5
 
-Underfull \hbox (badness 1668) in paragraph at lines 122--122
-\T1/lmr/m/n/9 (+20) ti-ca prin-ci-pal,
- []
+] [6
 
-
-Underfull \hbox (badness 10000) in paragraph at lines 122--122
-[]|\T1/lmr/m/n/9 (+20) OpenStreetMap
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 122--122
-[]|\T1/lmr/m/n/9 (+20) JSON/Overpass
- []
-
-
-Overfull \hbox (4.85825pt too wide) in paragraph at lines 122--122
-[]|\T1/lmr/m/n/9 (-20) Enriquecimiento
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 122--122
-\T1/lmr/m/n/9 (+20) y car-ga en
- []
-
-[1] [2] [3] [4] [5] [6]
+]
 (c:\Users\Becario\Documents\UNI\ProjectoFinal_MSW_TurismoSemantico\memoria\memo
 ria.aux
 LaTeX Info: Redefining \. on input line 11.
@@ -1041,11 +1020,11 @@ Package rerunfilecheck Info: File `memoria.out' has not changed.
 (rerunfilecheck)             Checksum: 44993F0DAD17B8871DCFD7A2B113A24E;2150.
  ) 
 Here is how much of TeX's memory you used:
- 25441 strings out of 467691
- 482909 string characters out of 5414019
- 939159 words of memory out of 5000000
- 53915 multiletter control sequences out of 15000+600000
- 690031 words of font info for 146 fonts, out of 8000000 for 9000
+ 25432 strings out of 467691
+ 482826 string characters out of 5414019
+ 939247 words of memory out of 5000000
+ 53916 multiletter control sequences out of 15000+600000
+ 689586 words of font info for 141 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  84i,10n,94p,1078b,806s stack positions out of 10000i,1000n,20000p,200000b,200000s
 <C:/Users/Becario/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmbx10.
@@ -1061,7 +1040,7 @@ lmr12.pfb><C:/Users/Becario/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm
 lm/lmtt8.pfb><C:/Users/Becario/AppData/Local/Programs/MiKTeX/fonts/type1/public
 /lm/lmtt9.pfb>
 Output written on c:\Users\Becario\Documents\UNI\ProjectoFinal_MSW_TurismoSeman
-tico\memoria\memoria.pdf (7 pages, 370863 bytes).
+tico\memoria\memoria.pdf (7 pages, 370964 bytes).
 PDF statistics:
  164 PDF objects out of 1000 (max. 8388607)
  30 named destinations out of 1000 (max. 500000)

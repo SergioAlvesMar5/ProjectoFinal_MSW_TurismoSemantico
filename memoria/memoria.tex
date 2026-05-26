@@ -36,13 +36,14 @@
   linkcolor=tsgreen,
   urlcolor=tsgreen,
   pdftitle={Memoria TurismoSemantico},
-  pdfauthor={Proyecto MSW}
+  pdfauthor={Sergio Alves Martín}
 }
 
 \newcommand{\proyecto}{TurismoSemántico}
 \newcommand{\asignatura}{Modelado Semántico de la Web}
-\newcommand{\autor}{[Nombre del estudiante o pareja]}
+\newcommand{\autor}{Sergio Alves Martín}
 \newcommand{\fechaentrega}{Mayo de 2026}
+\newcommand{\separaseccion}{\vspace{0.65\baselineskip}}
 
 \begin{document}
 
@@ -99,6 +100,7 @@ Elementos valorables & Recomendación semántica, chatbot, accesibilidad, SHACL,
 \end{tabularx}
 \end{table}
 
+\separaseccion
 \section{Descripción del dominio elegido}
 
 \proyecto{} es una aplicación web orientada al \textbf{turismo cultural y patrimonial en España}. El dominio elegido combina información geográfica, descripciones culturales, bienes declarados Patrimonio de la Humanidad, museos, monumentos y datos meteorológicos de apoyo a la visita. La motivación principal es que la información turística pública existe, pero está repartida entre fuentes heterogéneas: Wikidata publica entidades semánticas consultables con SPARQL, OpenStreetMap contiene puntos de interés geoespaciales mantenidos por la comunidad y Open-Meteo ofrece meteorología en tiempo real.
@@ -110,12 +112,12 @@ El programa transforma esas fuentes en una experiencia única: un mapa interacti
 \begin{table}[H]
 \centering
 \small
-\begin{tabularx}{\textwidth}{p{2.8cm}p{2.6cm}X p{2.1cm}}
+\begin{tabularx}{\textwidth}{>{\raggedright\arraybackslash}p{2.25cm}>{\raggedright\arraybackslash}p{2.25cm}>{\raggedright\arraybackslash}X>{\raggedright\arraybackslash}p{3.15cm}}
 \toprule
 \textbf{Fuente} & \textbf{Formato} & \textbf{Datos obtenidos} & \textbf{Uso en la app}\\
 \midrule
-Wikidata Query Service & SPARQL/JSON & Sitios UNESCO de España, museos, ciudades y destinos con coordenadas, etiquetas, descripciones, imágenes e identificadores Q. & Fuente semántica principal, grafo RDF, embeddings y consultas.\\
-OpenStreetMap Overpass y Nominatim & JSON/Overpass QL & Monumentos, castillos, ruinas, lugares de culto, museos y POIs por ciudad o por caja geográfica nacional. & Enriquecimiento geográfico, búsqueda de POIs y carga en segundo plano.\\
+Wikidata Query Service & SPARQL\slash JSON & Sitios UNESCO de España, museos, ciudades y destinos con coordenadas, etiquetas, descripciones, imágenes e identificadores Q. & Fuente semántica principal, grafo RDF, embeddings y consultas.\\
+OpenStreetMap Overpass y Nominatim & JSON\slash Overpass QL & Monumentos, castillos, ruinas, lugares de culto, museos y POIs por ciudad o por caja geográfica nacional. & Enriquecimiento geográfico, búsqueda de POIs y carga en segundo plano.\\
 Open-Meteo & JSON REST & Tiempo actual, viento y previsión de varios días a partir de latitud y longitud. & Panel de detalle del destino.\\
 Anthropic API (opcional) & JSON REST & Generación de respuestas en lenguaje natural a partir del contexto recuperado. & Chatbot RAG; si no hay clave, se usa respuesta local.\\
 \bottomrule
@@ -126,6 +128,7 @@ En la caché local analizada (\texttt{data/destinos.json}) hay \textbf{105 desti
 
 La selección de fuentes busca complementar tres dimensiones: \textbf{semántica} (Wikidata aporta identificadores, tipos y descripciones enlazables), \textbf{geoespacial} (OSM aporta puntos de interés actualizados por la comunidad) y \textbf{contextual} (Open-Meteo añade utilidad inmediata para planificar visitas). Esta combinación hace que los datos sean reutilizables, explicables y adecuados para funciones de exploración y recomendación.
 
+\separaseccion
 \section{Limpieza, integración y preprocesado}
 
 El proceso de datos está orquestado desde \texttt{app.py} y se divide en cinco fases:
@@ -189,6 +192,7 @@ Datos & JSON, TTL y caché local & JSON agiliza la carga de la app; TTL represen
 \end{tabularx}
 \end{table}
 
+\separaseccion
 \section{Arquitectura del sistema}
 
 La arquitectura es modular. El navegador consume una API REST Flask; el backend coordina fuentes externas, caché, grafo RDF y búsqueda vectorial. Los módulos de la carpeta \texttt{pipeline/} separan responsabilidades: \texttt{wikidata.py}, \texttt{overpass.py}, \texttt{weather.py}, \texttt{rdf\_model.py} y \texttt{embeddings.py}.
@@ -223,7 +227,7 @@ La arquitectura es modular. El navegador consume una API REST Flask; el backend 
 \path[arrow] (json.east) -- (features.west);
 \path[arrow] (ttl.east) to[out=0,in=140] (features.north west);
 \path[arrow] (chroma.east) to[out=0,in=-140] (features.south west);
-\path[returnarrow] (features.south) -- ++(0,-1.05) -| node[pos=0.78, below, font=\scriptsize]{respuesta UI} (ui.south);
+\path[returnarrow] (features.south) -- ++(0,-2.45) -| node[pos=0.78, above, font=\scriptsize]{respuesta UI} (ui.south);
 \end{tikzpicture}}
 \caption{Arquitectura funcional de \proyecto{}.}
 \end{figure}
@@ -283,6 +287,7 @@ SPARQL local & Permitir explotación directa del grafo con consultas reproducibl
 \end{tabularx}
 \end{table}
 
+\separaseccion
 \section{Diseño de la interfaz de usuario}
 
 La interfaz está organizada como una aplicación de una sola página. Tras la pantalla de carga, el usuario navega con una cabecera fija entre cinco vistas: Explorar, Buscar, Guía IA, Grafo RDF y SPARQL. El flujo de interacción principal es:
@@ -309,6 +314,8 @@ La interfaz está organizada como una aplicación de una sola página. Tras la p
 \end{tikzpicture}}
 \caption{Flujo de uso principal de la interfaz.}
 \end{figure}
+
+\clearpage
 
 El diseño prioriza claridad operativa: filtros en un panel lateral, tarjetas de resultados, indicadores de similitud, mensajes de carga, ejemplos predefinidos para búsqueda y SPARQL, y actualización periódica del estado cuando OSM termina en segundo plano. Además, incorpora criterios de accesibilidad: uso de \texttt{aria-label}, regiones \texttt{aria-live}, navegación por botones, foco visible, contraste alto, modo claro/oscuro, adaptación responsive y respeto de \texttt{prefers-reduced-motion}.
 
@@ -353,6 +360,7 @@ Grafo/SPARQL & D3, tabla de tripletas, editor y resultados. & Aprendizaje guiado
 \caption{Boceto de la pantalla principal de exploración.}
 \end{figure}
 
+\separaseccion
 \section{Evaluación y demostración}
 
 La evaluación se centra en comprobar que cada requisito se traduce en una funcionalidad verificable. A nivel de datos, la caché incluida permite arrancar la aplicación con 105 destinos, reconstruir el grafo y generar el índice semántico sin depender de una extracción completa en cada ejecución.
@@ -375,10 +383,14 @@ Robustez & Caché, timeouts, carga OSM en segundo plano, fallback TF-IDF y respu
 
 Para una demostración de 10 minutos, el flujo más completo es: cargar caché o APIs, filtrar museos/UNESCO en el mapa, abrir un destino y consultar su clima, buscar ``arte medieval y catedrales góticas'', preguntar al guía RAG por recomendaciones culturales, visualizar el grafo y ejecutar una consulta SPARQL de conteo por tipo. Así se cubren fuentes abiertas, preprocesado, modelado semántico, interacción, recomendación y accesibilidad.
 
+\clearpage
+
 \section{Valoración técnica y conclusiones}
 
 El programa cumple los requisitos del trabajo: integra más de dos fuentes abiertas, define un pipeline de limpieza y fusión, propone e implementa una arquitectura completa, expone más de cuatro funcionalidades basadas en datos integrados y presenta una interfaz navegable con mapa, grafo y consultas. También añade elementos valorados positivamente por la rúbrica: recomendación semántica, chatbot RAG, SHACL, accesibilidad y posibilidad de integración con otras aplicaciones mediante REST, Turtle y SPARQL.
 
 Como limitaciones, la carga completa depende de conectividad y de la disponibilidad de APIs públicas; Overpass puede ser lento y por eso se ejecuta en segundo plano; el LLM requiere clave externa; y la caché local revisada todavía no contiene elementos OSM persistidos. Aun así, la arquitectura está preparada para degradar de forma controlada: caché si falla la red, TF-IDF si faltan embeddings y respuesta local si no hay LLM.
+
+Como evolución natural, el sistema podría incorporar persistencia periódica de los POIs recuperados desde OSM, perfiles de usuario para ajustar recomendaciones, validaciones SHACL más estrictas por tipo de destino y despliegue público con actualización programada de datos. Estas mejoras no cambian el núcleo semántico del proyecto, sino que lo convierten en una base extensible para un servicio turístico reutilizable y mantenible.
 
 \end{document}
