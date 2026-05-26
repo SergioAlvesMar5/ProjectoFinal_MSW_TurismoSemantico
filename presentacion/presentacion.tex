@@ -26,6 +26,21 @@
 \setbeamercolor{block title}{fg=white,bg=tsgreen}
 \setbeamercolor{block body}{bg=tslight}
 
+\newcommand{\demolocalbutton}{%
+  \tikz[baseline=(btn.base)]{
+    \node[
+      fill=tsgreen,
+      text=white,
+      rounded corners=2pt,
+      minimum width=3.45cm,
+      minimum height=0.74cm,
+      inner xsep=0.22cm,
+      inner ysep=0pt,
+      font=\normalsize\bfseries
+    ] (btn) {Abrir demo local};
+  }%
+}
+
 \title[TurismoSemántico]{TurismoSemántico}
 \subtitle{Plataforma inteligente del patrimonio cultural de España}
 \author{Sergio Alves Martín}
@@ -179,7 +194,7 @@
   {\Large Abrir la aplicación local para la demostración}
 
   \vspace{0.45cm}
-  \href{http://127.0.0.1:5000}{\beamergotobutton{\Large Abrir demo local}}
+  \href{http://127.0.0.1:5000}{\demolocalbutton}
 
   \vspace{0.55cm}
   \begin{block}{Flujo de demo}
