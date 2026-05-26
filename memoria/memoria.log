@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.29 (MiKTeX 26.5) (preloaded format=pdflatex 2026.5.26)  26 MAY 2026 14:06
+This is pdfTeX, Version 3.141592653-2.6-1.40.29 (MiKTeX 26.5) (preloaded format=pdflatex 2026.5.26)  26 MAY 2026 14:16
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -830,7 +830,9 @@ File: t1lmr.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 dftex.def
 File: l3backend-pdftex.def 2026-02-18 L3 backend support: PDF output (pdfTeX)
 \l__color_backend_stack_int=\count344
-) (memoria.aux
+)
+(c:\Users\Becario\Documents\UNI\ProjectoFinal_MSW_TurismoSemantico\memoria\memo
+ria.aux
 LaTeX Info: Redefining \. on input line 11.
 LaTeX Info: Redefining \% on input line 11.
 Package babel Info: 'spanish' activates 'spanish' shorthands.
@@ -941,20 +943,22 @@ Package epstopdf-base Info: Redefining graphics rule for `.eps' on input line 4
 File: epstopdf-sys.cfg 2021/03/18 v2.0 Configuration of epstopdf for MiKTeX
 ))
 Package hyperref Info: Link coloring ON on input line 48.
- (memoria.out) (memoria.out)
+
+(c:\Users\Becario\Documents\UNI\ProjectoFinal_MSW_TurismoSemantico\memoria\memo
+ria.out)
+(c:\Users\Becario\Documents\UNI\ProjectoFinal_MSW_TurismoSemantico\memoria\memo
+ria.out)
 \@outlinefile=\write4
 \openout4 = `memoria.out'.
 
 LaTeX Font Info:    Trying to load font information for OT1+lmr on input line 6
 8.
-
-(C:\Users\Becario\AppData\Local\Programs\MiKTeX\tex/latex/lm\ot1lmr.fd
+ (C:\Users\Becario\AppData\Local\Programs\MiKTeX\tex/latex/lm\ot1lmr.fd
 File: ot1lmr.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 )
 LaTeX Font Info:    Trying to load font information for OML+lmm on input line 6
 8.
-
-(C:\Users\Becario\AppData\Local\Programs\MiKTeX\tex/latex/lm\omllmm.fd
+ (C:\Users\Becario\AppData\Local\Programs\MiKTeX\tex/latex/lm\omllmm.fd
 File: omllmm.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 )
 LaTeX Font Info:    Trying to load font information for OMS+lmsy on input line 
@@ -990,7 +994,8 @@ Package microtype Info: Loading generic protrusion settings for font family
 
 {C:/Users/Becario/AppData/Local/MiKTeX/fonts/map/pdftex/pdftex.map}{C:/Users/Be
 cario/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/lm/lm-ec.enc}]
-(memoria.toc
+(c:\Users\Becario\Documents\UNI\ProjectoFinal_MSW_TurismoSemantico\memoria\memo
+ria.toc
 LaTeX Info: Redefining \. on input line 1.
 LaTeX Info: Redefining \% on input line 1.
 )
@@ -1001,7 +1006,9 @@ LaTeX Info: Redefining \% on input line 1.
 
 ] [6
 
-] (memoria.aux
+]
+(c:\Users\Becario\Documents\UNI\ProjectoFinal_MSW_TurismoSemantico\memoria\memo
+ria.aux
 LaTeX Info: Redefining \. on input line 11.
 LaTeX Info: Redefining \% on input line 11.
 )
@@ -1014,7 +1021,7 @@ Package rerunfilecheck Info: File `memoria.out' has not changed.
  ) 
 Here is how much of TeX's memory you used:
  25435 strings out of 467683
- 482508 string characters out of 5413753
+ 482878 string characters out of 5413753
  939708 words of memory out of 5000000
  53927 multiletter control sequences out of 15000+600000
  689586 words of font info for 141 fonts, out of 8000000 for 9000
@@ -1032,10 +1039,10 @@ lmr12.pfb><C:/Users/Becario/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm
 /lmtt10.pfb><C:/Users/Becario/AppData/Local/Programs/MiKTeX/fonts/type1/public/
 lm/lmtt8.pfb><C:/Users/Becario/AppData/Local/Programs/MiKTeX/fonts/type1/public
 /lm/lmtt9.pfb>
-Output written on c:/Users\Becario\Documents\UNI\ProjectoFinal_MSW_TurismoSeman
-tico\memoria\memoria.pdf (7 pages, 371037 bytes).
+Output written on c:\Users\Becario\Documents\UNI\ProjectoFinal_MSW_TurismoSeman
+tico\memoria\memoria.pdf (7 pages, 371320 bytes).
 PDF statistics:
- 164 PDF objects out of 1000 (max. 8388607)
+ 165 PDF objects out of 1000 (max. 8388607)
  30 named destinations out of 1000 (max. 500000)
  36445 words of extra memory for PDF output out of 42996 (max. 10000000)
 
