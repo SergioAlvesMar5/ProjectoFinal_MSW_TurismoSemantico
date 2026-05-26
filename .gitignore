@@ -19,3 +19,11 @@ memoria/*.log
 memoria/*.out
 memoria/*.synctex.gz
 memoria/*.toc
+
+presentacion/*.aux
+presentacion/*.log
+presentacion/*.nav
+presentacion/*.out
+presentacion/*.snm
+presentacion/*.synctex.gz
+presentacion/*.toc
